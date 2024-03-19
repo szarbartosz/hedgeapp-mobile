@@ -12,12 +12,12 @@ export function ExternalLink(
       {...props}
       // @ts-expect-error: External URLs are not typed.
       href={props.href}
-      onPress={e => {
+      onPress={async e => {
         if (Platform.OS !== 'web') {
           // Prevent the default behavior of linking to the default browser on native.
           e.preventDefault();
           // Open the link in an in-app browser.
-          WebBrowser.openBrowserAsync(props.href);
+          await WebBrowser.openBrowserAsync(props.href);
         }
       }}
     />
