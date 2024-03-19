@@ -9,7 +9,7 @@ $ bun run ios/android
 
 ---
 
-## project structure
+## project structure :deciduous_tree:
 
 ```bash
 .
