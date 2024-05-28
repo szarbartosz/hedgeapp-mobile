@@ -37,8 +37,6 @@ const SignInModal: FC = () => {
       ...credentials,
     });
 
-    console.log(signInResult);
-
     if (signInResult?.data) {
       await SecureStore.setItemAsync('token', signInResult.data.response?.token || '');
       const currentAccount = await refetchAccount();
