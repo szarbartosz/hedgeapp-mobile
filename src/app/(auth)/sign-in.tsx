@@ -3,7 +3,7 @@ import { useTheme } from '@react-navigation/native';
 import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Pressable, Text, View } from 'react-native';
 
