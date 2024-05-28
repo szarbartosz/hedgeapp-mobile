@@ -41,7 +41,9 @@ const AuthProvider: FC<Props> = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (account && !account.details) {
+    if (!account) {
+      router.navigate('/(auth)/sign-in');
+    } else if (account && !account.details) {
       router.navigate('/(auth)/account-details');
     }
   }, [account]);

@@ -5,9 +5,12 @@ import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Pressable, Text, View } from 'react-native';
+import { Pressable } from 'react-native';
+import { Button, H3, H4, Text, XStack, YStack } from 'tamagui';
 
 import { useSignInMutation } from '@/api/auth.service';
+import { EyeClosedIcon } from '@/assets/icons/eye-closed-icon';
+import { EyeIcon } from '@/assets/icons/eye-icon';
 import Input from '@/components/input';
 import ToastMessage from '@/components/toast-message';
 import { useAuth } from '@/context/auth-context';
@@ -47,44 +50,49 @@ const SignInModal: FC = () => {
   };
 
   return (
-    <View>
-      <Pressable onPress={() => router.back()}>
-        <Text>zamknij</Text>
-      </Pressable>
-      <View>
-        <View>
-          <Input
-            name="email"
-            placeholder="email"
-            control={control}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <Input
-            name="password"
-            placeholder="hasło"
-            control={control}
-            keyboardType="default"
-            autoCapitalize="none"
-            secureTextEntry={hidePassword}
-            textContentType="oneTimeCode"
-          />
-        </View>
-        <View>
-          <Button title="Zaloguj się" onPress={handleSubmit(onSubmit)} />
-          <View>
-            <Text style={{ color: colors.text }}>Nie masz konta?</Text>
-            <Pressable
-              onPress={() => {
-                router.replace('/(auth)/sign-up');
-              }}>
-              <Text style={{ color: colors.text }}>Zarejestruj się</Text>
-            </Pressable>
-          </View>
-        </View>
-      </View>
+    <YStack marginHorizontal={24} gap="$8">
+      <YStack marginTop={128}>
+        <H3 color="$color">Miło Cię widzieć!</H3>
+        <H4 color="$color">Zaloguj się lub zarejestruj</H4>
+      </YStack>
+      <YStack>
+        <Input
+          name="email"
+          label="Email"
+          placeholder="Podaj swój email"
+          control={control}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <Input
+          name="password"
+          label="Hasło"
+          placeholder="Podaj swoje hasło"
+          control={control}
+          keyboardType="default"
+          autoCapitalize="none"
+          secureTextEntry={hidePassword}
+          suffixIcon={hidePassword ? <EyeClosedIcon /> : <EyeIcon />}
+          suffixIconCallback={() => _setHidePassword(!hidePassword)}
+          textContentType="oneTimeCode"
+        />
+      </YStack>
+      <YStack gap="$4">
+        <Button backgroundColor="$green8" onPress={handleSubmit(onSubmit)}>
+          Zaloguj się
+        </Button>
+        <XStack gap="$2" justifyContent="center">
+          <Text style={{ color: colors.text }}>Nie masz konta?</Text>
+          <Pressable
+            onPress={() => {
+              router.replace('/(auth)/sign-up');
+            }}>
+            <Text style={{ color: colors.text }}>Zarejestruj się</Text>
+          </Pressable>
+        </XStack>
+      </YStack>
       <ToastMessage />
-    </View>
+    </YStack>
   );
 };
 
