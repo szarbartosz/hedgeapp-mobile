@@ -19,7 +19,7 @@ import { signInValidationSchema } from '@/utils/schemas';
 
 const SignInModal: FC = () => {
   const { refetchAccount } = useAuth();
-  const [hidePassword, _setHidePassword] = useState<boolean>(true);
+  const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [signIn] = useSignInMutation();
   const { colors } = useTheme();
 
@@ -37,6 +37,8 @@ const SignInModal: FC = () => {
       ...credentials,
     });
 
+    console.log(signInResult);
+
     if (signInResult?.data) {
       await SecureStore.setItemAsync('token', signInResult.data.response?.token || '');
       const currentAccount = await refetchAccount();
@@ -53,7 +55,7 @@ const SignInModal: FC = () => {
     <YStack marginHorizontal={24} gap="$8">
       <YStack marginTop={128}>
         <H3 color="$color">Miło Cię widzieć!</H3>
-        <H4 color="$color">Zaloguj się lub zarejestruj</H4>
+        <H4 color="$color">Zaloguj się i korzystaj z aplikacji</H4>
       </YStack>
       <YStack>
         <Input
@@ -73,7 +75,7 @@ const SignInModal: FC = () => {
           autoCapitalize="none"
           secureTextEntry={hidePassword}
           suffixIcon={hidePassword ? <EyeClosedIcon /> : <EyeIcon />}
-          suffixIconCallback={() => _setHidePassword(!hidePassword)}
+          suffixIconCallback={() => setHidePassword(!hidePassword)}
           textContentType="oneTimeCode"
         />
       </YStack>

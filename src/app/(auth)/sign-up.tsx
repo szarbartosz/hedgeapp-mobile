@@ -5,9 +5,12 @@ import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Pressable, Text, View } from 'react-native';
+import { Pressable } from 'react-native';
+import { Button, H3, H4, Text, XStack, YStack } from 'tamagui';
 
 import { useSignUpMutation } from '@/api/auth.service';
+import { EyeClosedIcon } from '@/assets/icons/eye-closed-icon';
+import { EyeIcon } from '@/assets/icons/eye-icon';
 import Input from '@/components/input';
 import ToastMessage from '@/components/toast-message';
 import { useAuth } from '@/context/auth-context';
@@ -16,7 +19,7 @@ import { signUpValidationSchema } from '@/utils/schemas';
 
 const SignUpScreen: FC = () => {
   const { refetchAccount } = useAuth();
-  const [hidePassword, _setHidePassword] = useState<boolean>(true);
+  const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [signUp] = useSignUpMutation();
   const { colors } = useTheme();
 
@@ -38,47 +41,55 @@ const SignUpScreen: FC = () => {
     if (signUpResult?.data) {
       await SecureStore.setItemAsync('token', signUpResult.data.response?.token || '');
       await refetchAccount();
-      router.navigate('/(auth)/account-details');
+      router.navigate('/(tabs)');
     }
   };
 
   return (
-    <View>
-      <Pressable onPress={() => router.back()}>
-        <Text>zamknij</Text>
-      </Pressable>
-      <View>
-        <View>
-          <Input
-            name="email"
-            placeholder="email"
-            control={control}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <Input
-            name="password"
-            placeholder="hasło"
-            control={control}
-            keyboardType="default"
-            autoCapitalize="none"
-            secureTextEntry={hidePassword}
-            textContentType="oneTimeCode"
-          />
-          <Input
-            name="confirmPassword"
-            placeholder="potwierdź hasło"
-            control={control}
-            keyboardType="default"
-            autoCapitalize="none"
-            secureTextEntry={hidePassword}
-            textContentType="oneTimeCode"
-          />
-        </View>
-        <View>
-          <Button title="Zarejestruj się" onPress={handleSubmit(onSubmit)} />
-        </View>
-        <View>
+    <YStack marginHorizontal={24} gap="$8">
+      <YStack marginTop={128}>
+        <H3 color="$color">Miło Cię poznać!</H3>
+        <H4 color="$color">Zarejestruj się i korzystaj z aplikacji</H4>
+      </YStack>
+      <YStack>
+        <Input
+          name="email"
+          label="Email"
+          placeholder="Podaj swój email"
+          control={control}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <Input
+          name="password"
+          label="Hasło"
+          placeholder="Podaj hasło"
+          control={control}
+          keyboardType="default"
+          autoCapitalize="none"
+          secureTextEntry={hidePassword}
+          suffixIcon={hidePassword ? <EyeClosedIcon /> : <EyeIcon />}
+          suffixIconCallback={() => setHidePassword(!hidePassword)}
+          textContentType="oneTimeCode"
+        />
+        <Input
+          name="confirmPassword"
+          label="Powtórz hasło"
+          placeholder="Powtórz hasło"
+          control={control}
+          keyboardType="default"
+          autoCapitalize="none"
+          secureTextEntry={hidePassword}
+          suffixIcon={hidePassword ? <EyeClosedIcon /> : <EyeIcon />}
+          suffixIconCallback={() => setHidePassword(!hidePassword)}
+          textContentType="oneTimeCode"
+        />
+      </YStack>
+      <YStack gap="$4">
+        <Button backgroundColor="$green8" onPress={handleSubmit(onSubmit)}>
+          Zarejestruj się
+        </Button>
+        <XStack gap="$2" justifyContent="center">
           <Text style={{ color: colors.text }}>Masz już konto?</Text>
           <Pressable
             onPress={() => {
@@ -86,10 +97,10 @@ const SignUpScreen: FC = () => {
             }}>
             <Text style={{ color: colors.text }}>Zaloguj się</Text>
           </Pressable>
-        </View>
-      </View>
+        </XStack>
+      </YStack>
       <ToastMessage />
-    </View>
+    </YStack>
   );
 };
 
