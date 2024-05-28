@@ -16,7 +16,7 @@ import { signUpValidationSchema } from '@/utils/schemas';
 
 const SignUpScreen: FC = () => {
   const { refetchAccount } = useAuth();
-  const [hidePassword, setHidePassword] = useState<boolean>(true);
+  const [hidePassword, _setHidePassword] = useState<boolean>(true);
   const [signUp] = useSignUpMutation();
   const { colors } = useTheme();
 
@@ -36,7 +36,7 @@ const SignUpScreen: FC = () => {
     });
 
     if (signUpResult?.data) {
-      await SecureStore.setItemAsync('token', signUpResult.data?.token || '');
+      await SecureStore.setItemAsync('token', signUpResult.data.response?.token || '');
       await refetchAccount();
       router.navigate('/(auth)/account-details');
     }

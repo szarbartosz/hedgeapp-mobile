@@ -6,12 +6,12 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { Provider } from 'react-redux';
 
 import SpaceMono from '@/assets/fonts/SpaceMono-Regular.ttf';
 import { useColorScheme } from '@/components/useColorScheme';
-import { store } from '@/redux/store';
-import { Provider } from 'react-redux';
 import AuthProvider from '@/context/auth-context';
+import { store } from '@/redux/store';
 
 export {
   // Catch any errors thrown by the Layout component.

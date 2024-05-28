@@ -8,16 +8,15 @@ import { useForm } from 'react-hook-form';
 import { Button, Pressable, Text, View } from 'react-native';
 
 import { useSignInMutation } from '@/api/auth.service';
-
+import Input from '@/components/input';
 import ToastMessage from '@/components/toast-message';
 import { useAuth } from '@/context/auth-context';
 import { AuthData, SignInRequest } from '@/models/auth';
 import { signInValidationSchema } from '@/utils/schemas';
-import Input from '@/components/input';
 
 const SignInModal: FC = () => {
   const { refetchAccount } = useAuth();
-  const [hidePassword, setHidePassword] = useState<boolean>(true);
+  const [hidePassword, _setHidePassword] = useState<boolean>(true);
   const [signIn] = useSignInMutation();
   const { colors } = useTheme();
 
@@ -36,7 +35,7 @@ const SignInModal: FC = () => {
     });
 
     if (signInResult?.data) {
-      await SecureStore.setItemAsync('token', signInResult.data.response.token || '');
+      await SecureStore.setItemAsync('token', signInResult.data.response?.token || '');
       const currentAccount = await refetchAccount();
 
       if (currentAccount?.data?.details) {
