@@ -17,7 +17,6 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.0.2",
     "@hookform/resolvers": "^3.4.2",
     "@react-navigation/native": "^6.1.17",
     "@reduxjs/toolkit": "^2.2.5",
