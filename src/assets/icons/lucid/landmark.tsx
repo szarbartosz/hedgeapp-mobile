@@ -1,12 +1,8 @@
-import Svg, { Line, Polygon, SvgProps } from 'react-native-svg';
+import Svg, { Line, Polygon } from 'react-native-svg';
 
-interface LandmarkIconProps extends SvgProps {
-  width?: number;
-  height?: number;
-  strokeColor?: string;
-}
+import { LucidIconProps } from '@/types/icons';
 
-export const LandmarkIcon = ({ width, height, strokeColor, ...props }: LandmarkIconProps) => (
+export const LandmarkIcon = ({ width, height, strokeColor, ...props }: LucidIconProps) => (
   <Svg
     width={width || 24}
     height={height || 24}

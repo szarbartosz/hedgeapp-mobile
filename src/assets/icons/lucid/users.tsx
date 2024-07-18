@@ -1,12 +1,8 @@
-import Svg, { Circle, Path, SvgProps } from 'react-native-svg';
+import Svg, { Circle, Path } from 'react-native-svg';
 
-interface UsersIconProps extends SvgProps {
-  width?: number;
-  height?: number;
-  strokeColor?: string;
-}
+import { LucidIconProps } from '@/types/icons';
 
-export const UsersIcon = ({ width, height, strokeColor, ...props }: UsersIconProps) => (
+export const UsersIcon = ({ width, height, strokeColor, ...props }: LucidIconProps) => (
   <Svg
     width={width || 24}
     height={height || 24}

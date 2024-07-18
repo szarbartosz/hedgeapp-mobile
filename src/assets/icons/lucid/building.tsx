@@ -1,12 +1,8 @@
-import Svg, { Path, SvgProps } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 
-interface BuildingIconProps extends SvgProps {
-  width?: number;
-  height?: number;
-  strokeColor?: string;
-}
+import { LucidIconProps } from '@/types/icons';
 
-export const BuildingIcon = ({ width, height, strokeColor, ...props }: BuildingIconProps) => (
+export const BuildingIcon = ({ width, height, strokeColor, ...props }: LucidIconProps) => (
   <Svg
     width={width || 24}
     height={height || 24}
