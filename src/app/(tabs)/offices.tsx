@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { H4, YStack } from 'tamagui';
 
-const InvestmentsScreen: FC = () => (
+const OfficesScreen: FC = () => (
   <YStack justifyContent="center" flexGrow={1}>
     <H4 alignSelf="center" color="$color">
-      Inwestycje
+      Urzęddy
     </H4>
   </YStack>
 );
 
-export default InvestmentsScreen;
+export default OfficesScreen;

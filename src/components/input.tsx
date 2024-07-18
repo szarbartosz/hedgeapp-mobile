@@ -68,6 +68,7 @@ const Input = <T extends FieldValues>(props: Props<T>) => {
         <XGroup>
           <XGroup.Item>
             <TextInput
+              color="$red4"
               flex={1}
               maxLength={handleLength()}
               onChangeText={handleTextChange}
