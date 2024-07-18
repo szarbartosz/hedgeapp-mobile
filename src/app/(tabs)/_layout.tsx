@@ -1,7 +1,8 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
+import { Platform } from 'react-native';
 
-import { BuildingIcon, UserIcon, UsersIcon } from '@/assets/icons';
+import { BuildingIcon, LandmarkIcon, UserIcon, UsersIcon } from '@/assets/icons';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 
@@ -13,6 +14,14 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
+        tabBarStyle: {
+          height: Platform.OS === 'ios' ? 90 : 80,
+          paddingTop: 8,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+        },
       }}>
       <Tabs.Screen
         name="index"
@@ -32,7 +41,7 @@ export default function TabLayout() {
         name="offices"
         options={{
           title: 'Urzędy',
-          tabBarIcon: ({ color }) => <UsersIcon strokeColor={color} />,
+          tabBarIcon: ({ color }) => <LandmarkIcon strokeColor={color} />,
         }}
       />
       <Tabs.Screen
