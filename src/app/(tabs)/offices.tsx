@@ -4,7 +4,7 @@ import { H4, YStack } from 'tamagui';
 const OfficesScreen: FC = () => (
   <YStack justifyContent="center" flexGrow={1}>
     <H4 alignSelf="center" color="$color">
-      Urzęddy
+      Urzędy
     </H4>
   </YStack>
 );
