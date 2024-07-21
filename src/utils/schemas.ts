@@ -33,3 +33,13 @@ export const signInValidationSchema = z.object({
     .min(1, 'To pole jest wymagane'),
   password: z.string().min(1, 'To pole jest wymagane'),
 });
+
+export const investmentValidationSchema = z.object({
+  name: z.string().min(1, 'To pole jest wymagane'),
+  investorId: z.number().min(1, 'To pole jest wymagane'),
+  statusId: z.number().min(1, 'To pole jest wymagane'),
+  officeId: z.number().min(1, 'To pole jest wymagane'),
+  city: z.string(),
+  street: z.string(),
+  number: z.string(),
+});

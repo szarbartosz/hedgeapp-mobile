@@ -12,7 +12,7 @@ const InvestmentsScreen: FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <YStack flex={1} marginBottom="$8">
+      <YStack flex={1} marginBottom="$8" marginTop="$3">
         <ScrollView>
           <YGroup bordered borderRadius={0}>
             {investments.map(investment => (
