@@ -14,12 +14,14 @@ const InvestmentsScreen: FC = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <YStack flex={1} marginBottom="$8" marginTop="$3">
         <ScrollView>
-          <YGroup bordered borderRadius={0}>
+          <YGroup borderRadius={0}>
             {investments.map(investment => (
               <YGroup.Item key={investment.id}>
                 <ListItem
                   hoverTheme
-                  bordered
+                  backgroundColor={theme.$color2}
+                  borderBottomColor={theme.$color6}
+                  borderBottomWidth={1}
                   title={investment.name}
                   subTitle={investment.investor.name}
                   iconAfter={
