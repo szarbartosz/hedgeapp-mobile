@@ -36,7 +36,7 @@ export const investments: Investment[] = [
     },
     investor: {
       name: 'ATAL',
-      contactPerson: 'Zbigniew Jaroszek',
+      contactPerson: 'Jan Nowacki',
       email: 'zjaroszek@atal.pl',
       phone: '502304402',
       address: {

@@ -18,6 +18,12 @@ const InvestmentsScreen: FC = () => {
             {investments.map(investment => (
               <YGroup.Item key={investment.id}>
                 <ListItem
+                  onPress={() =>
+                    router.navigate({
+                      pathname: '/investments/details',
+                      params: { id: investment.id },
+                    })
+                  }
                   hoverTheme
                   backgroundColor={theme.$color2}
                   borderBottomColor={theme.$color6}
