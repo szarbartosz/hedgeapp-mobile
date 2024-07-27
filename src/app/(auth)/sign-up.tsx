@@ -1,27 +1,24 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTheme } from '@react-navigation/native';
 import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable } from 'react-native';
-import { Button, H3, H4, Text, XStack, YStack } from 'tamagui';
+import { Button, H3, H4, Text, useTheme, XStack, YStack } from 'tamagui';
 
 import { useSignUpMutation } from '@/api/auth.service';
 import { EyeClosedIcon } from '@/assets/icons/eye-closed-icon';
 import { EyeIcon } from '@/assets/icons/eye-icon';
 import Input from '@/components/input';
 import ToastMessage from '@/components/toast-message';
-import { useAuth } from '@/context/auth-context';
 import { AuthData, SignUpRequest } from '@/models/auth';
 import { signUpValidationSchema } from '@/utils/schemas';
 
 const SignUpScreen: FC = () => {
-  const { refetchAccount } = useAuth();
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [signUp] = useSignUpMutation();
-  const { colors } = useTheme();
+  const theme = useTheme();
 
   const { control, handleSubmit } = useForm<SignUpRequest>({
     mode: 'onChange',
@@ -39,9 +36,8 @@ const SignUpScreen: FC = () => {
     });
 
     if (signUpResult?.data) {
-      await SecureStore.setItemAsync('token', signUpResult.data.response?.token || '');
-      await refetchAccount();
-      router.navigate('/(tabs)');
+      await SecureStore.setItemAsync('token', signUpResult.data?.token || '');
+      router.navigate('/(tabs)/');
     }
   };
 
@@ -68,7 +64,13 @@ const SignUpScreen: FC = () => {
           keyboardType="default"
           autoCapitalize="none"
           secureTextEntry={hidePassword}
-          suffixIcon={hidePassword ? <EyeClosedIcon /> : <EyeIcon />}
+          suffixIcon={
+            hidePassword ? (
+              <EyeClosedIcon strokeColor={theme.color12.val} />
+            ) : (
+              <EyeIcon strokeColor={theme.color12.val} />
+            )
+          }
           suffixIconCallback={() => setHidePassword(!hidePassword)}
           textContentType="oneTimeCode"
         />
@@ -80,7 +82,13 @@ const SignUpScreen: FC = () => {
           keyboardType="default"
           autoCapitalize="none"
           secureTextEntry={hidePassword}
-          suffixIcon={hidePassword ? <EyeClosedIcon /> : <EyeIcon />}
+          suffixIcon={
+            hidePassword ? (
+              <EyeClosedIcon strokeColor={theme.color12.val} />
+            ) : (
+              <EyeIcon strokeColor={theme.color12.val} />
+            )
+          }
           suffixIconCallback={() => setHidePassword(!hidePassword)}
           textContentType="oneTimeCode"
         />
@@ -90,12 +98,12 @@ const SignUpScreen: FC = () => {
           Zarejestruj się
         </Button>
         <XStack gap="$2" justifyContent="center">
-          <Text style={{ color: colors.text }}>Masz już konto?</Text>
+          <Text>Masz już konto?</Text>
           <Pressable
             onPress={() => {
               router.replace('/(auth)/sign-in');
             }}>
-            <Text style={{ color: colors.text }}>Zaloguj się</Text>
+            <Text>Zaloguj się</Text>
           </Pressable>
         </XStack>
       </YStack>

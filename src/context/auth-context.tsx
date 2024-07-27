@@ -1,14 +1,12 @@
 import { router, useNavigationContainerRef } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import React, { createContext, FC, useContext, useEffect, useState } from 'react';
+import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 
-import { coreApi, useCurrentAccountQuery } from '@/api/core.service';
-import { Account, AccountQueryDefinition } from '@/types/auth';
+import { coreApi } from '@/api/core.service';
 
 type AuthContextData = {
-  account: Account;
-  refetchAccount: () => AccountQueryDefinition;
   signOut: () => Promise<void>;
 };
 
@@ -37,16 +35,26 @@ const useContextReadiness = () => {
 };
 
 const AuthProvider: FC<Props> = ({ children }) => {
-  const { data: account, refetch: refetchAccount } = useCurrentAccountQuery();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!account) {
-      router.navigate('/(auth)/sign-in');
-    } else if (account && !account.details) {
-      router.navigate('/(auth)/account-details');
-    }
-  }, [account]);
+    const getToken = async () => {
+      const token = await SecureStore.getItemAsync('token');
+      if (!token) {
+        router.navigate('/(auth)/sign-in');
+      }
+    };
+
+    getToken().catch(_err => {
+      Toast.show({
+        type: 'error',
+        props: {
+          text1: 'Wystąpił błąd!',
+          text2: 'Coś poszło nie tak...',
+        },
+      });
+    });
+  }, []);
 
   const signOut = async () => {
     await SecureStore.deleteItemAsync('token');
@@ -58,8 +66,6 @@ const AuthProvider: FC<Props> = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        account,
-        refetchAccount,
         signOut,
       }}>
       {children}

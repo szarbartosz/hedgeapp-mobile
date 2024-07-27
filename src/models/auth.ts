@@ -1,7 +1,5 @@
 export type AuthData = {
-  response: {
-    token: string;
-  };
+  token: string;
 };
 
 export type SignInRequest = {

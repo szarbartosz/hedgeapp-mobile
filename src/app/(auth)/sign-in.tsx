@@ -1,27 +1,24 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTheme } from '@react-navigation/native';
 import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Pressable } from 'react-native';
-import { Button, H3, H4, Text, XStack, YStack } from 'tamagui';
+import { Button, H3, H4, Text, useTheme, XStack, YStack } from 'tamagui';
 
 import { useSignInMutation } from '@/api/auth.service';
 import { EyeClosedIcon } from '@/assets/icons/eye-closed-icon';
 import { EyeIcon } from '@/assets/icons/eye-icon';
 import Input from '@/components/input';
 import ToastMessage from '@/components/toast-message';
-import { useAuth } from '@/context/auth-context';
 import { AuthData, SignInRequest } from '@/models/auth';
 import { signInValidationSchema } from '@/utils/schemas';
 
 const SignInModal: FC = () => {
-  const { refetchAccount } = useAuth();
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [signIn] = useSignInMutation();
-  const { colors } = useTheme();
+  const theme = useTheme();
 
   const { control, handleSubmit } = useForm<SignInRequest>({
     mode: 'onChange',
@@ -38,14 +35,8 @@ const SignInModal: FC = () => {
     });
 
     if (signInResult?.data) {
-      await SecureStore.setItemAsync('token', signInResult.data.response?.token || '');
-      const currentAccount = await refetchAccount();
-
-      if (currentAccount?.data?.details) {
-        router.navigate('/(tabs)');
-      } else {
-        router.navigate('/(tabs)/two');
-      }
+      await SecureStore.setItemAsync('token', signInResult.data?.token || '');
+      router.navigate('/(tabs)/');
     }
   };
 
@@ -72,7 +63,13 @@ const SignInModal: FC = () => {
           keyboardType="default"
           autoCapitalize="none"
           secureTextEntry={hidePassword}
-          suffixIcon={hidePassword ? <EyeClosedIcon /> : <EyeIcon />}
+          suffixIcon={
+            hidePassword ? (
+              <EyeClosedIcon strokeColor={theme.color12.val} />
+            ) : (
+              <EyeIcon strokeColor={theme.color12.val} />
+            )
+          }
           suffixIconCallback={() => setHidePassword(!hidePassword)}
           textContentType="oneTimeCode"
         />
@@ -82,12 +79,12 @@ const SignInModal: FC = () => {
           Zaloguj się
         </Button>
         <XStack gap="$2" justifyContent="center">
-          <Text style={{ color: colors.text }}>Nie masz konta?</Text>
+          <Text>Nie masz konta?</Text>
           <Pressable
             onPress={() => {
               router.replace('/(auth)/sign-up');
             }}>
-            <Text style={{ color: colors.text }}>Zarejestruj się</Text>
+            <Text>Zarejestruj się</Text>
           </Pressable>
         </XStack>
       </YStack>
