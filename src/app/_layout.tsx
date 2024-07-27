@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+import { FontSource, useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
@@ -10,7 +9,6 @@ import { useColorScheme } from 'react-native';
 import { Provider } from 'react-redux';
 import { TamaguiProvider } from 'tamagui';
 
-import SpaceMono from '@/assets/fonts/SpaceMono-Regular.ttf';
 import AuthProvider from '@/context/auth-context';
 import { store } from '@/redux/store';
 import { tamaguiConfig } from '@/utils/tamagui.config';
@@ -25,8 +23,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono,
-    ...FontAwesome.font,
+    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf') as FontSource,
+    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf') as FontSource,
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.

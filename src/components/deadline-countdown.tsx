@@ -3,9 +3,10 @@ import { Text, useTheme } from 'tamagui';
 
 type Props = {
   dates: string[];
+  fontWeight?: 100 | 200 | 300 | 400 | 600 | 700 | 800 | 900 | 'unset';
 };
 
-const DeadlineCountdown: FC<Props> = ({ dates }) => {
+const DeadlineCountdown: FC<Props> = ({ dates, fontWeight }) => {
   const [daysLeft, setDaysLeft] = useState<number>();
 
   const theme = useTheme();
@@ -33,6 +34,7 @@ const DeadlineCountdown: FC<Props> = ({ dates }) => {
   return (
     daysLeft && (
       <Text
+        fontWeight={fontWeight}
         color={
           daysLeft > 90
             ? theme.green10
