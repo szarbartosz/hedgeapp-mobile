@@ -25,7 +25,7 @@ const InvestmentsScreen: FC = () => {
                     })
                   }
                   hoverTheme
-                  backgroundColor={theme.$color2}
+                  backgroundColor={theme.$color4}
                   borderBottomColor={theme.$color6}
                   borderBottomWidth={1}
                   title={investment.name}

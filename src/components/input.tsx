@@ -63,12 +63,11 @@ const Input = <T extends FieldValues>(props: Props<T>) => {
 
   return (
     <YStack>
-      <Label htmlFor={name}>{label}</Label>
+      <Label>{label}</Label>
       {suffixIcon ? (
         <XGroup>
           <XGroup.Item>
             <TextInput
-              color="$red4"
               flex={1}
               maxLength={handleLength()}
               onChangeText={handleTextChange}

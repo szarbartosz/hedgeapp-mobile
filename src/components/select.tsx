@@ -21,7 +21,7 @@ export type Props<T extends FieldValues> = SelectType & UseControllerProps<T>;
 const Select = <T extends FieldValues>(props: Props<T>) => {
   const { control, name, label, items, placeholder } = props;
   const {
-    field: { onChange, value, ...rest },
+    field: { onChange, value },
     fieldState: { error },
   } = useController<T>({ name, control });
 
@@ -29,12 +29,11 @@ const Select = <T extends FieldValues>(props: Props<T>) => {
 
   return (
     <YStack>
-      <Label htmlFor={name}>{label}</Label>
+      <Label>{label}</Label>
       <SelectPicker
         value={value}
         onValueChange={v => onChange(items.find(item => item.label.toLowerCase() === v)?.id)}
         disablePreventBodyScroll
-        {...rest}
         {...props}>
         <SelectPicker.Trigger
           iconAfter={<ChevronDownIcon strokeColor={theme.color11.val} />}

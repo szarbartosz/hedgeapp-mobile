@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -56,9 +56,33 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
+  const LightTheme = {
+    dark: false,
+    colors: {
+      primary: 'rgb(0, 122, 255)',
+      background: '#F0F0F0',
+      card: '#F0F0F0',
+      text: 'rgb(28, 28, 30)',
+      border: '#E6E6E6',
+      notification: 'rgb(255, 59, 48)',
+    },
+  };
+
+  const DarkTheme = {
+    dark: true,
+    colors: {
+      primary: 'rgb(10, 132, 255)',
+      background: '#232323',
+      card: '#232323',
+      text: 'rgb(229, 229, 231)',
+      border: '#323232',
+      notification: 'rgb(255, 69, 58)',
+    },
+  };
+
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || 'light'}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : LightTheme}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)" options={{ presentation: 'modal', headerShown: false }} />
