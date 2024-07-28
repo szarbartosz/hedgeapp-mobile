@@ -32,8 +32,8 @@ const LocalizationButton: FC<Props> = ({ mapRef, coords, isMapCentered, setIsMap
     <Pressable
       onPress={handlePress}
       style={{
-        width: 44,
-        height: 44,
+        width: 50,
+        height: 50,
         borderRadius: 8,
         display: 'flex',
         justifyContent: 'center',
@@ -41,8 +41,8 @@ const LocalizationButton: FC<Props> = ({ mapRef, coords, isMapCentered, setIsMap
         backgroundColor: theme.color4.val,
         borderWidth: 1.5,
         borderColor: theme.color10.val,
-        top: 170,
-        left: 10,
+        top: 190,
+        right: 10,
         position: 'absolute',
         zIndex: 10,
       }}>

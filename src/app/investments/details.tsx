@@ -8,6 +8,7 @@ import { Button, H3, H4, ScrollView, Text, useTheme, View, XGroup } from 'tamagu
 import { HardHatIcon, PhoneIcon } from '@/assets/icons';
 import DeadlineCountdown from '@/components/deadline-countdown';
 import LocalizationButton from '@/components/localization-button';
+import NavigationButton from '@/components/navigation-button';
 import { investments } from '@/utils/data';
 
 const InvestmentDetailsScreen: FC = () => {
@@ -46,6 +47,10 @@ const InvestmentDetailsScreen: FC = () => {
         coords={coords}
         isMapCentered={isMapCentered}
         setIsMapCentered={setIsMapCentered}
+      />
+      <NavigationButton
+        address={`${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`}
+        coords={coords}
       />
       <MapView
         onPanDrag={() => setIsMapCentered(false)}
