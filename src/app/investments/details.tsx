@@ -1,6 +1,7 @@
 import * as Location from 'expo-location';
 import { router, useLocalSearchParams } from 'expo-router';
 import { FC, useEffect, useRef, useState } from 'react';
+import { useColorScheme } from 'react-native';
 import MapView, { MapMarker } from 'react-native-maps';
 import Toast from 'react-native-toast-message';
 import { Button, H3, H4, ScrollView, Text, useTheme, View, XGroup } from 'tamagui';
@@ -9,7 +10,9 @@ import { HardHatIcon, PhoneIcon } from '@/assets/icons';
 import DeadlineCountdown from '@/components/deadline-countdown';
 import LocalizationButton from '@/components/localization-button';
 import NavigationButton from '@/components/navigation-button';
+import darkMap from '@/utils/dark-map.json';
 import { investments } from '@/utils/data';
+import retroMap from '@/utils/retro-map.json';
 
 const InvestmentDetailsScreen: FC = () => {
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
@@ -18,6 +21,7 @@ const InvestmentDetailsScreen: FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const theme = useTheme();
   const mapRef = useRef<MapView>(null);
+  const colorScheme = useColorScheme();
 
   const investment = investments.find(i => i.id.toString() === id);
 
@@ -60,8 +64,10 @@ const InvestmentDetailsScreen: FC = () => {
           latitudeDelta: 0.0035,
           longitudeDelta: 0.0035,
         }}
+        customMapStyle={colorScheme === 'dark' ? darkMap : retroMap}
         ref={mapRef}
         style={{ height: 250 }}
+        showsCompass={false}
         showsMyLocationButton={false}>
         <MapMarker coordinate={coords || { latitude: 50.049683, longitude: 19.944544 }} />
       </MapView>

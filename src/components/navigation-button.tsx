@@ -14,12 +14,17 @@ const NavigationButton: FC<Props> = ({ address, coords }) => {
   const theme = useTheme();
 
   const handlePress = async () => {
-    coords &&
-      (await showLocation({
+    if (coords) {
+      await showLocation({
         latitude: coords?.latitude,
         longitude: coords?.longitude,
         title: address,
-      }));
+      });
+    } else {
+      await showLocation({
+        address: address,
+      });
+    }
   };
 
   return (
