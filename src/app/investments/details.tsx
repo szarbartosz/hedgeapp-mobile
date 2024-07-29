@@ -6,6 +6,7 @@ import MapView, { MapMarker } from 'react-native-maps';
 import Toast from 'react-native-toast-message';
 import { Button, H3, H4, ScrollView, Text, useTheme } from 'tamagui';
 
+import DateCard from '@/components/date-card';
 import DateIndicator from '@/components/date-indicator';
 import InvestorContact from '@/components/investor-contact';
 import LocalizationButton from '@/components/localization-button';
@@ -103,6 +104,31 @@ const InvestmentDetailsScreen: FC = () => {
         />
 
         <H4 marginTop="$4">Daty i terminy</H4>
+        <DateCard
+          title="Data złożenia wniosku"
+          date={investment?.issueDate || ''}
+          handlePress={() => console.log('issue date')}
+        />
+        <DateCard
+          title="Data oględzin"
+          date={investment?.inspectionDate || ''}
+          handlePress={() => console.log('inspection date')}
+        />
+        <DateCard
+          title="Data wydania decyzji"
+          date={investment?.decisionDate || ''}
+          handlePress={() => console.log('decision date')}
+        />
+        <DateCard
+          title="Termin wycinki"
+          date={investment?.deforestationDate || ''}
+          handlePress={() => console.log('deforestation date')}
+        />
+        <DateCard
+          title="Termin nasadzeń"
+          date={investment?.plantingDate || ''}
+          handlePress={() => console.log('planting date')}
+        />
 
         <Button
           marginTop="$4"

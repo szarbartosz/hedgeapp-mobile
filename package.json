@@ -22,6 +22,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@tamagui/babel-plugin": "^1.105.1",
     "@tamagui/config": "^1.105.1",
+    "dayjs": "^1.11.12",
     "expo": "~51.0.22",
     "expo-font": "~12.0.9",
     "expo-linking": "~6.3.1",

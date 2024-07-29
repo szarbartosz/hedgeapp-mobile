@@ -24,7 +24,9 @@ const DateIndicator: FC<Props> = ({
 
   return (
     <>
-      <Text margin="$2">{title}</Text>
+      <Text margin="$2" marginTop="$4">
+        {title}
+      </Text>
       {date ? (
         <XGroup backgroundColor="$color2">
           <XGroup.Item>

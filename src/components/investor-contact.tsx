@@ -33,10 +33,10 @@ const InvestorContact: FC<Props> = ({ investor }) => {
         gap={12}>
         <HardHatIcon strokeColor={theme.color12.val} />
         <View gap={4}>
-          <Text maxWidth={110} numberOfLines={1}>
+          <Text maxWidth={110} numberOfLines={1} fontSize={16}>
             {investor.name}
           </Text>
-          <Text maxWidth={110} numberOfLines={1} color={theme.color11} fontSize={12}>
+          <Text maxWidth={110} numberOfLines={1} color={theme.color11} fontSize={14}>
             {investor.contactPerson}
           </Text>
         </View>
@@ -50,7 +50,7 @@ const InvestorContact: FC<Props> = ({ investor }) => {
         justifyContent="center"
         gap={12}>
         <PhoneIcon strokeColor={theme.color12.val} />
-        <Text>Zadzwoń</Text>
+        <Text fontSize={15}>Zadzwoń</Text>
       </View>
     </View>
   );
