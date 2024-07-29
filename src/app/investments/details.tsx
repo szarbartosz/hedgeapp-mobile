@@ -4,10 +4,10 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import MapView, { MapMarker } from 'react-native-maps';
 import Toast from 'react-native-toast-message';
-import { Button, H3, H4, ScrollView, Text, useTheme, View, XGroup } from 'tamagui';
+import { Button, H3, H4, ScrollView, Text, useTheme, View } from 'tamagui';
 
 import { HardHatIcon, PhoneIcon } from '@/assets/icons';
-import DeadlineCountdown from '@/components/deadline-countdown';
+import DateIndicator from '@/components/date-indicator';
 import LocalizationButton from '@/components/localization-button';
 import NavigationButton from '@/components/navigation-button';
 import darkMap from '@/utils/dark-map.json';
@@ -120,126 +120,27 @@ const InvestmentDetailsScreen: FC = () => {
         </View>
 
         <H4 marginTop="$4">Terminy</H4>
-
-        <Text margin="$2">Termin oględzin</Text>
-        {investment?.inspectionDate ? (
-          <XGroup backgroundColor="$color2">
-            <XGroup.Item>
-              <Button
-                backgroundColor="$color1"
-                width="50%"
-                size="$4"
-                borderWidth={1}
-                borderRightWidth={0.5}
-                borderColor="$color5"
-                disabled
-                chromeless>
-                {investment?.inspectionDone ? (
-                  <Text fontWeight={800}>wykonano</Text>
-                ) : (
-                  <DeadlineCountdown dates={[investment?.inspectionDate]} fontWeight={800} />
-                )}
-              </Button>
-            </XGroup.Item>
-
-            <XGroup.Item>
-              <Button
-                backgroundColor="$color1"
-                width="50%"
-                size="$4"
-                borderWidth={1}
-                borderLeftWidth={0.5}
-                borderColor="$color5"
-                chromeless>
-                {investment?.inspectionDone ? 'cofnij potwierdzenie' : 'potwierdź wykonanie'}
-              </Button>
-            </XGroup.Item>
-          </XGroup>
-        ) : (
-          <Button width="50%" size="$2" chromeless>
-            niesprecyzowano
-          </Button>
-        )}
-
-        <Text margin="$2">Termin wycinki</Text>
-        {investment?.deforestationDate ? (
-          <XGroup backgroundColor="$color2">
-            <XGroup.Item>
-              <Button
-                backgroundColor="$color1"
-                width="50%"
-                size="$4"
-                borderWidth={1}
-                borderRightWidth={0.5}
-                borderColor="$color5"
-                disabled
-                chromeless>
-                {investment?.deforestationDone ? (
-                  <Text fontWeight={800}>wykonano</Text>
-                ) : (
-                  <DeadlineCountdown dates={[investment?.deforestationDate]} fontWeight={800} />
-                )}
-              </Button>
-            </XGroup.Item>
-
-            <XGroup.Item>
-              <Button
-                backgroundColor="$color1"
-                width="50%"
-                size="$4"
-                borderWidth={1}
-                borderLeftWidth={0.5}
-                borderColor="$color5"
-                chromeless>
-                {investment?.deforestationDone ? 'cofnij potwierdzenie' : 'potwierdź wykonanie'}
-              </Button>
-            </XGroup.Item>
-          </XGroup>
-        ) : (
-          <Button width="50%" size="$2" chromeless>
-            niesprecyzowano
-          </Button>
-        )}
-
-        <Text margin="$2">Termin nasadzeń</Text>
-        {investment?.plantingDate ? (
-          <XGroup backgroundColor="$color2">
-            <XGroup.Item>
-              <Button
-                backgroundColor="$color1"
-                width="50%"
-                size="$4"
-                borderWidth={1}
-                borderRightWidth={0.5}
-                borderColor="$color5"
-                disabled
-                chromeless>
-                {investment?.plantingDone ? (
-                  <Text fontWeight={800}>wykonano</Text>
-                ) : (
-                  <DeadlineCountdown dates={[investment?.plantingDate]} fontWeight={800} />
-                )}
-              </Button>
-            </XGroup.Item>
-
-            <XGroup.Item>
-              <Button
-                backgroundColor="$color1"
-                width="50%"
-                size="$4"
-                borderWidth={1}
-                borderLeftWidth={0.5}
-                borderColor="$color5"
-                chromeless>
-                {investment?.plantingDone ? 'cofnij potwierdzenie' : 'potwierdź wykonanie'}
-              </Button>
-            </XGroup.Item>
-          </XGroup>
-        ) : (
-          <Button width="50%" size="$2" chromeless>
-            niesprecyzowano
-          </Button>
-        )}
+        <DateIndicator
+          title="Termin oględzin"
+          date={investment?.inspectionDate || ''}
+          isDone={investment?.inspectionDone || false}
+          handleConfirmation={() => console.log('inspection confirmed')}
+          handleWithdrawal={() => console.log('inspection withdrawn')}
+        />
+        <DateIndicator
+          title="Termin wycinki"
+          date={investment?.deforestationDate || ''}
+          isDone={investment?.deforestationDone || false}
+          handleConfirmation={() => console.log('deforestation confirmed')}
+          handleWithdrawal={() => console.log('deforestation withdrawn')}
+        />
+        <DateIndicator
+          title="Termin nasadzeń"
+          date={investment?.plantingDate || ''}
+          isDone={investment?.plantingDone || false}
+          handleConfirmation={() => console.log('planting confirmed')}
+          handleWithdrawal={() => console.log('planting withdrawn')}
+        />
 
         <H4 marginTop="$4">Daty i terminy</H4>
 
