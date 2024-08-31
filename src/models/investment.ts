@@ -3,7 +3,9 @@ export type AddInvestmentRequest = {
   investorId: number;
   statusId: number;
   officeId: number;
-  city?: string;
-  street?: string;
-  number?: string;
+  address: {
+    city?: string;
+    street?: string;
+    number?: string;
+  };
 };

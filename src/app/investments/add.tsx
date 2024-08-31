@@ -28,9 +28,11 @@ const AddInvestmentScreen: FC = () => {
       investorId: undefined,
       statusId: undefined,
       officeId: undefined,
-      city: '',
-      street: '',
-      number: '',
+      address: {
+        city: '',
+        street: '',
+        number: '',
+      },
     },
     resolver: zodResolver(investmentValidationSchema),
   });
@@ -73,14 +75,24 @@ const AddInvestmentScreen: FC = () => {
           items={offices?.map(office => ({ id: office.id, label: office.name })) || []}
         />
         <Input
-          name="city"
+          name="address.city"
           label="Miasto"
           placeholder="Podaj nazwę miasta"
           control={control}
           autoCapitalize="words"
         />
-        <Input name="street" label="Ulica" placeholder="Podaj nazwę ulicy" control={control} />
-        <Input name="number" label="Numer" placeholder="Podaj numer obiektu" control={control} />
+        <Input
+          name="address.street"
+          label="Ulica"
+          placeholder="Podaj nazwę ulicy"
+          control={control}
+        />
+        <Input
+          name="address.number"
+          label="Numer"
+          placeholder="Podaj numer obiektu"
+          control={control}
+        />
         <View gap="$4" marginVertical="$4">
           <Button
             backgroundColor={theme.$color12}
