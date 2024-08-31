@@ -62,9 +62,19 @@ const DateIndicator: FC<Props> = ({
           </XGroup.Item>
         </XGroup>
       ) : (
-        <Button width="50%" size="$2" chromeless>
-          niesprecyzowano
-        </Button>
+        <XGroup backgroundColor="$color2">
+          <XGroup.Item>
+            <Button
+              backgroundColor="$color1"
+              width="100%"
+              borderWidth={1}
+              borderColor="$color5"
+              chromeless
+              disabled>
+              nie sprecyzowano
+            </Button>
+          </XGroup.Item>
+        </XGroup>
       )}
     </>
   );

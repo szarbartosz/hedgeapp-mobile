@@ -5,7 +5,7 @@ export type Address = {
 };
 
 export type Note = {
-  date: string;
+  createdAt: string;
   content: string;
 };
 

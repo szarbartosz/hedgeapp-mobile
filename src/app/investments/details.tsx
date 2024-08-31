@@ -6,25 +6,25 @@ import MapView, { MapMarker } from 'react-native-maps';
 import Toast from 'react-native-toast-message';
 import { Button, H3, H4, ScrollView, Text, useTheme } from 'tamagui';
 
+import { useGetSingleInvestmentQuery } from '@/api/investments.service';
 import DateCard from '@/components/date-card';
 import DateIndicator from '@/components/date-indicator';
 import InvestorContact from '@/components/investor-contact';
 import LocalizationButton from '@/components/localization-button';
 import NavigationButton from '@/components/navigation-button';
 import darkMap from '@/utils/dark-map.json';
-import { investments } from '@/utils/data';
 import retroMap from '@/utils/retro-map.json';
 
 const InvestmentDetailsScreen: FC = () => {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const { data: investment } = useGetSingleInvestmentQuery(+id);
+
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
   const [isMapCentered, setIsMapCentered] = useState(true);
 
-  const { id } = useLocalSearchParams<{ id: string }>();
   const theme = useTheme();
   const mapRef = useRef<MapView>(null);
   const colorScheme = useColorScheme();
-
-  const investment = investments.find(i => i.id.toString() === id);
 
   useEffect(() => {
     const fetchCoords = async () => {
@@ -43,7 +43,7 @@ const InvestmentDetailsScreen: FC = () => {
         },
       });
     });
-  }, []);
+  }, [investment]);
 
   return (
     <>
@@ -132,6 +132,7 @@ const InvestmentDetailsScreen: FC = () => {
 
         <Button
           marginTop="$4"
+          marginBottom="$8"
           backgroundColor={theme.$color4}
           color={theme.$color12}
           borderColor={theme.$color12}
