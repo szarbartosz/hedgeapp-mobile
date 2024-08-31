@@ -2,6 +2,7 @@ export type Address = {
   city: string;
   street: string;
   number: string;
+  zipCode: string;
 };
 
 export type Note = {
@@ -20,6 +21,7 @@ export type ApplicationData = {
 };
 
 export type Investor = {
+  id: number;
   name: string;
   contactPerson: string;
   email: string;

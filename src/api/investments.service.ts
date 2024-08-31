@@ -10,7 +10,11 @@ export const investmentsApi = coreApi.injectEndpoints({
     getSingleInvestment: builder.query<Investment, number>({
       query: id => ({ url: `/locations/${id}` }),
     }),
+    createInvestment: builder.mutation<Investment, Partial<Investment>>({
+      query: data => ({ url: '/locations', method: 'POST', body: data }),
+    }),
   }),
 });
 
-export const { useGetInvestmentsQuery, useGetSingleInvestmentQuery } = investmentsApi;
+export const { useGetInvestmentsQuery, useGetSingleInvestmentQuery, useCreateInvestmentMutation } =
+  investmentsApi;

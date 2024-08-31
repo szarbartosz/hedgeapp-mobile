@@ -4,7 +4,7 @@ import { coreApi } from './core.service';
 
 export const statusesApi = coreApi.injectEndpoints({
   endpoints: builder => ({
-    getStatuses: builder.query<Status, void>({
+    getStatuses: builder.query<Status[], void>({
       query: () => ({ url: '/statuses' }),
     }),
   }),

@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, ListItem, ScrollView, useTheme, View, YGroup, YStack } from 'tamagui';
 

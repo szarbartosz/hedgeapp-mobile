@@ -5,14 +5,21 @@ import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, H3, ScrollView, useTheme, View } from 'tamagui';
 
+import { useCreateInvestmentMutation } from '@/api/investments.service';
+import { useGetInvestorsQuery } from '@/api/investors.service';
+import { useGetOfficesQuery } from '@/api/offices.service';
+import { useGetStatusesQuery } from '@/api/statuses.service';
 import Input from '@/components/input';
 import Select from '@/components/select';
 import { AddInvestmentRequest } from '@/models/investment';
-import { investors, offices, statuses } from '@/utils/data';
 import { investmentValidationSchema } from '@/utils/schemas';
 
 const AddInvestmentScreen: FC = () => {
   const theme = useTheme();
+  const { data: investors } = useGetInvestorsQuery();
+  const { data: statuses } = useGetStatusesQuery();
+  const { data: offices } = useGetOfficesQuery();
+  const [addInvestment] = useCreateInvestmentMutation();
 
   const { control, handleSubmit } = useForm<AddInvestmentRequest>({
     mode: 'onChange',
@@ -29,8 +36,8 @@ const AddInvestmentScreen: FC = () => {
   });
 
   const onSubmit = async (data: AddInvestmentRequest) => {
-    // await addInvestment(data);
-    router.replace('/investments');
+    await addInvestment(data);
+    router.replace('/');
   };
 
   return (
@@ -49,21 +56,21 @@ const AddInvestmentScreen: FC = () => {
           label="Wybierz inwestora"
           placeholder="Wybierz inwestora"
           control={control}
-          items={investors}
+          items={investors?.map(investor => ({ id: investor.id, label: investor.name })) || []}
         />
         <Select
           name="statusId"
           label="Wybierz status"
           placeholder="Wybierz status"
           control={control}
-          items={statuses}
+          items={statuses?.map(status => ({ id: status.id, label: status.name })) || []}
         />
         <Select
           name="officeId"
           label="Wybierz urząd"
           placeholder="Wybierz urząd"
           control={control}
-          items={offices}
+          items={offices?.map(office => ({ id: office.id, label: office.name })) || []}
         />
         <Input
           name="city"
