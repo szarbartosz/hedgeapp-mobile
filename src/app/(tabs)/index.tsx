@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, ListItem, ScrollView, useTheme, View, YGroup, YStack } from 'tamagui';
 
 import { useGetInvestmentsQuery } from '@/api/investments.service';
+import { getStatusIcon } from '@/utils/helpers';
 
 import DeadlineCountdown from '../../components/deadline-countdown';
 
@@ -33,6 +34,7 @@ const InvestmentsScreen: FC = () => {
                     borderBottomWidth={1}
                     title={investment.name}
                     subTitle={investment.investor.name}
+                    icon={getStatusIcon(investment.status.id)}
                     iconAfter={
                       <DeadlineCountdown
                         dates={[

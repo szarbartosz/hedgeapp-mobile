@@ -1,3 +1,5 @@
+import { Status } from '@/models/statuses';
+
 export type Address = {
   city: string;
   street: string;
@@ -34,6 +36,7 @@ export type Investor = {
 export type Investment = {
   id: number;
   name: string;
+  status: Status;
   address: Address;
   investor: Investor;
   issueDate: string;
