@@ -1,3 +1,4 @@
+import { AddInvestorRequest } from '@/models/investor';
 import { Investor } from '@/types/data';
 
 import { coreApi, TAGS } from './core.service';
@@ -11,7 +12,12 @@ export const investorsApi = coreApi.injectEndpoints({
     getSingleInvestor: builder.query<Investor, number>({
       query: id => ({ url: `/investors/${id}` }),
     }),
+    createInvestor: builder.mutation<Investor, AddInvestorRequest>({
+      query: data => ({ url: '/locations', method: 'POST', body: data }),
+      invalidatesTags: [TAGS.INVESTORS],
+    }),
   }),
 });
 
-export const { useGetInvestorsQuery, useGetSingleInvestorQuery } = investorsApi;
+export const { useGetInvestorsQuery, useGetSingleInvestorQuery, useCreateInvestorMutation } =
+  investorsApi;

@@ -5,29 +5,24 @@ import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, H3, ScrollView, useTheme, View } from 'tamagui';
 
-import { useCreateInvestmentMutation } from '@/api/investments.service';
-import { useGetInvestorsQuery } from '@/api/investors.service';
-import { useGetOfficesQuery } from '@/api/offices.service';
-import { useGetStatusesQuery } from '@/api/statuses.service';
+import { useCreateInvestorMutation } from '@/api/investors.service';
 import Input from '@/components/input';
-import Select from '@/components/select';
-import { AddInvestmentRequest } from '@/models/investment';
-import { investmentValidationSchema } from '@/utils/schemas';
+import { AddInvestorRequest } from '@/models/investor';
+import { investorValidationSchema } from '@/utils/schemas';
 
 const AddInvestmentScreen: FC = () => {
   const theme = useTheme();
-  const { data: investors } = useGetInvestorsQuery();
-  const { data: statuses } = useGetStatusesQuery();
-  const { data: offices } = useGetOfficesQuery();
-  const [addInvestment] = useCreateInvestmentMutation();
+  const [addInvestor] = useCreateInvestorMutation();
 
-  const { control, handleSubmit } = useForm<AddInvestmentRequest>({
+  const { control, handleSubmit } = useForm<AddInvestorRequest>({
     mode: 'onChange',
     defaultValues: {
       name: '',
-      investorId: undefined,
-      statusId: undefined,
-      officeId: undefined,
+      contactPerson: '',
+      phone: '',
+      email: '',
+      nip: '',
+      regon: '',
       address: {
         city: '',
         street: '',
@@ -35,18 +30,18 @@ const AddInvestmentScreen: FC = () => {
         zipCode: '',
       },
     },
-    resolver: zodResolver(investmentValidationSchema),
+    resolver: zodResolver(investorValidationSchema),
   });
 
-  const onSubmit = async (data: AddInvestmentRequest) => {
-    await addInvestment(data);
-    router.replace('/');
+  const onSubmit = async (data: AddInvestorRequest) => {
+    await addInvestor(data);
+    router.replace('/investors');
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
-        <H3 paddingVertical="$4">Dodaj nowy obiekt</H3>
+        <H3 paddingVertical="$4">Dodaj nowego inwestora</H3>
         <Input
           name="name"
           label="Nazwa obiektu"
@@ -54,26 +49,41 @@ const AddInvestmentScreen: FC = () => {
           control={control}
           autoCapitalize="sentences"
         />
-        <Select
-          name="investorId"
-          label="Wybierz inwestora"
-          placeholder="Wybierz inwestora"
+        <Input
+          name="contactPerson"
+          label="Osoba kontaktowa"
+          placeholder="Podaj imię i nazwisko osoby kontaktowej"
           control={control}
-          items={investors?.map(investor => ({ id: investor.id, label: investor.name })) || []}
+          autoCapitalize="words"
         />
-        <Select
-          name="statusId"
-          label="Wybierz status"
-          placeholder="Wybierz status"
+        <Input
+          name="email"
+          label="Email"
+          placeholder="Podaj email inwestora"
           control={control}
-          items={statuses?.map(status => ({ id: status.id, label: status.name })) || []}
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
-        <Select
-          name="officeId"
-          label="Wybierz urząd"
-          placeholder="Wybierz urząd"
+        <Input
+          name="phone"
+          label="Telefon"
+          placeholder="Podaj numer telefonu inwestora"
           control={control}
-          items={offices?.map(office => ({ id: office.id, label: office.name })) || []}
+          keyboardType="phone-pad"
+        />
+        <Input
+          name="nip"
+          label="NIP"
+          placeholder="Podaj numer NIP inwestora"
+          control={control}
+          keyboardType="phone-pad"
+        />
+        <Input
+          name="regon"
+          label="REGON"
+          placeholder="Podaj numer REGON inwestora"
+          control={control}
+          keyboardType="phone-pad"
         />
         <Input
           name="address.city"

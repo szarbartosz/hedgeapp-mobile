@@ -31,6 +31,7 @@ export type Investor = {
   address: Address;
   nip: string;
   regon: string;
+  locations: Investment[];
 };
 
 export type Investment = {

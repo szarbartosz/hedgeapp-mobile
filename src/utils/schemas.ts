@@ -43,5 +43,21 @@ export const investmentValidationSchema = z.object({
     city: z.string(),
     street: z.string(),
     number: z.string(),
+    zipCode: z.string(),
+  }),
+});
+
+export const investorValidationSchema = z.object({
+  name: z.string().min(1, 'To pole jest wymagane'),
+  contactPerson: z.string().min(1, 'To pole jest wymagane'),
+  phone: z.string(),
+  email: z.string(),
+  nip: z.string(),
+  regon: z.string(),
+  address: z.object({
+    city: z.string(),
+    street: z.string(),
+    number: z.string(),
+    zipCode: z.string(),
   }),
 });

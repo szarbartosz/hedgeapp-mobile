@@ -7,5 +7,6 @@ export type AddInvestmentRequest = {
     city?: string;
     street?: string;
     number?: string;
+    zipCode?: string;
   };
 };
