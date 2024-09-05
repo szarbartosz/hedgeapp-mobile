@@ -11,6 +11,7 @@ export * from './lucid/landmark';
 export * from './lucid/laptop';
 export * from './lucid/locate';
 export * from './lucid/locate-fixed';
+export * from './lucid/mail';
 export * from './lucid/navigation';
 export * from './lucid/phone';
 export * from './lucid/puzzle';
