@@ -13,9 +13,17 @@ export type AddInvestmentRequest = {
 
 export type UpdateInvestmentRequest = {
   name: string;
-  investorId: number;
-  statusId: number;
-  officeId: number;
+  investorId?: number;
+  statusId?: number;
+  officeId?: number;
+  issueDate?: string;
+  inspectionDate?: string;
+  inspectionDone?: boolean;
+  decisionDate?: string;
+  deforestationDate?: string;
+  deforestationDone?: boolean;
+  plantingDate?: string;
+  plantingDone?: boolean;
   address: {
     city?: string;
     street?: string;
