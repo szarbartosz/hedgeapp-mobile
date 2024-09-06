@@ -99,8 +99,12 @@ const InvestorDetailsScreen: FC = () => {
           <Button
             backgroundColor={theme.$color12}
             color={theme.$color1}
-            // onPress={() => router.navigate('/investors/edit')}
-          >
+            onPress={() =>
+              router.navigate({
+                pathname: '/investors/form',
+                params: { id: investor?.id },
+              })
+            }>
             Edytuj
           </Button>
           <Button

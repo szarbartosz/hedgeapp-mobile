@@ -22,6 +22,12 @@ export type ApplicationData = {
   species: string;
 };
 
+export type Office = {
+  id: number;
+  name: string;
+  address: Address;
+};
+
 export type Investor = {
   id: number;
   name: string;
@@ -50,4 +56,5 @@ export type Investment = {
   plantingDone: boolean;
   applicationData: ApplicationData;
   notes: Note[];
+  office: Office;
 };

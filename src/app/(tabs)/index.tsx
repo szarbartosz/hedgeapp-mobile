@@ -54,8 +54,8 @@ const InvestmentsScreen: FC = () => {
         <Button
           backgroundColor={theme.$color12}
           color={theme.$color1}
-          onPress={() => router.navigate('/investments/add')}>
-          Dodaj inwestycję
+          onPress={() => router.navigate('/investments/form')}>
+          Dodaj obiekt
         </Button>
       </View>
     </SafeAreaView>

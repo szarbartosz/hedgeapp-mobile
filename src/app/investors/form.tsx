@@ -1,47 +1,83 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, H3, ScrollView, useTheme, View } from 'tamagui';
 
-import { useCreateInvestorMutation } from '@/api/investors.service';
+import {
+  useCreateInvestorMutation,
+  useGetSingleInvestorQuery,
+  useUpdateInvestorMutation,
+} from '@/api/investors.service';
 import Input from '@/components/input';
 import { AddInvestorRequest } from '@/models/investor';
 import { investorValidationSchema } from '@/utils/schemas';
 
-const AddInvestmentScreen: FC = () => {
+const AddOrUpdateInvestmentScreen: FC = () => {
+  const { id: investorId } = useLocalSearchParams<{ id: string }>();
+
   const theme = useTheme();
+
+  const { data: investor } = useGetSingleInvestorQuery(+investorId, { skip: !investorId });
   const [addInvestor] = useCreateInvestorMutation();
+  const [updateInvestor] = useUpdateInvestorMutation();
+
+  const getDefaultValues = () => {
+    if (investorId) {
+      return {
+        name: investor?.name || '',
+        contactPerson: investor?.contactPerson || '',
+        phone: investor?.phone || '',
+        email: investor?.email || '',
+        nip: investor?.nip || '',
+        regon: investor?.regon || '',
+        address: {
+          city: investor?.address.city || '',
+          street: investor?.address.street || '',
+          number: investor?.address.number || '',
+          zipCode: investor?.address.zipCode || '',
+        },
+      };
+    } else {
+      return {
+        name: '',
+        contactPerson: '',
+        phone: '',
+        email: '',
+        nip: '',
+        regon: '',
+        address: {
+          city: '',
+          street: '',
+          number: '',
+          zipCode: '',
+        },
+      };
+    }
+  };
 
   const { control, handleSubmit } = useForm<AddInvestorRequest>({
     mode: 'onChange',
-    defaultValues: {
-      name: '',
-      contactPerson: '',
-      phone: '',
-      email: '',
-      nip: '',
-      regon: '',
-      address: {
-        city: '',
-        street: '',
-        number: '',
-        zipCode: '',
-      },
-    },
+    defaultValues: getDefaultValues(),
     resolver: zodResolver(investorValidationSchema),
   });
 
   const onSubmit = async (data: AddInvestorRequest) => {
-    await addInvestor(data);
+    if (investorId) {
+      await updateInvestor({ id: +investorId, data });
+    } else {
+      await addInvestor(data);
+    }
     router.replace('/investors');
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
-        <H3 paddingVertical="$4">Dodaj nowego inwestora</H3>
+        <H3 paddingVertical="$4">
+          {investorId ? 'Edytuj dane inwestora' : 'Dodaj nowego inwestora'}
+        </H3>
         <Input
           name="name"
           label="Nazwa obiektu"
@@ -131,4 +167,4 @@ const AddInvestmentScreen: FC = () => {
   );
 };
 
-export default AddInvestmentScreen;
+export default AddOrUpdateInvestmentScreen;

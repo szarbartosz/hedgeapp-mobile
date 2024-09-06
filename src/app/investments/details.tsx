@@ -4,7 +4,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import MapView, { MapMarker } from 'react-native-maps';
 import Toast from 'react-native-toast-message';
-import { Button, H3, H4, ScrollView, Text, useTheme } from 'tamagui';
+import { Button, H3, H4, ScrollView, Text, useTheme, View } from 'tamagui';
 
 import { useGetSingleInvestmentQuery } from '@/api/investments.service';
 import DateCard from '@/components/date-card';
@@ -130,15 +130,26 @@ const InvestmentDetailsScreen: FC = () => {
           handlePress={() => console.log('planting date')}
         />
 
-        <Button
-          marginTop="$4"
-          marginBottom="$8"
-          backgroundColor={theme.$color4}
-          color={theme.$color12}
-          borderColor={theme.$color12}
-          onPress={() => router.back()}>
-          Cofnij
-        </Button>
+        <View marginVertical="$4" gap="$4">
+          <Button
+            backgroundColor={theme.$color12}
+            color={theme.$color1}
+            onPress={() =>
+              router.navigate({
+                pathname: '/investments/form',
+                params: { id: investment?.id },
+              })
+            }>
+            Edytuj
+          </Button>
+          <Button
+            backgroundColor={theme.$color4}
+            color={theme.$color12}
+            borderColor={theme.$color12}
+            onPress={() => router.back()}>
+            Cofnij
+          </Button>
+        </View>
       </ScrollView>
     </>
   );
