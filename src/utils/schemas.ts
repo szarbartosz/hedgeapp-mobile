@@ -15,6 +15,8 @@ export const signUpValidationSchema = z
         'Hasło musi zawierać co najmniej 8 znaków, przynajmniej jedną małą literę, jedną dużą literę i jedną cyfrę.'
       ),
     confirmPassword: z.string().min(1, 'To pole jest wymagane'),
+    firstName: z.string().min(1, 'To pole jest wymagane'),
+    lastName: z.string().min(1, 'To pole jest wymagane'),
   })
   .superRefine((obj, ctx) => {
     if (obj.password !== obj.confirmPassword) {

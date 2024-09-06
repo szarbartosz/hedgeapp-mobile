@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { router } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import { FC, useState } from 'react';
@@ -12,7 +11,7 @@ import { EyeClosedIcon } from '@/assets/icons/eye-closed-icon';
 import { EyeIcon } from '@/assets/icons/eye-icon';
 import Input from '@/components/input';
 import ToastMessage from '@/components/toast-message';
-import { AuthData, SignInRequest } from '@/models/auth';
+import { SignInRequest } from '@/models/auth';
 import { signInValidationSchema } from '@/utils/schemas';
 
 const SignInModal: FC = () => {
@@ -30,7 +29,7 @@ const SignInModal: FC = () => {
   });
 
   const onSubmit = async (credentials: SignInRequest) => {
-    const signInResult: QueryReturnValue<AuthData> = await signIn({
+    const signInResult = await signIn({
       ...credentials,
     });
 

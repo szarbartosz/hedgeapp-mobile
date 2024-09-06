@@ -83,8 +83,8 @@ const InvestmentDetailsScreen: FC = () => {
       </MapView>
       <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
         <H3 paddingTop="$2">{office?.address.city}</H3>
-        <Text color={theme.color11}>{`${office?.address.street} ${office?.address.number}`}</Text>
-        <Text color={theme.color11}>{office?.name}</Text>
+        <Text color={theme.color12}>{`${office?.address.street} ${office?.address.number}`}</Text>
+        <Text color={theme.color12}>{office?.name}</Text>
 
         <H4 marginTop="$4">Inwestycje</H4>
         <YStack flex={1} marginTop="$2">
