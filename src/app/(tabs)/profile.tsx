@@ -21,7 +21,6 @@ const ProfileScreen = () => {
 
         <View
           backgroundColor="$color1"
-          flex={1}
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between"
@@ -48,7 +47,7 @@ const ProfileScreen = () => {
           <Text color={theme.color12}>{user?.email}</Text>
         </View>
 
-        <YGroup borderRadius={0} paddingTop="$4">
+        <YGroup borderRadius={0} paddingTop="$8">
           <YGroup.Item>
             <ListItem
               onPress={() => Linking.openSettings()}
