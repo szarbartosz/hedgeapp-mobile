@@ -8,7 +8,11 @@ export const officesApi = coreApi.injectEndpoints({
       query: () => ({ url: '/offices' }),
       providesTags: [TAGS.OFFICES],
     }),
+    getSingleOffice: builder.query<Office, number>({
+      query: id => ({ url: `/offices/${id}` }),
+      providesTags: [TAGS.OFFICES],
+    }),
   }),
 });
 
-export const { useGetOfficesQuery } = officesApi;
+export const { useGetOfficesQuery, useGetSingleOfficeQuery } = officesApi;
