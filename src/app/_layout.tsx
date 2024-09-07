@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+import { ThemeProvider } from '@react-navigation/native';
+import { FontSource, useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-
-import SpaceMono from '@/assets/fonts/SpaceMono-Regular.ttf';
-import { useColorScheme } from '@/components/useColorScheme';
-import { store } from '@/redux/store';
+import { useColorScheme } from 'react-native';
 import { Provider } from 'react-redux';
+import { TamaguiProvider } from 'tamagui';
+
+import ToastMessage from '@/components/toast-message';
 import AuthProvider from '@/context/auth-context';
+import { store } from '@/redux/store';
+import { tamaguiConfig } from '@/utils/tamagui.config';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -23,8 +24,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono,
-    ...FontAwesome.font,
+    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf') as FontSource,
+    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf') as FontSource,
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -54,13 +55,39 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
+  const LightTheme = {
+    dark: false,
+    colors: {
+      primary: 'rgb(0, 122, 255)',
+      background: '#F0F0F0',
+      card: '#F0F0F0',
+      text: 'rgb(28, 28, 30)',
+      border: '#E6E6E6',
+      notification: 'rgb(255, 59, 48)',
+    },
+  };
+
+  const DarkTheme = {
+    dark: true,
+    colors: {
+      primary: 'rgb(10, 132, 255)',
+      background: '#232323',
+      card: '#232323',
+      text: 'rgb(229, 229, 231)',
+      border: '#323232',
+      notification: 'rgb(255, 69, 58)',
+    },
+  };
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ presentation: 'modal' }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || 'light'}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : LightTheme}>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ presentation: 'modal', headerShown: false }} />
+        </Stack>
+        <ToastMessage />
+      </ThemeProvider>
+    </TamaguiProvider>
   );
 }

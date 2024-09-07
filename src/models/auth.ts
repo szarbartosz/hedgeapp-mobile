@@ -1,7 +1,5 @@
 export type AuthData = {
-  response: {
-    token: string;
-  };
+  token: string;
 };
 
 export type SignInRequest = {
@@ -13,4 +11,6 @@ export type SignUpRequest = {
   email: string;
   password: string;
   confirmPassword: string;
+  firstName: string;
+  lastName: string;
 };

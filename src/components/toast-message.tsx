@@ -10,12 +10,10 @@ const toastConfig = {
   error: ({ props }: Props) => (
     <ErrorToast {...props} style={{ top: 20, borderLeftColor: 'red' }} />
   ),
+  warning: ({ props }: Props) => (
+    <BaseToast {...props} style={{ top: 20, borderLeftColor: 'orange' }} />
+  ),
 };
 
-const ToastMessage: FC = () => (
-  <>
-    <Toast config={toastConfig} />
-  </>
-);
-
+const ToastMessage: FC = () => <Toast config={toastConfig} />;
 export default ToastMessage;

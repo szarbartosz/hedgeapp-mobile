@@ -1,17 +1,18 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
-import { Text, TextInput, View } from 'react-native';
+import { Button, Input as TextInput, Label, Text, XGroup, XStack, YStack } from 'tamagui';
 
 import { ContentTypes } from '@/types/form';
 
 type InputType = {
   name: string;
+  label?: string;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   secureTextEntry?: boolean;
   placeholder?: string;
-  prefixIcon?: ReactNode;
-  suffixIcon?: ReactNode;
+  suffixIcon?: JSX.Element | null;
+  suffixIconCallback?: () => void;
   textContentType?: ContentTypes;
   multiline?: boolean;
 };
@@ -22,12 +23,13 @@ const Input = <T extends FieldValues>(props: Props<T>) => {
   const {
     control,
     name,
+    label,
     placeholder,
     keyboardType,
     autoCapitalize,
     secureTextEntry,
-    prefixIcon,
     suffixIcon,
+    suffixIconCallback,
     textContentType,
     multiline,
   } = props;
@@ -60,25 +62,51 @@ const Input = <T extends FieldValues>(props: Props<T>) => {
   };
 
   return (
-    <View>
-      <View>
-        {prefixIcon}
-        <TextInput
-          maxLength={handleLength()}
-          onChangeText={handleTextChange}
-          placeholder={placeholder}
-          keyboardType={keyboardType}
-          autoCapitalize={autoCapitalize}
-          secureTextEntry={secureTextEntry}
-          textContentType={textContentType}
-          blurOnSubmit={false}
-          multiline={multiline}
-          {...rest}
-        />
-        {suffixIcon}
-      </View>
-      <Text>{error?.message}</Text>
-    </View>
+    <YStack>
+      <Label>{label}</Label>
+      {suffixIcon ? (
+        <XGroup>
+          <XGroup.Item>
+            <TextInput
+              flex={1}
+              maxLength={handleLength()}
+              onChangeText={handleTextChange}
+              placeholder={placeholder}
+              keyboardType={keyboardType}
+              autoCapitalize={autoCapitalize}
+              secureTextEntry={secureTextEntry}
+              textContentType={textContentType}
+              blurOnSubmit={false}
+              multiline={multiline}
+              {...rest}
+            />
+          </XGroup.Item>
+          <XGroup.Item>
+            <Button onPress={suffixIconCallback} backgroundColor="$color6" icon={suffixIcon} />
+          </XGroup.Item>
+        </XGroup>
+      ) : (
+        <XStack>
+          <TextInput
+            flex={1}
+            maxLength={handleLength()}
+            onChangeText={handleTextChange}
+            placeholder={placeholder}
+            keyboardType={keyboardType}
+            autoCapitalize={autoCapitalize}
+            secureTextEntry={secureTextEntry}
+            textContentType={textContentType}
+            blurOnSubmit={false}
+            multiline={multiline}
+            {...rest}
+          />
+        </XStack>
+      )}
+
+      <Text padding="$2" color="$red10" fontSize={12}>
+        {error?.message}
+      </Text>
+    </YStack>
   );
 };
 

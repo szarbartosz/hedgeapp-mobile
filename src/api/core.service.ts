@@ -1,10 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { AccountResponse } from '@/models/account';
+import { User } from '@/models/user';
 import { prepareHeaders } from '@/redux/utils';
 
 export const TAGS = {
-  CURRENT_ACCOUNT: 'CurrentAccount',
+  CURRENT_USER: 'CurrentUser',
+  INVESTMENTS: 'Investments',
+  INVESTORS: 'Investors',
+  OFFICES: 'Offices',
 };
 
 export const coreApi = createApi({
@@ -13,13 +16,13 @@ export const coreApi = createApi({
     baseUrl: process.env.EXPO_PUBLIC_BASE_URL,
     prepareHeaders: async headers => await prepareHeaders(headers),
   }),
-  tagTypes: [TAGS.CURRENT_ACCOUNT],
+  tagTypes: [TAGS.CURRENT_USER, TAGS.INVESTMENTS, TAGS.INVESTORS, TAGS.OFFICES],
   endpoints: builder => ({
-    currentAccount: builder.query<AccountResponse, void>({
-      query: () => ({ url: '/logged-account' }),
-      providesTags: [TAGS.CURRENT_ACCOUNT],
+    getCurrentUser: builder.query<User, void>({
+      query: () => ({ url: '/validate' }),
+      providesTags: [TAGS.CURRENT_USER],
     }),
   }),
 });
 
-export const { useCurrentAccountQuery } = coreApi;
+export const { useGetCurrentUserQuery } = coreApi;
