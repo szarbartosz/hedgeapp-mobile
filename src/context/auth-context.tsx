@@ -57,9 +57,9 @@ const AuthProvider: FC<Props> = ({ children }) => {
   }, []);
 
   const signOut = async () => {
+    router.navigate('/(auth)/sign-in');
     await SecureStore.deleteItemAsync('token');
     dispatch(coreApi.util.resetApiState());
-    router.navigate('/(auth)/sign-in');
   };
 
   useContextReadiness();

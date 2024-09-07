@@ -22,7 +22,7 @@ type Action = {
 export const rtkQueryErrorLogger: Middleware = () => next => (action: Action) => {
   const endpointName = action.meta?.arg?.endpointName;
 
-  if (endpointName !== 'currentAccount' && (isRejectedWithValue(action) || isRejected(action))) {
+  if (endpointName !== 'currentUser' && (isRejectedWithValue(action) || isRejected(action))) {
     Toast.show({
       type: 'error',
       props: {
@@ -40,7 +40,7 @@ export const authorizationMiddleware: Middleware = () => next => async (action: 
   if (isRejected(action) && action?.payload?.status === 401) {
     await SecureStore.deleteItemAsync('token');
     if (endpointName != 'signIn') {
-      router.replace('/(tabs)');
+      router.navigate('/(auth)/sign-in');
     }
   }
   return next(action as unknown as Action);

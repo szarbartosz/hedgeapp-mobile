@@ -9,6 +9,7 @@ import { useColorScheme } from 'react-native';
 import { Provider } from 'react-redux';
 import { TamaguiProvider } from 'tamagui';
 
+import ToastMessage from '@/components/toast-message';
 import AuthProvider from '@/context/auth-context';
 import { store } from '@/redux/store';
 import { tamaguiConfig } from '@/utils/tamagui.config';
@@ -85,6 +86,7 @@ function RootLayoutNav() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)" options={{ presentation: 'modal', headerShown: false }} />
         </Stack>
+        <ToastMessage />
       </ThemeProvider>
     </TamaguiProvider>
   );

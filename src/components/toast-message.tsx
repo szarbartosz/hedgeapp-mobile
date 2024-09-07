@@ -12,10 +12,6 @@ const toastConfig = {
   ),
 };
 
-const ToastMessage: FC = () => (
-  <>
-    <Toast config={toastConfig} />
-  </>
-);
+const ToastMessage: FC = () => <Toast config={toastConfig} />;
 
 export default ToastMessage;
