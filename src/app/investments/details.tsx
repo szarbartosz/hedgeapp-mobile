@@ -26,8 +26,6 @@ const InvestmentDetailsScreen: FC = () => {
   const { data: investment } = useGetSingleInvestmentQuery(+id);
   const [updateInvestment] = useUpdateInvestmentMutation();
 
-  console.log(investment?.application);
-
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
   const [isMapCentered, setIsMapCentered] = useState(true);
 
