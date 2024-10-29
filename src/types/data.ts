@@ -12,7 +12,7 @@ export type Note = {
   content: string;
 };
 
-export type ApplicationData = {
+export type Application = {
   signature: string;
   isCommercial: boolean;
   deforestationCause: string;
@@ -54,7 +54,7 @@ export type Investment = {
   deforestationDone: boolean;
   plantingDate: string;
   plantingDone: boolean;
-  applicationData: ApplicationData;
+  application: Application;
   notes: Note[];
   office: Office;
 };
