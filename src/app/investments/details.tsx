@@ -1,7 +1,9 @@
+import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import * as Location from 'expo-location';
 import { router, useLocalSearchParams } from 'expo-router';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useColorScheme } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MapView, { MapMarker } from 'react-native-maps';
 import Toast from 'react-native-toast-message';
 import { Button, H3, H4, ScrollView, Text, useTheme, View } from 'tamagui';
@@ -11,6 +13,11 @@ import {
   useUpdateInvestmentMutation,
 } from '@/api/investments.service';
 import ApplicationCard from '@/components/application-card';
+import DecisionDateSheet from '@/components/bottom-sheet/decision-date';
+import DeforestationDateSheet from '@/components/bottom-sheet/deforestation-date';
+import InspectionDateSheet from '@/components/bottom-sheet/inspection-date';
+import IssueDateSheet from '@/components/bottom-sheet/issue-date';
+import PlantingDateSheet from '@/components/bottom-sheet/planting-date';
 import DateCard from '@/components/date-card';
 import DateIndicator from '@/components/date-indicator';
 import InvestorContact from '@/components/investor-contact';
@@ -52,9 +59,15 @@ const InvestmentDetailsScreen: FC = () => {
     });
   }, [investment]);
 
+  const issueDateSheetRef = useRef<BottomSheetModal>(null);
+  const inspectionDateSheetRef = useRef<BottomSheetModal>(null);
+  const decisionDateSheetRef = useRef<BottomSheetModal>(null);
+  const deforestationDateSheetRef = useRef<BottomSheetModal>(null);
+  const plantingDateSheetRef = useRef<BottomSheetModal>(null);
+
   return (
     investment && (
-      <>
+      <GestureHandlerRootView>
         <LocalizationButton
           mapRef={mapRef}
           coords={coords}
@@ -81,7 +94,7 @@ const InvestmentDetailsScreen: FC = () => {
           showsMyLocationButton={false}>
           <MapMarker coordinate={coords || { latitude: 50.049683, longitude: 19.944544 }} />
         </MapView>
-        <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
+        <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4" zIndex={-10}>
           <H3 paddingTop="$2">{investment?.name}</H3>
           <Text color={theme.color11}>
             {`${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`}
@@ -146,27 +159,27 @@ const InvestmentDetailsScreen: FC = () => {
           <DateCard
             title="Data złożenia wniosku"
             date={investment?.issueDate || ''}
-            handlePress={() => console.log('issue date')}
+            handlePress={() => issueDateSheetRef.current?.present()}
           />
           <DateCard
             title="Data oględzin"
             date={investment?.inspectionDate || ''}
-            handlePress={() => console.log('inspection date')}
+            handlePress={() => inspectionDateSheetRef.current?.present()}
           />
           <DateCard
             title="Data wydania decyzji"
             date={investment?.decisionDate || ''}
-            handlePress={() => console.log('decision date')}
+            handlePress={() => decisionDateSheetRef.current?.present()}
           />
           <DateCard
             title="Termin wycinki"
             date={investment?.deforestationDate || ''}
-            handlePress={() => console.log('deforestation date')}
+            handlePress={() => deforestationDateSheetRef.current?.present()}
           />
           <DateCard
             title="Termin nasadzeń"
             date={investment?.plantingDate || ''}
-            handlePress={() => console.log('planting date')}
+            handlePress={() => plantingDateSheetRef.current?.present()}
           />
 
           <H4 marginTop="$4">Dane do wniosku</H4>
@@ -196,7 +209,17 @@ const InvestmentDetailsScreen: FC = () => {
             </Button>
           </View>
         </ScrollView>
-      </>
+        <BottomSheetModalProvider>
+          <IssueDateSheet date={investment?.issueDate} ref={issueDateSheetRef} />
+          <InspectionDateSheet date={investment?.inspectionDate} ref={inspectionDateSheetRef} />
+          <DecisionDateSheet date={investment?.decisionDate} ref={decisionDateSheetRef} />
+          <DeforestationDateSheet
+            date={investment?.deforestationDate}
+            ref={deforestationDateSheetRef}
+          />
+          <PlantingDateSheet date={investment?.plantingDate} ref={plantingDateSheetRef} />
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
     )
   );
 };
