@@ -43,7 +43,7 @@ const NavigationButton: FC<Props> = ({ address, coords }) => {
         top: 70,
         right: 10,
         position: 'absolute',
-        zIndex: 10,
+        zIndex: 1,
         paddingRight: 2,
       }}>
       <NavigationIcon strokeColor={theme.color12.val} />

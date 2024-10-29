@@ -44,7 +44,7 @@ const LocalizationButton: FC<Props> = ({ mapRef, coords, isMapCentered, setIsMap
         top: 130,
         right: 10,
         position: 'absolute',
-        zIndex: 10,
+        zIndex: 1,
       }}>
       {isMapCentered ? (
         <LocateFixedIcon strokeColor={theme.color12.val} />

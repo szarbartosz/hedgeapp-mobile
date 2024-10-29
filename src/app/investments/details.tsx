@@ -210,7 +210,7 @@ const InvestmentDetailsScreen: FC = () => {
           </View>
         </ScrollView>
         <BottomSheetModalProvider>
-          <IssueDateSheet date={investment?.issueDate} ref={issueDateSheetRef} />
+          <IssueDateSheet issueDate={investment?.issueDate} ref={issueDateSheetRef} />
           <InspectionDateSheet date={investment?.inspectionDate} ref={inspectionDateSheetRef} />
           <DecisionDateSheet date={investment?.decisionDate} ref={decisionDateSheetRef} />
           <DeforestationDateSheet

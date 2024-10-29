@@ -27,7 +27,7 @@ const StatusButton: FC<Props> = ({ status }) => {
         top: 190,
         right: 10,
         position: 'absolute',
-        zIndex: 10,
+        zIndex: 1,
       }}
       icon={getStatusIcon(status.id)}>
       <Text fontSize={16}>{status.name}</Text>
