@@ -11,7 +11,7 @@ export const investmentsApi = coreApi.injectEndpoints({
     }),
     getSingleInvestment: builder.query<Investment, number>({
       query: id => ({ url: `/locations/${id}` }),
-      providesTags: [TAGS.INVESTMENTS],
+      providesTags: (_result, _error, arg) => [{ type: TAGS.INVESTMENTS, id: arg }],
     }),
     createInvestment: builder.mutation<Investment, AddInvestmentRequest>({
       query: data => ({ url: '/locations', method: 'POST', body: data }),
@@ -19,7 +19,10 @@ export const investmentsApi = coreApi.injectEndpoints({
     }),
     updateInvestment: builder.mutation<Investment, { id: number; data: UpdateInvestmentRequest }>({
       query: ({ id, data }) => ({ url: `/locations/${id}`, method: 'PUT', body: data }),
-      invalidatesTags: [TAGS.INVESTMENTS],
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: TAGS.INVESTMENTS, id },
+        TAGS.INVESTMENTS,
+      ],
     }),
   }),
 });

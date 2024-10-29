@@ -12,10 +12,10 @@ import { Button, H4, useTheme, View } from 'tamagui';
 
 import { formattedDate } from '@/utils/helpers';
 
-type Props = { issueDate: string };
+type Props = { title: string; currentDate: string; updateDate: (date: string) => void };
 
-const IssueDateSheet = forwardRef<BottomSheetModal, Props>(({ issueDate }, ref) => {
-  const [date, setDate] = useState<string>(issueDate);
+const DateSheet = forwardRef<BottomSheetModal, Props>(({ title, currentDate, updateDate }, ref) => {
+  const [date, setDate] = useState<string>(currentDate);
 
   const insets = useSafeAreaInsets();
   const theme = useTheme();
@@ -24,6 +24,11 @@ const IssueDateSheet = forwardRef<BottomSheetModal, Props>(({ issueDate }, ref) 
     (props: BottomSheetBackdropProps) => <BottomSheetBackdrop {...props} disappearsOnIndex={-1} />,
     []
   );
+
+  const handleUpdate = () => {
+    updateDate(new Date(date).toISOString());
+    (ref as React.RefObject<BottomSheetModal>).current?.dismiss();
+  };
 
   return (
     <BottomSheetModal
@@ -42,7 +47,7 @@ const IssueDateSheet = forwardRef<BottomSheetModal, Props>(({ issueDate }, ref) 
           paddingBottom: Platform.OS === 'ios' ? (insets.bottom ? 60 : 40) : 40,
           rowGap: 24,
         }}>
-        <H4 marginTop="$4">Data złożenia wniosku</H4>
+        <H4 marginTop="$4">{title}</H4>
         <Calendar
           onDayPress={(day: { dateString: string }) => setDate(day.dateString)}
           markedDates={{
@@ -75,8 +80,7 @@ const IssueDateSheet = forwardRef<BottomSheetModal, Props>(({ issueDate }, ref) 
             backgroundColor={theme.$color12}
             borderColor={theme.$color12}
             color={theme.$color1}
-            // TODO: handle updating the date on press
-            onPress={() => {}}>
+            onPress={handleUpdate}>
             Zapisz
           </Button>
           <Button
@@ -92,4 +96,4 @@ const IssueDateSheet = forwardRef<BottomSheetModal, Props>(({ issueDate }, ref) 
   );
 });
 
-export default IssueDateSheet;
+export default DateSheet;

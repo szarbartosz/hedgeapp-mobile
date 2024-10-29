@@ -13,11 +13,7 @@ import {
   useUpdateInvestmentMutation,
 } from '@/api/investments.service';
 import ApplicationCard from '@/components/application-card';
-import DecisionDateSheet from '@/components/bottom-sheet/decision-date';
-import DeforestationDateSheet from '@/components/bottom-sheet/deforestation-date';
-import InspectionDateSheet from '@/components/bottom-sheet/inspection-date';
-import IssueDateSheet from '@/components/bottom-sheet/issue-date';
-import PlantingDateSheet from '@/components/bottom-sheet/planting-date';
+import DateSheet from '@/components/bottom-sheet/date';
 import DateCard from '@/components/date-card';
 import DateIndicator from '@/components/date-indicator';
 import InvestorContact from '@/components/investor-contact';
@@ -210,14 +206,61 @@ const InvestmentDetailsScreen: FC = () => {
           </View>
         </ScrollView>
         <BottomSheetModalProvider>
-          <IssueDateSheet issueDate={investment?.issueDate} ref={issueDateSheetRef} />
-          <InspectionDateSheet date={investment?.inspectionDate} ref={inspectionDateSheetRef} />
-          <DecisionDateSheet date={investment?.decisionDate} ref={decisionDateSheetRef} />
-          <DeforestationDateSheet
-            date={investment?.deforestationDate}
-            ref={deforestationDateSheetRef}
+          <DateSheet
+            title="Data złożenia wniosku"
+            currentDate={investment?.issueDate}
+            ref={issueDateSheetRef}
+            updateDate={issueDate =>
+              updateInvestment({
+                id: +id,
+                data: { ...investment, issueDate },
+              })
+            }
           />
-          <PlantingDateSheet date={investment?.plantingDate} ref={plantingDateSheetRef} />
+          <DateSheet
+            title="Data oględzin"
+            currentDate={investment?.inspectionDate}
+            ref={inspectionDateSheetRef}
+            updateDate={inspectionDate =>
+              updateInvestment({
+                id: +id,
+                data: { ...investment, inspectionDate },
+              })
+            }
+          />
+          <DateSheet
+            title="Data wydania decyzji"
+            currentDate={investment?.decisionDate}
+            ref={decisionDateSheetRef}
+            updateDate={decisionDate =>
+              updateInvestment({
+                id: +id,
+                data: { ...investment, decisionDate },
+              })
+            }
+          />
+          <DateSheet
+            title="Termin wykonania wycinki"
+            currentDate={investment?.deforestationDate}
+            ref={deforestationDateSheetRef}
+            updateDate={deforestationDate =>
+              updateInvestment({
+                id: +id,
+                data: { ...investment, deforestationDate },
+              })
+            }
+          />
+          <DateSheet
+            title="Termin wykonania nasadzeń"
+            currentDate={investment?.plantingDate}
+            ref={plantingDateSheetRef}
+            updateDate={plantingDate =>
+              updateInvestment({
+                id: +id,
+                data: { ...investment, plantingDate },
+              })
+            }
+          />
         </BottomSheetModalProvider>
       </GestureHandlerRootView>
     )

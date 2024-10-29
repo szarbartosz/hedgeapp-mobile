@@ -31,33 +31,31 @@ const DeadlineCountdown: FC<Props> = ({ dates, fontWeight }) => {
     }
   }, [dates]);
 
-  return (
-    daysLeft && (
-      <Text
-        fontWeight={fontWeight}
-        color={
-          daysLeft > 90
-            ? theme.green10
-            : daysLeft > 60
-              ? theme.yellow10
-              : daysLeft > 30
-                ? theme.orange10
-                : daysLeft > 10
-                  ? theme.red10
-                  : theme.purple10
-        }>
-        {daysLeft > 1
-          ? `${daysLeft} dni`
-          : daysLeft === 1
-            ? `${daysLeft} dzień`
-            : daysLeft === 0
-              ? 'Dzisiaj!'
-              : daysLeft === -1
-                ? `${Math.abs(daysLeft)} dzień po terminie!`
-                : `${Math.abs(daysLeft)} dni po terminie!`}
-      </Text>
-    )
-  );
+  return daysLeft !== undefined ? (
+    <Text
+      fontWeight={fontWeight}
+      color={
+        daysLeft > 90
+          ? theme.green10
+          : daysLeft > 60
+            ? theme.yellow10
+            : daysLeft > 30
+              ? theme.orange10
+              : daysLeft > 10
+                ? theme.red10
+                : theme.purple10
+      }>
+      {daysLeft > 1
+        ? `${daysLeft} dni`
+        : daysLeft === 1
+          ? `${daysLeft} dzień`
+          : daysLeft === 0
+            ? 'Dzisiaj!'
+            : daysLeft === -1
+              ? `${Math.abs(daysLeft)} dzień po terminie!`
+              : `${Math.abs(daysLeft)} dni po terminie!`}
+    </Text>
+  ) : null;
 };
 
 export default DeadlineCountdown;
