@@ -10,11 +10,14 @@ import {
   useGetSingleInvestmentQuery,
   useUpdateInvestmentMutation,
 } from '@/api/investments.service';
+import ApplicationCard from '@/components/application-card';
 import DateCard from '@/components/date-card';
 import DateIndicator from '@/components/date-indicator';
 import InvestorContact from '@/components/investor-contact';
 import LocalizationButton from '@/components/localization-button';
 import NavigationButton from '@/components/navigation-button';
+import NotesCard from '@/components/notes-card';
+import StatusButton from '@/components/status-button';
 import darkMap from '@/utils/dark-map.json';
 import retroMap from '@/utils/retro-map.json';
 
@@ -22,6 +25,8 @@ const InvestmentDetailsScreen: FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { data: investment } = useGetSingleInvestmentQuery(+id);
   const [updateInvestment] = useUpdateInvestmentMutation();
+
+  console.log(investment?.application);
 
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
   const [isMapCentered, setIsMapCentered] = useState(true);
@@ -62,6 +67,7 @@ const InvestmentDetailsScreen: FC = () => {
           address={`${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`}
           coords={coords}
         />
+        <StatusButton status={investment.status} />
         <MapView
           onPanDrag={() => setIsMapCentered(false)}
           region={{
@@ -165,7 +171,13 @@ const InvestmentDetailsScreen: FC = () => {
             handlePress={() => console.log('planting date')}
           />
 
-          <View marginVertical="$4" gap="$4">
+          <H4 marginTop="$4">Dane do wniosku</H4>
+          <ApplicationCard application={investment.application} />
+
+          <H4 marginTop="$4">Notatki</H4>
+          <NotesCard notes={investment.notes} />
+
+          <View marginVertical="$6" gap="$4">
             <Button
               backgroundColor={theme.$color12}
               color={theme.$color1}
