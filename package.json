@@ -39,6 +39,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.53.0",
     "react-native": "~0.74.5",
+    "react-native-calendars": "^1.1307.0",
     "react-native-gesture-handler": "~2.16.1",
     "react-native-map-link": "^3.5.0",
     "react-native-maps": "~1.14.0",
