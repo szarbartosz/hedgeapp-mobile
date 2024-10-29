@@ -111,7 +111,7 @@ const InvestmentDetailsScreen: FC = () => {
           </YGroup>
         </YStack>
 
-        <View marginVertical="$4" gap="$4">
+        <View marginVertical="$6" gap="$4">
           <Button
             backgroundColor={theme.$color4}
             color={theme.$color12}

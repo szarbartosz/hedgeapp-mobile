@@ -13,7 +13,11 @@ const StatusFilters: FC<Props> = ({ selectedStatus, setSelectedStatus }) => {
   const { data: statuses } = useGetStatusesQuery();
 
   return (
-    <ScrollView horizontal margin={24} showsHorizontalScrollIndicator={false}>
+    <ScrollView
+      horizontal
+      marginVertical={24}
+      paddingLeft={24}
+      showsHorizontalScrollIndicator={false}>
       <XGroup display="flex" gap={14}>
         {[{ id: 0, name: 'Wszystkie' }, ...(statuses || [])]?.map(status => (
           <XGroup.Item key={status.id}>

@@ -40,7 +40,7 @@ const NavigationButton: FC<Props> = ({ address, coords }) => {
         backgroundColor: theme.color4.val,
         borderWidth: 1.5,
         borderColor: theme.color10.val,
-        top: 130,
+        top: 70,
         right: 10,
         position: 'absolute',
         zIndex: 10,

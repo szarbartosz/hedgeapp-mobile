@@ -41,7 +41,7 @@ const LocalizationButton: FC<Props> = ({ mapRef, coords, isMapCentered, setIsMap
         backgroundColor: theme.color4.val,
         borderWidth: 1.5,
         borderColor: theme.color10.val,
-        top: 190,
+        top: 130,
         right: 10,
         position: 'absolute',
         zIndex: 10,
