@@ -59,3 +59,21 @@ export const formatPhoneNumber = (phoneNumber: string) => {
   }
   return null;
 };
+
+export const calculateDaysLeft = (dates: string[]) => {
+  let minDaysLeft = Number.MAX_SAFE_INTEGER;
+
+  for (const date of dates) {
+    const parsedDate = new Date(date).getTime();
+
+    if (!isNaN(parsedDate)) {
+      const now = new Date().getTime();
+      const diffTime = parsedDate - now;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      minDaysLeft = Math.min(diffDays, minDaysLeft);
+    }
+  }
+
+  return minDaysLeft;
+};

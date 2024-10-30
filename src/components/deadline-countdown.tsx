@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { Text, useTheme } from 'tamagui';
 
+import { calculateDaysLeft } from '@/utils/helpers';
+
 type Props = {
   dates: string[];
   fontWeight?: 100 | 200 | 300 | 400 | 600 | 700 | 800 | 900 | 'unset';
@@ -12,19 +14,7 @@ const DeadlineCountdown: FC<Props> = ({ dates, fontWeight }) => {
   const theme = useTheme();
 
   useEffect(() => {
-    let minDaysLeft = Number.MAX_SAFE_INTEGER;
-
-    for (const date of dates) {
-      const parsedDate = new Date(date).getTime();
-
-      if (!isNaN(parsedDate)) {
-        const now = new Date().getTime();
-        const diffTime = parsedDate - now;
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        minDaysLeft = Math.min(diffDays, minDaysLeft);
-      }
-    }
+    const minDaysLeft = calculateDaysLeft(dates);
 
     if (minDaysLeft !== Number.MAX_SAFE_INTEGER) {
       setDaysLeft(minDaysLeft);

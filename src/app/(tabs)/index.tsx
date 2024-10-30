@@ -7,7 +7,7 @@ import { Button, ListItem, ScrollView, Text, useTheme, View, YGroup, YStack } fr
 
 import { useGetInvestmentsQuery } from '@/api/investments.service';
 import StatusFilters from '@/components/status-filters';
-import { getStatusIcon } from '@/utils/helpers';
+import { calculateDaysLeft, getStatusIcon } from '@/utils/helpers';
 
 import DeadlineCountdown from '../../components/deadline-countdown';
 
@@ -28,6 +28,20 @@ const InvestmentsScreen: FC = () => {
                 .filter(investment => {
                   if (selectedStatus === 0) return true;
                   return investment.status.id === selectedStatus;
+                })
+                .sort((a, b) => {
+                  const aDaysLeft = calculateDaysLeft([
+                    ...(!a.inspectionDone ? [a.inspectionDate] : []),
+                    ...(!a.deforestationDone ? [a.deforestationDate] : []),
+                    ...(!a.plantingDone ? [a.plantingDate] : []),
+                  ]);
+                  const bDaysLeft = calculateDaysLeft([
+                    ...(!b.inspectionDone ? [b.inspectionDate] : []),
+                    ...(!b.deforestationDone ? [b.deforestationDate] : []),
+                    ...(!b.plantingDone ? [b.plantingDate] : []),
+                  ]);
+                  if (aDaysLeft === bDaysLeft) return 0;
+                  return aDaysLeft < bDaysLeft ? -1 : 1;
                 })
                 .map(investment => (
                   <YGroup.Item key={investment.id}>
