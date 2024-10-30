@@ -83,8 +83,8 @@ function RootLayoutNav() {
     <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || 'light'}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : LightTheme}>
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, animation: 'fade' }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false, animation: 'fade' }} />
         </Stack>
         <ToastMessage />
       </ThemeProvider>
