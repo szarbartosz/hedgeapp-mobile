@@ -19,10 +19,16 @@ type Action = {
   };
 };
 
+const endpointsExceptions: string[] = ['signIn', 'signUp'];
+
 export const rtkQueryErrorLogger: Middleware = () => next => (action: Action) => {
   const endpointName = action.meta?.arg?.endpointName;
 
-  if (endpointName !== 'currentUser' && (isRejectedWithValue(action) || isRejected(action))) {
+  if (
+    endpointName !== 'currentUser' &&
+    endpointsExceptions.includes(endpointName) &&
+    (isRejectedWithValue(action) || isRejected(action))
+  ) {
     Toast.show({
       type: 'error',
       props: {

@@ -8,6 +8,7 @@ import { ImageRequireSource, Pressable } from 'react-native';
 import { Button, H3, H4, ScrollView, Text, useTheme, XStack, YStack } from 'tamagui';
 
 import { useSignInMutation } from '@/api/auth.service';
+import { useLazyGetCurrentUserQuery } from '@/api/core.service';
 import { EyeClosedIcon } from '@/assets/icons/eye-closed-icon';
 import { EyeIcon } from '@/assets/icons/eye-icon';
 import Input from '@/components/input';
@@ -17,6 +18,7 @@ import { signInValidationSchema } from '@/utils/schemas';
 const SignInModal: FC = () => {
   const [hidePassword, setHidePassword] = useState<boolean>(true);
   const [signIn] = useSignInMutation();
+  const [fetchCurrentUser] = useLazyGetCurrentUserQuery();
   const theme = useTheme();
 
   const { control, handleSubmit } = useForm<SignInRequest>({
@@ -35,6 +37,7 @@ const SignInModal: FC = () => {
 
     if (signInResult?.data) {
       await SecureStore.setItemAsync('token', signInResult.data?.token || '');
+      await fetchCurrentUser();
       router.navigate('/(tabs)/');
     }
   };
