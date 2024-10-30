@@ -15,7 +15,7 @@ import { formattedDate } from '@/utils/helpers';
 type Props = { title: string; currentDate: string; updateDate: (date: string) => void };
 
 const DateSheet = forwardRef<BottomSheetModal, Props>(({ title, currentDate, updateDate }, ref) => {
-  const [date, setDate] = useState<string>(currentDate);
+  const [date, setDate] = useState<string>(formattedDate(currentDate, 'YYYY-MM-DD'));
 
   const insets = useSafeAreaInsets();
   const theme = useTheme();
@@ -65,6 +65,7 @@ const DateSheet = forwardRef<BottomSheetModal, Props>(({ title, currentDate, upd
           )}
           enableSwipeMonths={true}
           selected={date}
+          initialDate={date}
           theme={{
             calendarBackground: theme.color1.val,
             selectedDayBackgroundColor: theme.green8.val,
