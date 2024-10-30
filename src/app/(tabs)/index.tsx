@@ -1,10 +1,11 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { ImageRequireSource } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, ListItem, ScrollView, Text, useTheme, View, YGroup, YStack } from 'tamagui';
 
+import { useGetCurrentUserQuery } from '@/api/core.service';
 import { useGetInvestmentsQuery } from '@/api/investments.service';
 import StatusFilters from '@/components/status-filters';
 import { calculateDaysLeft, getStatusIcon } from '@/utils/helpers';
@@ -15,7 +16,16 @@ const InvestmentsScreen: FC = () => {
   const theme = useTheme();
   const [selectedStatus, setSelectedStatus] = useState<number>(0);
 
-  const { data: investments, isSuccess } = useGetInvestmentsQuery();
+  const { data: user } = useGetCurrentUserQuery();
+  const { data: investments, isSuccess, refetch: refetchInvestments } = useGetInvestmentsQuery();
+
+  useEffect(() => {
+    void (async () => {
+      if (user) {
+        await refetchInvestments();
+      }
+    })();
+  }, [user]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
