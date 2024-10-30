@@ -13,7 +13,8 @@ import {
   useUpdateInvestmentMutation,
 } from '@/api/investments.service';
 import ApplicationCard from '@/components/application-card';
-import DateSheet from '@/components/bottom-sheet/date';
+import DateSheet from '@/components/bottom-sheet/date-sheet';
+import StatusSheet from '@/components/bottom-sheet/status-sheet';
 import DateCard from '@/components/date-card';
 import DateIndicator from '@/components/date-indicator';
 import InvestorContact from '@/components/investor-contact';
@@ -55,6 +56,8 @@ const InvestmentDetailsScreen: FC = () => {
     });
   }, [investment]);
 
+  const statusSheetRef = useRef<BottomSheetModal>(null);
+
   const issueDateSheetRef = useRef<BottomSheetModal>(null);
   const inspectionDateSheetRef = useRef<BottomSheetModal>(null);
   const decisionDateSheetRef = useRef<BottomSheetModal>(null);
@@ -64,17 +67,28 @@ const InvestmentDetailsScreen: FC = () => {
   return (
     investment && (
       <GestureHandlerRootView>
+        <NavigationButton
+          address={`${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`}
+          coords={coords}
+        />
         <LocalizationButton
           mapRef={mapRef}
           coords={coords}
           isMapCentered={isMapCentered}
           setIsMapCentered={setIsMapCentered}
         />
-        <NavigationButton
-          address={`${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`}
-          coords={coords}
-        />
-        <StatusButton status={investment.status} />
+        <View
+          style={{
+            top: 190,
+            right: 10,
+            position: 'absolute',
+            zIndex: 1,
+          }}>
+          <StatusButton
+            status={investment.status}
+            onPress={() => statusSheetRef.current?.present()}
+          />
+        </View>
         <MapView
           onPanDrag={() => setIsMapCentered(false)}
           region={{
@@ -206,6 +220,17 @@ const InvestmentDetailsScreen: FC = () => {
           </View>
         </ScrollView>
         <BottomSheetModalProvider>
+          <StatusSheet
+            title="Status inwestycji"
+            currentStauts={investment?.status}
+            ref={statusSheetRef}
+            updateStatus={statusId =>
+              updateInvestment({
+                id: +id,
+                data: { ...investment, statusId },
+              })
+            }
+          />
           <DateSheet
             title="Data złożenia wniosku"
             currentDate={investment?.issueDate}

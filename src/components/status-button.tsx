@@ -6,28 +6,26 @@ import { getStatusIcon } from '@/utils/helpers';
 
 type Props = {
   status: Status;
+  onPress: () => void;
+  active?: boolean;
 };
 
-const StatusButton: FC<Props> = ({ status }) => {
+const StatusButton: FC<Props> = ({ status, onPress, active }) => {
   const theme = useTheme();
 
   return (
     <Button
-      onPress={() => {}}
+      onPress={onPress}
       style={{
         width: 'fit-content',
         height: 50,
         borderRadius: 8,
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: theme.color4.val,
+        backgroundColor: active ? theme.color8.val : theme.color4.val,
         borderWidth: 1.5,
-        borderColor: theme.color10.val,
-        top: 190,
-        right: 10,
-        position: 'absolute',
-        zIndex: 1,
+        borderColor: active ? theme.color12.val : theme.color10.val,
       }}
       icon={getStatusIcon(status.id)}>
       <Text fontSize={16}>{status.name}</Text>
