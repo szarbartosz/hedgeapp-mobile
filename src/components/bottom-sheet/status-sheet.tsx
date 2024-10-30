@@ -14,10 +14,10 @@ import { Status } from '@/models/statuses';
 
 import StatusButton from '../status-button';
 
-type Props = { title: string; currentStauts: Status; updateStatus: (statusId: number) => void };
+type Props = { title: string; currentStatus: Status; updateStatus: (statusId: number) => void };
 
 const StatusSheet = forwardRef<BottomSheetModal, Props>(
-  ({ title, currentStauts, updateStatus }, ref) => {
+  ({ title, currentStatus, updateStatus }, ref) => {
     const { data: statuses } = useGetStatusesQuery();
 
     const insets = useSafeAreaInsets();
@@ -60,7 +60,7 @@ const StatusSheet = forwardRef<BottomSheetModal, Props>(
                 <StatusButton
                   key={status.id}
                   status={status}
-                  active={currentStauts.id === status.id}
+                  active={currentStatus.id === status.id}
                   onPress={() => handleUpdate(status.id)}
                 />
               ))}

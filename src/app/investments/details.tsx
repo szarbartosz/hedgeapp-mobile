@@ -222,7 +222,7 @@ const InvestmentDetailsScreen: FC = () => {
         <BottomSheetModalProvider>
           <StatusSheet
             title="Status inwestycji"
-            currentStauts={investment?.status}
+            currentStatus={investment?.status}
             ref={statusSheetRef}
             updateStatus={statusId =>
               updateInvestment({
