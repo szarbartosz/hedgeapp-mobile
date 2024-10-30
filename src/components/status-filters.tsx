@@ -13,13 +13,9 @@ const StatusFilters: FC<Props> = ({ selectedStatus, setSelectedStatus }) => {
   const { data: statuses } = useGetStatusesQuery();
 
   return (
-    <ScrollView
-      horizontal
-      marginVertical={24}
-      paddingLeft={24}
-      showsHorizontalScrollIndicator={false}>
+    <ScrollView horizontal marginVertical={24} showsHorizontalScrollIndicator={false}>
       <XGroup display="flex" gap={14}>
-        {[{ id: 0, name: 'Wszystkie' }, ...(statuses || [])]?.map(status => (
+        {[{ id: 0, name: 'Wszystkie' }, ...(statuses || [])]?.map((status, index) => (
           <XGroup.Item key={status.id}>
             <Button
               icon={status.id ? getStatusIcon(status.id) : undefined}
@@ -29,7 +25,9 @@ const StatusFilters: FC<Props> = ({ selectedStatus, setSelectedStatus }) => {
               h={44}
               display="flex"
               justifyContent="center"
-              paddingHorizontal={12}>
+              paddingHorizontal={12}
+              marginLeft={index === 0 ? 24 : 0}
+              marginRight={index === statuses?.length ? 24 : 0}>
               <Text color={selectedStatus === status.id ? '$color1' : '$color12'}>
                 {status.name}
               </Text>
