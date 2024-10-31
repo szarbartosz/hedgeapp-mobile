@@ -1,0 +1,24 @@
+name: Prettier check
+
+on:
+  push:
+
+jobs:
+  prettier-check:
+    name: Prettier check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+
+      - name: 🥟 Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: 🌿 Setup Node
+        uses: actions/setup-node@v4
+
+      - name: 📦 Install dependencies
+        run: bun install
+
+      - name: ✨ Run Prettier check
+        run: bun ci:prettier:check

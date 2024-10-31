@@ -1,0 +1,24 @@
+name: Run Typescript
+
+on:
+  push:
+
+jobs:
+  typescript-check:
+    name: Typescript check
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v4
+
+      - name: 🥟 Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: 🌿 Setup Node
+        uses: actions/setup-node@v4
+
+      - name: 📦 Install dependencies
+        run: bun install
+
+      - name: 🔍 Run Typescript check
+        run: bun run ci:ts:check
