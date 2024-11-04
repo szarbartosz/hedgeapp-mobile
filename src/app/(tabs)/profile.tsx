@@ -35,7 +35,7 @@ const ProfileScreen = () => {
             <Text color="$color10">w jednym miejscu</Text>
           </View>
           <Image
-            source={require('@/assets/images/city-image.png') as ImageRequireSource}
+            source={require('@/assets/images/hedgehog.png') as ImageRequireSource}
             style={{ width: 120, height: 120, position: 'absolute', right: 20, bottom: -10 }}
             contentFit="contain"
           />
