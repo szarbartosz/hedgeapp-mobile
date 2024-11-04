@@ -39,7 +39,7 @@ const Select = <T extends FieldValues>(props: Props<T>) => {
           iconAfter={<ChevronDownIcon strokeColor={theme.color11.val} />}
           backgroundColor="$color2"
           borderColor="$color6">
-          <SelectPicker.Value placeholder={placeholder} />
+          <SelectPicker.Value>{items.find(item => item.id === value)?.label}</SelectPicker.Value>
         </SelectPicker.Trigger>
 
         <Adapt when="sm" platform="touch">

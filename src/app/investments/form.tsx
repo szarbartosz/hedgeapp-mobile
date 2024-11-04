@@ -68,7 +68,7 @@ const AddOrUpdateInvestmentScreen: FC = () => {
 
   const onSubmit = async (data: AddInvestmentRequest) => {
     if (investmentId) {
-      await updateInvestment({ id: +investmentId, data });
+      await updateInvestment({ id: +investmentId, data: { ...investment, ...data } });
     } else {
       await addInvestment(data);
     }
