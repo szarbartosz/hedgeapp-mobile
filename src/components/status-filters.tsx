@@ -1,8 +1,9 @@
 import { Dispatch, FC } from 'react';
-import { Button, ScrollView, Text, XGroup } from 'tamagui';
+import { Button, ScrollView, Text, useTheme, XGroup } from 'tamagui';
 
 import { useGetStatusesQuery } from '@/api/statuses.service';
-import { getStatusIcon } from '@/utils/helpers';
+
+import StatusIcon from './status-icon';
 
 type Props = {
   selectedStatus: number;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 const StatusFilters: FC<Props> = ({ selectedStatus, setSelectedStatus }) => {
+  const theme = useTheme();
   const { data: statuses } = useGetStatusesQuery();
 
   return (
@@ -18,7 +20,16 @@ const StatusFilters: FC<Props> = ({ selectedStatus, setSelectedStatus }) => {
         {[{ id: 0, name: 'Wszystkie' }, ...(statuses || [])]?.map((status, index) => (
           <XGroup.Item key={status.id}>
             <Button
-              icon={status.id ? getStatusIcon(status.id) : undefined}
+              icon={
+                status.id ? (
+                  <StatusIcon
+                    status={status.id}
+                    strokeColor={
+                      selectedStatus === status.id ? theme.color1.val : theme.color12.val
+                    }
+                  />
+                ) : undefined
+              }
               onPress={() => setSelectedStatus(status.id)}
               style={{ borderRadius: 8 }}
               backgroundColor={selectedStatus === status.id ? '#245531' : '$color8'}

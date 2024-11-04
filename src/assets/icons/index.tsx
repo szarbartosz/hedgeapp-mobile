@@ -6,6 +6,8 @@ export * from './lucid/check';
 export * from './lucid/chevron-down';
 export * from './lucid/chevron-right';
 export * from './lucid/chevron-up';
+export * from './lucid/circle-check';
+export * from './lucid/file-check';
 export * from './lucid/hard-hat';
 export * from './lucid/landmark';
 export * from './lucid/laptop';

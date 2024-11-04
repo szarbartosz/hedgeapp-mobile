@@ -17,13 +17,15 @@ import {
 import { useGetSingleInvestorQuery } from '@/api/investors.service';
 import { HardHatIcon } from '@/assets/icons';
 import InvestorContact from '@/components/investor-contact';
-import { formatPhoneNumber, getStatusIcon } from '@/utils/helpers';
+import StatusIcon from '@/components/status-icon';
+import { formatPhoneNumber } from '@/utils/helpers';
 
 const InvestorDetailsScreen: FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { data: investor } = useGetSingleInvestorQuery(+id);
 
   const theme = useTheme();
+  console.log(investor?.locations[0].status);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
@@ -86,7 +88,7 @@ const InvestorDetailsScreen: FC = () => {
                 borderBottomWidth={1}
                 title={investment.name}
                 subTitle={investment.investor.name}
-                icon={getStatusIcon(investment.status.id)}
+                icon={<StatusIcon status={investment.status.id} strokeColor={theme.color11.val} />}
               />
             </YGroup.Item>
           ))}

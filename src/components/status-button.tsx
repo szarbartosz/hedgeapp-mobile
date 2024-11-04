@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { Button, Text, useTheme } from 'tamagui';
 
 import { Status } from '@/models/statuses';
-import { getStatusIcon } from '@/utils/helpers';
+
+import StatusIcon from './status-icon';
 
 type Props = {
   status: Status;
@@ -27,7 +28,7 @@ const StatusButton: FC<Props> = ({ status, onPress, active }) => {
         borderWidth: 1.5,
         borderColor: active ? theme.color12.val : theme.color10.val,
       }}
-      icon={getStatusIcon(status.id)}>
+      icon={<StatusIcon status={status.id} />}>
       <Text fontSize={16}>{status.name}</Text>
     </Button>
   );

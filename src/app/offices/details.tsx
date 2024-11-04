@@ -20,8 +20,8 @@ import {
 import { useGetSingleOfficeQuery } from '@/api/offices.service';
 import LocalizationButton from '@/components/localization-button';
 import NavigationButton from '@/components/navigation-button';
+import StatusIcon from '@/components/status-icon';
 import darkMap from '@/utils/dark-map.json';
-import { getStatusIcon } from '@/utils/helpers';
 import retroMap from '@/utils/retro-map.json';
 
 const InvestmentDetailsScreen: FC = () => {
@@ -104,7 +104,9 @@ const InvestmentDetailsScreen: FC = () => {
                   borderBottomWidth={1}
                   title={investment.name}
                   subTitle={investment.investor.name}
-                  icon={getStatusIcon(investment.status.id)}
+                  icon={
+                    <StatusIcon status={investment.status.id} strokeColor={theme.color11.val} />
+                  }
                 />
               </YGroup.Item>
             ))}

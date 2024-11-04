@@ -9,7 +9,8 @@ import { useGetCurrentUserQuery } from '@/api/core.service';
 import { useGetInvestmentsQuery } from '@/api/investments.service';
 import LoadingWrapper from '@/components/loading-wrapper';
 import StatusFilters from '@/components/status-filters';
-import { calculateDaysLeft, getStatusIcon } from '@/utils/helpers';
+import StatusIcon from '@/components/status-icon';
+import { calculateDaysLeft } from '@/utils/helpers';
 
 import DeadlineCountdown from '../../components/deadline-countdown';
 
@@ -78,7 +79,12 @@ const InvestmentsScreen: FC = () => {
                         borderBottomWidth={1}
                         title={investment.name}
                         subTitle={investment.investor.name}
-                        icon={getStatusIcon(investment.status.id)}
+                        icon={
+                          <StatusIcon
+                            status={investment.status.id}
+                            strokeColor={theme.color11.val}
+                          />
+                        }
                         iconAfter={
                           <DeadlineCountdown
                             dates={[
