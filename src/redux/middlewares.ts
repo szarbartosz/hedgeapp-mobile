@@ -21,8 +21,10 @@ type Action = {
 
 const endpointsExceptions: string[] = ['signIn', 'signUp'];
 
-export const rtkQueryErrorLogger: Middleware = () => next => (action: Action) => {
-  const endpointName = action.meta?.arg?.endpointName;
+export const rtkQueryErrorLogger: Middleware = () => next => (action: unknown) => {
+  const typedAction = action as Action;
+
+  const endpointName = typedAction.meta?.arg?.endpointName;
 
   if (
     endpointName !== 'currentUser' &&
@@ -33,23 +35,25 @@ export const rtkQueryErrorLogger: Middleware = () => next => (action: Action) =>
       type: 'error',
       props: {
         text1: 'Wystąpił błąd!',
-        text2: action.payload?.data?.message || 'Coś poszło nie tak...',
+        text2: typedAction.payload?.data?.message || 'Coś poszło nie tak...',
       },
     });
   }
-  return next(action as unknown as Action);
+  return next(typedAction);
 };
 
-export const authorizationMiddleware: Middleware = () => next => async (action: Action) => {
-  const endpointName = action.meta?.arg?.endpointName;
+export const authorizationMiddleware: Middleware = () => next => async (action: unknown) => {
+  const typedAction = action as Action;
 
-  if (isRejected(action) && action?.payload?.status === 401) {
+  const endpointName = typedAction.meta?.arg?.endpointName;
+
+  if (isRejected(action) && typedAction?.payload?.status === 401) {
     await SecureStore.deleteItemAsync('token');
     if (endpointName != 'signIn') {
       router.navigate('/(auth)/sign-in');
     }
   }
-  return next(action as unknown as Action);
+  return next(typedAction);
 };
 
 export const rootMiddleware = [coreApi.middleware];
