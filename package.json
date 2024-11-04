@@ -14,7 +14,7 @@
     "prettier:fix": "prettier --write .",
     "ci:lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
     "ci:ts:check": "tsc -p . --noEmit",
-    "ci:prettier:write": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,scss,md}\""
+    "ci:prettier:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,scss,md}\""
   },
   "jest": {
     "preset": "jest-expo"
