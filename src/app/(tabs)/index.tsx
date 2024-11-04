@@ -7,6 +7,7 @@ import { Button, ListItem, ScrollView, Text, useTheme, View, YGroup, YStack } fr
 
 import { useGetCurrentUserQuery } from '@/api/core.service';
 import { useGetInvestmentsQuery } from '@/api/investments.service';
+import LoadingWrapper from '@/components/loading-wrapper';
 import StatusFilters from '@/components/status-filters';
 import { calculateDaysLeft, getStatusIcon } from '@/utils/helpers';
 
@@ -17,7 +18,12 @@ const InvestmentsScreen: FC = () => {
   const [selectedStatus, setSelectedStatus] = useState<number>(0);
 
   const { data: user } = useGetCurrentUserQuery();
-  const { data: investments, isSuccess, refetch: refetchInvestments } = useGetInvestmentsQuery();
+  const {
+    data: investments,
+    isSuccess,
+    isLoading,
+    refetch: refetchInvestments,
+  } = useGetInvestmentsQuery();
 
   useEffect(() => {
     void (async () => {
@@ -29,83 +35,90 @@ const InvestmentsScreen: FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <YStack flex={1} marginBottom="$8" marginTop="$3">
-        {isSuccess && investments.length > 0 ? (
-          <ScrollView>
-            <StatusFilters selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
-            <YGroup borderRadius={0}>
-              {investments
-                .filter(investment => {
-                  if (selectedStatus === 0) return true;
-                  return investment.status.id === selectedStatus;
-                })
-                .sort((a, b) => {
-                  const aDaysLeft = calculateDaysLeft([
-                    ...(!a.inspectionDone ? [a.inspectionDate] : []),
-                    ...(!a.deforestationDone ? [a.deforestationDate] : []),
-                    ...(!a.plantingDone ? [a.plantingDate] : []),
-                  ]);
-                  const bDaysLeft = calculateDaysLeft([
-                    ...(!b.inspectionDone ? [b.inspectionDate] : []),
-                    ...(!b.deforestationDone ? [b.deforestationDate] : []),
-                    ...(!b.plantingDone ? [b.plantingDate] : []),
-                  ]);
-                  if (aDaysLeft === bDaysLeft) return 0;
-                  return aDaysLeft < bDaysLeft ? -1 : 1;
-                })
-                .map(investment => (
-                  <YGroup.Item key={investment.id}>
-                    <ListItem
-                      onPress={() =>
-                        router.navigate({
-                          pathname: '/investments/details',
-                          params: { id: investment.id },
-                        })
-                      }
-                      hoverTheme
-                      backgroundColor={theme.$color4}
-                      borderBottomColor={theme.$color6}
-                      borderBottomWidth={1}
-                      title={investment.name}
-                      subTitle={investment.investor.name}
-                      icon={getStatusIcon(investment.status.id)}
-                      iconAfter={
-                        <DeadlineCountdown
-                          dates={[
-                            ...(!investment.inspectionDone ? [investment.inspectionDate] : []),
-                            ...(!investment.deforestationDone
-                              ? [investment.deforestationDate]
-                              : []),
-                            ...(!investment.plantingDone ? [investment.plantingDate] : []),
-                          ]}
-                        />
-                      }
-                    />
-                  </YGroup.Item>
-                ))}
-            </YGroup>
-          </ScrollView>
-        ) : (
-          <YGroup flex={1} justifyContent="center" alignItems="center" margin={24} gap="$4">
-            <YGroup.Item>
-              <Text fontWeight={800} textAlign="center">
-                Brak zdefiniowanych inwestycji
-              </Text>
-              <Text textAlign="center">
-                Nie posiadasz ani jednej zdefiniowanej inwestycji. Utwórz nowy obiekt, który
-                następnie zostanie wyświetlony na liście.
-              </Text>
-            </YGroup.Item>
-            <YGroup.Item>
-              <Image
-                source={require('@/assets/images/empty-investments-list.png') as ImageRequireSource}
-                style={{ width: 300, height: 300 }}
-                contentFit="contain"
+      <LoadingWrapper isLoading={isLoading}>
+        <YStack flex={1} marginBottom="$8" marginTop="$3">
+          {isSuccess && investments.length > 0 ? (
+            <ScrollView>
+              <StatusFilters
+                selectedStatus={selectedStatus}
+                setSelectedStatus={setSelectedStatus}
               />
-            </YGroup.Item>
-          </YGroup>
-        )}
-      </YStack>
+              <YGroup borderRadius={0}>
+                {investments
+                  .filter(investment => {
+                    if (selectedStatus === 0) return true;
+                    return investment.status.id === selectedStatus;
+                  })
+                  .sort((a, b) => {
+                    const aDaysLeft = calculateDaysLeft([
+                      ...(!a.inspectionDone ? [a.inspectionDate] : []),
+                      ...(!a.deforestationDone ? [a.deforestationDate] : []),
+                      ...(!a.plantingDone ? [a.plantingDate] : []),
+                    ]);
+                    const bDaysLeft = calculateDaysLeft([
+                      ...(!b.inspectionDone ? [b.inspectionDate] : []),
+                      ...(!b.deforestationDone ? [b.deforestationDate] : []),
+                      ...(!b.plantingDone ? [b.plantingDate] : []),
+                    ]);
+                    if (aDaysLeft === bDaysLeft) return 0;
+                    return aDaysLeft < bDaysLeft ? -1 : 1;
+                  })
+                  .map(investment => (
+                    <YGroup.Item key={investment.id}>
+                      <ListItem
+                        onPress={() =>
+                          router.navigate({
+                            pathname: '/investments/details',
+                            params: { id: investment.id },
+                          })
+                        }
+                        hoverTheme
+                        backgroundColor={theme.$color4}
+                        borderBottomColor={theme.$color6}
+                        borderBottomWidth={1}
+                        title={investment.name}
+                        subTitle={investment.investor.name}
+                        icon={getStatusIcon(investment.status.id)}
+                        iconAfter={
+                          <DeadlineCountdown
+                            dates={[
+                              ...(!investment.inspectionDone ? [investment.inspectionDate] : []),
+                              ...(!investment.deforestationDone
+                                ? [investment.deforestationDate]
+                                : []),
+                              ...(!investment.plantingDone ? [investment.plantingDate] : []),
+                            ]}
+                          />
+                        }
+                      />
+                    </YGroup.Item>
+                  ))}
+              </YGroup>
+            </ScrollView>
+          ) : (
+            <YGroup flex={1} justifyContent="center" alignItems="center" margin={24} gap="$4">
+              <YGroup.Item>
+                <Text fontWeight={800} textAlign="center">
+                  Brak zdefiniowanych inwestycji
+                </Text>
+                <Text textAlign="center">
+                  Nie posiadasz ani jednej zdefiniowanej inwestycji. Utwórz nowy obiekt, który
+                  następnie zostanie wyświetlony na liście.
+                </Text>
+              </YGroup.Item>
+              <YGroup.Item>
+                <Image
+                  source={
+                    require('@/assets/images/empty-investments-list.png') as ImageRequireSource
+                  }
+                  style={{ width: 300, height: 300 }}
+                  contentFit="contain"
+                />
+              </YGroup.Item>
+            </YGroup>
+          )}
+        </YStack>
+      </LoadingWrapper>
       <View paddingHorizontal="$4" position="absolute" bottom="$4" width="100%">
         <Button
           backgroundColor={theme.$color12}
