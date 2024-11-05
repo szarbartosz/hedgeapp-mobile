@@ -4,6 +4,7 @@ import {
   BottomSheetModal,
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
+import dayjs from 'dayjs';
 import React, { forwardRef, useCallback, useState } from 'react';
 import { Platform, Text } from 'react-native';
 import { Calendar } from 'react-native-calendars';
@@ -65,7 +66,7 @@ const DateSheet = forwardRef<BottomSheetModal, Props>(({ title, currentDate, upd
           )}
           enableSwipeMonths={true}
           selected={date}
-          initialDate={date}
+          initialDate={dayjs.utc(date).isValid() ? date : dayjs().format('YYYY-MM-DD')}
           theme={{
             calendarBackground: theme.color1.val,
             selectedDayBackgroundColor: theme.green8.val,
@@ -81,7 +82,9 @@ const DateSheet = forwardRef<BottomSheetModal, Props>(({ title, currentDate, upd
             backgroundColor={theme.$color12}
             borderColor={theme.$color12}
             color={theme.$color1}
-            onPress={handleUpdate}>
+            onPress={handleUpdate}
+            disabled={!dayjs.utc(date).isValid()}
+            opacity={!dayjs.utc(date).isValid() ? 0.5 : 1}>
             Zapisz
           </Button>
           <Button
