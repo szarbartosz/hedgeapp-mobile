@@ -7,6 +7,13 @@ $ bun install
 $ bun run ios/android
 ```
 
+## eas build :truck:
+
+```bash
+eas build --platform android --profile development
+eas build --platform ios --profile development
+```
+
 ---
 
 ## project structure :deciduous_tree:
