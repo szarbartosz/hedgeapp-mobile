@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Jeżyk",
-    "slug": "hedgeapp-mobile",
+    "slug": "hedgeapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
@@ -35,7 +35,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "035020a4-6a82-446e-8ea4-dbb9a99c0f83"
+        "projectId": "d31eac7e-77bf-4ed4-ab97-e12b9e1a2b0b"
       }
     }
   }
