@@ -26,7 +26,11 @@ import retroMap from '@/utils/retro-map.json';
 
 const InvestmentDetailsScreen: FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { data: office } = useGetSingleOfficeQuery(+id);
+  const {
+    data: office,
+    isLoading: isFetchingOffice,
+    isSuccess: isOfficeFetched,
+  } = useGetSingleOfficeQuery(+id);
 
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
   const [isMapCentered, setIsMapCentered] = useState(true);
@@ -43,16 +47,18 @@ const InvestmentDetailsScreen: FC = () => {
       setCoords({ latitude: geoResult[0].latitude, longitude: geoResult[0].longitude });
     };
 
-    fetchCoords().catch(_err => {
-      Toast.show({
-        type: 'warning',
-        props: {
-          text1: 'Wystąpił błąd!',
-          text2: 'Nie udało się pobrać lokalizacji urzędu...',
-        },
+    if (!isFetchingOffice && isOfficeFetched) {
+      fetchCoords().catch(_err => {
+        Toast.show({
+          type: 'warning',
+          props: {
+            text1: 'Wystąpił błąd!',
+            text2: 'Nie udało się pobrać lokalizacji urzędu...',
+          },
+        });
       });
-    });
-  }, [office]);
+    }
+  }, [isFetchingOffice, isOfficeFetched, office]);
 
   return (
     <>

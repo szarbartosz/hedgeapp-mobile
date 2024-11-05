@@ -25,7 +25,6 @@ const InvestorDetailsScreen: FC = () => {
   const { data: investor } = useGetSingleInvestorQuery(+id);
 
   const theme = useTheme();
-  console.log(investor?.locations[0].status);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
