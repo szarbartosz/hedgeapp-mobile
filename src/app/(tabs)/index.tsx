@@ -93,7 +93,7 @@ const InvestmentsScreen: FC = () => {
                                 ? [investment.deforestationDate]
                                 : []),
                               ...(!investment.plantingDone ? [investment.plantingDate] : []),
-                            ]}
+                            ].filter(date => date)}
                           />
                         }
                       />

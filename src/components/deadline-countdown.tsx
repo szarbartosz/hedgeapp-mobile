@@ -9,7 +9,7 @@ type Props = {
 };
 
 const DeadlineCountdown: FC<Props> = ({ dates, fontWeight }) => {
-  const [daysLeft, setDaysLeft] = useState<number>();
+  const [daysLeft, setDaysLeft] = useState<number | null>(null);
 
   const theme = useTheme();
 
@@ -21,7 +21,7 @@ const DeadlineCountdown: FC<Props> = ({ dates, fontWeight }) => {
     }
   }, [dates]);
 
-  return daysLeft !== undefined ? (
+  return daysLeft !== null ? (
     <Text
       fontWeight={fontWeight}
       color={
