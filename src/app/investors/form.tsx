@@ -80,8 +80,8 @@ const AddOrUpdateInvestmentScreen: FC = () => {
         </H3>
         <Input
           name="name"
-          label="Nazwa obiektu"
-          placeholder="Podaj nazwę obiektu"
+          label="Nazwa inwestora"
+          placeholder="Podaj nazwę inwestora"
           control={control}
           autoCapitalize="sentences"
         />

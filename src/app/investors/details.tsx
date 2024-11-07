@@ -61,38 +61,46 @@ const InvestorDetailsScreen: FC = () => {
 
       <H4 marginTop="$4">NIP</H4>
       <View paddingHorizontal="$2" gap={8}>
-        <Text color={theme.color11}>{investor?.nip}</Text>
+        <Text color={theme.color11}>{investor?.nip ? investor.nip : 'Nie sprecyzowano'}</Text>
       </View>
 
       <H4 marginTop="$4">REGON</H4>
       <View paddingHorizontal="$2" gap={8}>
-        <Text color={theme.color11}>{investor?.regon}</Text>
+        <Text color={theme.color11}>{investor?.regon ? investor.regon : 'Nie sprecyzowano'}</Text>
       </View>
 
       <H4 marginTop="$4">Inwestycje</H4>
-      <YStack flex={1} marginTop="$2">
-        <YGroup borderRadius={0}>
-          {investor?.locations.map(investment => (
-            <YGroup.Item key={investment.id}>
-              <ListItem
-                onPress={() =>
-                  router.navigate({
-                    pathname: '/investments/details',
-                    params: { id: investment.id },
-                  })
-                }
-                hoverTheme
-                backgroundColor={theme.$color4}
-                borderBottomColor={theme.$color6}
-                borderBottomWidth={1}
-                title={investment.name}
-                subTitle={investment.investor.name}
-                icon={<StatusIcon status={investment.status.id} strokeColor={theme.color11.val} />}
-              />
-            </YGroup.Item>
-          ))}
-        </YGroup>
-      </YStack>
+      {investor?.locations?.length ? (
+        <YStack flex={1} marginTop="$2">
+          <YGroup borderRadius={0}>
+            {investor.locations.map(investment => (
+              <YGroup.Item key={investment.id}>
+                <ListItem
+                  onPress={() =>
+                    router.navigate({
+                      pathname: '/investments/details',
+                      params: { id: investment.id },
+                    })
+                  }
+                  hoverTheme
+                  backgroundColor={theme.$color4}
+                  borderBottomColor={theme.$color6}
+                  borderBottomWidth={1}
+                  title={investment.name}
+                  subTitle={investment.investor.name}
+                  icon={
+                    <StatusIcon status={investment.status.id} strokeColor={theme.color11.val} />
+                  }
+                />
+              </YGroup.Item>
+            ))}
+          </YGroup>
+        </YStack>
+      ) : (
+        <View paddingHorizontal="$2" gap={8}>
+          <Text color={theme.color11}>Brak inwestycji</Text>
+        </View>
+      )}
 
       <View marginVertical="$6" gap="$4">
         <Button

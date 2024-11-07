@@ -14,7 +14,7 @@ export const investorsApi = coreApi.injectEndpoints({
       providesTags: [TAGS.INVESTORS],
     }),
     createInvestor: builder.mutation<Investor, AddInvestorRequest>({
-      query: data => ({ url: '/locations', method: 'POST', body: data }),
+      query: data => ({ url: '/investors', method: 'POST', body: data }),
       invalidatesTags: [TAGS.INVESTORS],
     }),
     updateInvestor: builder.mutation<Investor, { id: number; data: UpdateInvestorRequest }>({
