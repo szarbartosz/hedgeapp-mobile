@@ -38,9 +38,9 @@ export const signInValidationSchema = z.object({
 
 export const investmentValidationSchema = z.object({
   name: z.string().min(1, 'To pole jest wymagane'),
-  investorId: z.number().min(1, 'To pole jest wymagane'),
-  statusId: z.number().min(1, 'To pole jest wymagane'),
-  officeId: z.number().min(1, 'To pole jest wymagane'),
+  investorId: z.number({ required_error: 'To pole jest wymagane' }),
+  statusId: z.number({ required_error: 'To pole jest wymagane' }),
+  officeId: z.number({ required_error: 'To pole jest wymagane' }),
   address: z.object({
     city: z.string(),
     street: z.string(),
