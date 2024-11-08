@@ -20,6 +20,7 @@ export * from './lucid/puzzle';
 export * from './lucid/scale';
 export * from './lucid/sparkles';
 export * from './lucid/sprout';
+export * from './lucid/trash';
 export * from './lucid/trees';
 export * from './lucid/user';
 export * from './lucid/user-search';

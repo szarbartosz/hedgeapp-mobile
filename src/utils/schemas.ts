@@ -73,3 +73,7 @@ export const investorValidationSchema = z.object({
     zipCode: z.string(),
   }),
 });
+
+export const noteValidationSchema = z.object({
+  content: z.string().optional(),
+});

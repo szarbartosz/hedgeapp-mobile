@@ -8,6 +8,7 @@ export type Address = {
 };
 
 export type Note = {
+  id: number;
   createdAt: string;
   content: string;
 };

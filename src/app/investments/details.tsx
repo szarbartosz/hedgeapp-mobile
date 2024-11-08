@@ -15,6 +15,7 @@ import {
 import ApplicationCard from '@/components/application-card';
 import ApplicationSheet from '@/components/bottom-sheet/application-sheet';
 import DateSheet from '@/components/bottom-sheet/date-sheet';
+import NotesSheet from '@/components/bottom-sheet/notes-sheet';
 import StatusSheet from '@/components/bottom-sheet/status-sheet';
 import DateCard from '@/components/date-card';
 import DateIndicator from '@/components/date-indicator';
@@ -71,6 +72,7 @@ const InvestmentDetailsScreen: FC = () => {
   const deforestationDateSheetRef = useRef<BottomSheetModal>(null);
   const plantingDateSheetRef = useRef<BottomSheetModal>(null);
   const applicationSheetRef = useRef<BottomSheetModal>(null);
+  const notesSheetRef = useRef<BottomSheetModal>(null);
 
   return (
     investment && (
@@ -207,7 +209,10 @@ const InvestmentDetailsScreen: FC = () => {
           />
 
           <H4 marginTop="$4">Notatki</H4>
-          <NotesCard notes={investment.notes} />
+          <NotesCard
+            notes={investment.notes}
+            handlePress={() => notesSheetRef.current?.present()}
+          />
 
           <View marginVertical="$6" gap="$4">
             <Button
@@ -298,6 +303,7 @@ const InvestmentDetailsScreen: FC = () => {
             }
           />
           <ApplicationSheet investment={investment} ref={applicationSheetRef} />
+          <NotesSheet investmentId={investment.id} notes={investment.notes} ref={notesSheetRef} />
         </BottomSheetModalProvider>
       </GestureHandlerRootView>
     )

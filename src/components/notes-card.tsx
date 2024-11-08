@@ -5,9 +5,10 @@ import { Note } from '@/types/data';
 
 type Props = {
   notes: Note[];
+  handlePress: () => void;
 };
 
-const NotesCard: FC<Props> = ({ notes }) => {
+const NotesCard: FC<Props> = ({ notes, handlePress }) => {
   const theme = useTheme();
 
   return (
@@ -24,7 +25,9 @@ const NotesCard: FC<Props> = ({ notes }) => {
           {notes.length ? (
             notes.map((note, index) => (
               <YGroup.Item key={index}>
-                <Text color={theme.color11}>{note.content}</Text>
+                <Text maxWidth="85%" color={theme.color11}>
+                  {note.content}
+                </Text>
               </YGroup.Item>
             ))
           ) : (
@@ -33,8 +36,7 @@ const NotesCard: FC<Props> = ({ notes }) => {
             </YGroup.Item>
           )}
         </YGroup>
-        {/* TODO: Add edit button functionality */}
-        <Button position="absolute" right={18} top={18} onPress={() => {}} borderRadius="$10">
+        <Button position="absolute" right={18} top={18} onPress={handlePress} borderRadius="$10">
           <Text>Edytuj</Text>
         </Button>
       </XGroup.Item>
