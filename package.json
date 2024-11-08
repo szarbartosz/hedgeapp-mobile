@@ -24,8 +24,8 @@
     "@hookform/resolvers": "^3.9.1",
     "@react-navigation/native": "^6.1.18",
     "@reduxjs/toolkit": "^2.3.0",
-    "@tamagui/babel-plugin": "^1.116.12",
-    "@tamagui/config": "^1.116.12",
+    "@tamagui/babel-plugin": "^1.116.14",
+    "@tamagui/config": "^1.116.14",
     "dayjs": "^1.11.13",
     "expo": "~51.0.38",
     "expo-dev-client": "~4.0.29",
@@ -54,7 +54,7 @@
     "react-native-toast-message": "^2.2.1",
     "react-native-web": "~0.19.13",
     "react-redux": "^9.1.2",
-    "tamagui": "^1.116.12",
+    "tamagui": "^1.116.14",
     "zod": "^3.23.8"
   },
   "devDependencies": {
