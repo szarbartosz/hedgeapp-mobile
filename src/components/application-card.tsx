@@ -2,13 +2,13 @@ import { FC } from 'react';
 import { Button, H4, Text, useTheme, XGroup, YGroup } from 'tamagui';
 
 import { Application } from '@/types/data';
-import { formattedDate } from '@/utils/helpers';
 
 type Props = {
   application: Application;
+  handlePress: () => void;
 };
 
-const ApplicationCard: FC<Props> = ({ application }) => {
+const ApplicationCard: FC<Props> = ({ application, handlePress }) => {
   const theme = useTheme();
 
   return (
@@ -29,7 +29,7 @@ const ApplicationCard: FC<Props> = ({ application }) => {
           </YGroup.Item>
           <YGroup.Item>
             <H4 fontSize={14}>Wycinka komercyjna</H4>
-            <Text color={theme.color11}>{application.isCommercial ? 'Tak' : 'Nie'}</Text>
+            <Text color={theme.color11}>{application.isCommercial || '-'}</Text>
           </YGroup.Item>
           <YGroup.Item>
             <H4 fontSize={14}>Przyczyna wycinki</H4>
@@ -37,15 +37,11 @@ const ApplicationCard: FC<Props> = ({ application }) => {
           </YGroup.Item>
           <YGroup.Item>
             <H4 fontSize={14}>Termin przeprowadzenia wycinki</H4>
-            <Text color={theme.color11}>
-              {formattedDate(application.deforestationDate, 'D MMMM YYYY')}
-            </Text>
+            <Text color={theme.color11}>{application.deforestationDate || '-'}</Text>
           </YGroup.Item>
           <YGroup.Item>
             <H4 fontSize={14}>Termin wykonania nasadzeń zastępczych</H4>
-            <Text color={theme.color11}>
-              {formattedDate(application.plantingDate, 'D MMMM YYYY')}
-            </Text>
+            <Text color={theme.color11}>{application.plantingDate || '-'}</Text>
           </YGroup.Item>
           <YGroup.Item>
             <H4 fontSize={14}>Miejsce nasadzeń</H4>
@@ -56,8 +52,7 @@ const ApplicationCard: FC<Props> = ({ application }) => {
             <Text color={theme.color11}>{application.species || '-'}</Text>
           </YGroup.Item>
         </YGroup>
-        {/* TODO: add edit button functionality */}
-        <Button position="absolute" right={18} top={18} onPress={() => {}} borderRadius="$10">
+        <Button position="absolute" right={18} top={18} onPress={handlePress} borderRadius="$10">
           <Text>Edytuj</Text>
         </Button>
       </XGroup.Item>

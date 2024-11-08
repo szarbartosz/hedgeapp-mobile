@@ -57,7 +57,7 @@ const Input = <T extends FieldValues>(props: Props<T>) => {
       case 'about':
         return 100;
       default:
-        return 34;
+        return 200;
     }
   };
 

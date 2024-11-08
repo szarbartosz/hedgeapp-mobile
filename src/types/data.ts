@@ -14,7 +14,7 @@ export type Note = {
 
 export type Application = {
   signature: string;
-  isCommercial: boolean;
+  isCommercial: string;
   deforestationCause: string;
   deforestationDate: string;
   plantingDate: string;

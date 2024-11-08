@@ -3,17 +3,13 @@ import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 import { Adapt, Label, Select as SelectPicker, Sheet, Text, useTheme, YStack } from 'tamagui';
 
 import { CheckIcon, ChevronDownIcon } from '@/assets/icons';
-import { ContentTypes } from '@/types/form';
 
 type SelectType = {
   name: string;
   label?: string;
   items: { id: number; label: string }[];
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
-  secureTextEntry?: boolean;
   placeholder?: string;
-  textContentType?: ContentTypes;
-  multiline?: boolean;
+  booleanValue?: boolean;
 };
 
 export type Props<T extends FieldValues> = SelectType & UseControllerProps<T>;
@@ -27,12 +23,15 @@ const Select = <T extends FieldValues>(props: Props<T>) => {
 
   const theme = useTheme();
 
+  const extractValue = (value: string) =>
+    items.find(item => item.label.toLowerCase() === value)?.id;
+
   return (
     <YStack>
       <Label>{label}</Label>
       <SelectPicker
         value={value}
-        onValueChange={v => onChange(items.find(item => item.label.toLowerCase() === v)?.id)}
+        onValueChange={v => onChange(extractValue(v))}
         disablePreventBodyScroll
         {...props}>
         <SelectPicker.Trigger

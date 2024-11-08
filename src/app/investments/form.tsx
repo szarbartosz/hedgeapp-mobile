@@ -72,7 +72,7 @@ const AddOrUpdateInvestmentScreen: FC = () => {
     } else {
       await addInvestment(data);
     }
-    router.replace('/');
+    router.back();
   };
 
   return (

@@ -49,6 +49,16 @@ export const investmentValidationSchema = z.object({
   }),
 });
 
+export const applicationValidationSchema = z.object({
+  signature: z.string().optional(),
+  isCommercial: z.string().optional(),
+  deforestationCause: z.string().optional(),
+  deforestationDate: z.string().optional(),
+  plantingDate: z.string().optional(),
+  plantingSite: z.string().optional(),
+  species: z.string().optional(),
+});
+
 export const investorValidationSchema = z.object({
   name: z.string().min(1, 'To pole jest wymagane'),
   contactPerson: z.string().min(1, 'To pole jest wymagane'),

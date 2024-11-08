@@ -13,6 +13,7 @@ import {
   useUpdateInvestmentMutation,
 } from '@/api/investments.service';
 import ApplicationCard from '@/components/application-card';
+import ApplicationSheet from '@/components/bottom-sheet/application-sheet';
 import DateSheet from '@/components/bottom-sheet/date-sheet';
 import StatusSheet from '@/components/bottom-sheet/status-sheet';
 import DateCard from '@/components/date-card';
@@ -69,6 +70,7 @@ const InvestmentDetailsScreen: FC = () => {
   const decisionDateSheetRef = useRef<BottomSheetModal>(null);
   const deforestationDateSheetRef = useRef<BottomSheetModal>(null);
   const plantingDateSheetRef = useRef<BottomSheetModal>(null);
+  const applicationSheetRef = useRef<BottomSheetModal>(null);
 
   return (
     investment && (
@@ -199,7 +201,10 @@ const InvestmentDetailsScreen: FC = () => {
           />
 
           <H4 marginTop="$4">Dane do wniosku</H4>
-          <ApplicationCard application={investment.application} />
+          <ApplicationCard
+            application={investment.application}
+            handlePress={() => applicationSheetRef.current?.present()}
+          />
 
           <H4 marginTop="$4">Notatki</H4>
           <NotesCard notes={investment.notes} />
@@ -292,6 +297,7 @@ const InvestmentDetailsScreen: FC = () => {
               })
             }
           />
+          <ApplicationSheet investment={investment} ref={applicationSheetRef} />
         </BottomSheetModalProvider>
       </GestureHandlerRootView>
     )

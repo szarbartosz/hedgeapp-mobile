@@ -18,7 +18,6 @@ const StatusButton: FC<Props> = ({ status, onPress, active }) => {
     <Button
       onPress={onPress}
       style={{
-        width: 'fit-content',
         height: 50,
         borderRadius: 8,
         display: 'flex',

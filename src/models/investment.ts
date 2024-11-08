@@ -25,9 +25,22 @@ export type UpdateInvestmentRequest = {
   plantingDate?: string;
   plantingDone?: boolean;
   address: {
+    id?: number;
+    userId?: number;
     city?: string;
     street?: string;
     number?: string;
     zipCode?: string;
   };
+  application?: UpdateApplicationRequest;
+};
+
+export type UpdateApplicationRequest = {
+  signature?: string;
+  isCommercial?: string;
+  deforestationCause?: string;
+  deforestationDate?: string;
+  plantingDate?: string;
+  plantingSite?: string;
+  species?: string;
 };
