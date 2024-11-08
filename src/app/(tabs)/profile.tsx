@@ -17,7 +17,7 @@ const ProfileScreen = () => {
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
-        <H3>Witaj, {user?.firstName}!</H3>
+        <H3>{user?.firstName ? `Witaj, ${user?.firstName}!` : 'Witaj!'}</H3>
 
         <View
           backgroundColor="$color1"
@@ -43,7 +43,9 @@ const ProfileScreen = () => {
 
         <H4 marginTop="$4">Twoje dane</H4>
         <View paddingHorizontal="$2" gap={8}>
-          <Text color={theme.color12}>{`${user?.firstName} ${user?.lastName}`}</Text>
+          {user?.firstName && (
+            <Text color={theme.color12}>{`${user.firstName} ${user?.lastName}`}</Text>
+          )}
           <Text color={theme.color12}>{user?.email}</Text>
         </View>
 
