@@ -1,5 +1,12 @@
 # hedgeapp mobile :hedgehog:
 
+## tech stack :wrench:
+
+![React Native](https://img.shields.io/badge/react_native-%23000000.svg?style=for-the-badge&logo=react&logoColor=white)
+![Expo](https://img.shields.io/badge/expo-%23000000.svg?style=for-the-badge&logo=expo&logoColor=white)
+![Bun](https://img.shields.io/badge/bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white)
+![Nativewind](https://img.shields.io/badge/nativewind-%23000000.svg?style=for-the-badge&logo=tamagui&logoColor=white)
+
 ## dev quickstart :construction:
 
 ```bash
@@ -24,21 +31,21 @@ eas build --platform ios --profile development
 ├── app.json
 ├── babel.config.js
 ├── bun.lockb
+├── eas.json
 ├── expo-env.d.ts
 ├── package.json
 ├── src
 │   ├── api
-│   │   ├── auth.service.ts
-│   │   └── core.service.ts
 │   ├── app
 │   │   ├── (auth)
 │   │   ├── (tabs)
-│   │   ├── +html.tsx
-│   │   ├── +not-found.tsx
-│   │   ├── _layout.tsx
-│   │   └── modal.tsx
+│   │   ├── investments
+│   │   ├── investors
+│   │   ├── modal.tsx
+│   │   └── offices
 │   ├── assets
 │   │   ├── fonts
+│   │   ├── icons
 │   │   └── images
 │   ├── components
 │   ├── constants
@@ -47,7 +54,5 @@ eas build --platform ios --profile development
 │   ├── redux
 │   ├── types
 │   └── utils
-├── tsconfig.json
-└── types
-    └── fonts.d.ts
+└── tsconfig.json
 ```
