@@ -1,7 +1,8 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { FC } from 'react';
-import { ImageRequireSource, SafeAreaView } from 'react-native';
+import { ImageRequireSource } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, ListItem, ScrollView, Text, useTheme, View, YGroup, YStack } from 'tamagui';
 
 import { useGetInvestorsQuery } from '@/api/investors.service';
