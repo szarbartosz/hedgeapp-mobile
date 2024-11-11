@@ -5,6 +5,9 @@
   },
   "build": {
     "development": {
+      "env": {
+        "EXPO_PUBLIC_BASE_URL": "https://hedgeapp.szarbartosz.com"
+      },
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
@@ -12,9 +15,22 @@
       }
     },
     "preview": {
+      "env": {
+        "EXPO_PUBLIC_BASE_URL": "https://hedgeapp.szarbartosz.com"
+      },
+      "developmentClient": false,
+      "android": {
+        "buildType": "apk"
+      },
       "distribution": "internal"
     },
     "production": {
+      "env": {
+        "EXPO_PUBLIC_BASE_URL": "https://hedgeapp.szarbartosz.com"
+      },
+      "android": {
+        "buildType": "apk"
+      },
       "autoIncrement": true
     }
   },
