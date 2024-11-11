@@ -1,6 +1,6 @@
 import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import { Button, Text, useTheme, View } from 'tamagui';
 
@@ -13,20 +13,26 @@ type Props = {
 };
 
 const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
+  const [canSendMail, setCanSendMail] = useState<boolean>(false);
+  const [canMakePhoneCall, setCanMakePhoneCall] = useState<boolean>(false);
+
+  useEffect(() => {
+    void (async () => {
+      setCanSendMail(await Linking.canOpenURL(`mailto:${investor.email}`));
+      setCanMakePhoneCall(await Linking.canOpenURL(`tel:${investor.phone}`));
+    })();
+  }, [investor.email, investor.phone]);
+
   const theme = useTheme();
 
-  const handlePhoneLinking = async () => {
-    if (!investor.phone) return;
+  const handleMailLinking = async () => {
+    await Linking.openURL(`mailto:${investor.email}`);
+  };
 
+  const handlePhoneLinking = async () => {
     Platform.OS === 'android'
       ? await Linking.openURL(`tel:${investor.phone}`)
       : await Linking.openURL(`telprompt:${investor.phone}`);
-  };
-
-  const handleMailLinking = async () => {
-    if (!investor.email) return;
-
-    await Linking.openURL(`mailto:${investor.email}`);
   };
 
   return (
@@ -76,7 +82,8 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
           justifyContent="center"
           backgroundColor={theme.$color1}
           gap={2}
-          onPress={handleMailLinking}>
+          onPress={handleMailLinking}
+          disabled={!canSendMail}>
           <MailIcon strokeColor={theme.color12.val} />
           <Text fontSize={15}>Wyślij mail</Text>
         </Button>
@@ -90,7 +97,8 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
         justifyContent="center"
         backgroundColor={theme.$color1}
         gap={2}
-        onPress={handlePhoneLinking}>
+        onPress={handlePhoneLinking}
+        disabled={!canMakePhoneCall}>
         <PhoneIcon strokeColor={theme.color12.val} />
         <Text fontSize={15}>Zadzwoń</Text>
       </Button>
