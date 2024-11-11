@@ -15,7 +15,7 @@ const ProfileScreen = () => {
   const { data: user } = useGetCurrentUserQuery();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
         <H3>{user?.firstName ? `Witaj, ${user?.firstName}!` : 'Witaj!'}</H3>
 

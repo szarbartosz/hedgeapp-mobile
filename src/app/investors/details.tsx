@@ -27,102 +27,105 @@ const InvestorDetailsScreen: FC = () => {
   const theme = useTheme();
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
-      <SafeAreaView />
-      <View flex={1} flexDirection="row" alignItems="center" gap="$2">
-        <HardHatIcon strokeColor={theme.color12.val} />
-        <H3>{investor?.name}</H3>
-      </View>
-
-      {investor && <InvestorContact investor={investor} variant="simplified" />}
-
-      <H4 marginTop="$4">Kontakt</H4>
-      <View paddingHorizontal="$2" gap={8}>
-        <Text color={theme.color11}>{investor?.contactPerson}</Text>
-        {investor?.phone && <Text color={theme.color11}>{formatPhoneNumber(investor.phone)}</Text>}
-        {investor?.email && <Text color={theme.color11}>{investor?.email}</Text>}
-      </View>
-
-      {investor?.address.city && (
-        <>
-          <H4 marginTop="$4">Adres</H4>
-          <View paddingHorizontal="$2" gap={8}>
-            <Text color={theme.color11}>
-              {`${investor?.address.city}, ${investor?.address.street} ${investor?.address.number}`}
-            </Text>
-            {investor?.address.zipCode && (
-              <Text color={theme.color11}>
-                {`${investor?.address.zipCode} ${investor?.address.city}`}
-              </Text>
-            )}
-          </View>
-        </>
-      )}
-
-      <H4 marginTop="$4">NIP</H4>
-      <View paddingHorizontal="$2" gap={8}>
-        <Text color={theme.color11}>{investor?.nip ? investor.nip : 'Nie sprecyzowano'}</Text>
-      </View>
-
-      <H4 marginTop="$4">REGON</H4>
-      <View paddingHorizontal="$2" gap={8}>
-        <Text color={theme.color11}>{investor?.regon ? investor.regon : 'Nie sprecyzowano'}</Text>
-      </View>
-
-      <H4 marginTop="$4">Inwestycje</H4>
-      {investor?.locations?.length ? (
-        <YStack flex={1} marginTop="$2">
-          <YGroup borderRadius={0}>
-            {investor.locations.map(investment => (
-              <YGroup.Item key={investment.id}>
-                <ListItem
-                  onPress={() =>
-                    router.navigate({
-                      pathname: '/investments/details',
-                      params: { id: investment.id },
-                    })
-                  }
-                  hoverTheme
-                  backgroundColor={theme.$color4}
-                  borderBottomColor={theme.$color6}
-                  borderBottomWidth={1}
-                  title={investment.name}
-                  subTitle={investment.investor.name}
-                  icon={
-                    <StatusIcon status={investment.status.id} strokeColor={theme.color11.val} />
-                  }
-                />
-              </YGroup.Item>
-            ))}
-          </YGroup>
-        </YStack>
-      ) : (
-        <View paddingHorizontal="$2" gap={8}>
-          <Text color={theme.color11}>Brak inwestycji</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
+        <View flex={1} flexDirection="row" alignItems="center" gap="$2">
+          <HardHatIcon strokeColor={theme.color12.val} />
+          <H3>{investor?.name}</H3>
         </View>
-      )}
 
-      <View marginVertical="$6" gap="$4">
-        <Button
-          backgroundColor={theme.$color12}
-          color={theme.$color1}
-          onPress={() =>
-            router.navigate({
-              pathname: '/investors/form',
-              params: { id: investor?.id },
-            })
-          }>
-          Edytuj
-        </Button>
-        <Button
-          backgroundColor={theme.$color4}
-          color={theme.$color12}
-          borderColor={theme.$color12}
-          onPress={() => router.back()}>
-          Cofnij
-        </Button>
-      </View>
-    </ScrollView>
+        {investor && <InvestorContact investor={investor} variant="simplified" />}
+
+        <H4 marginTop="$4">Kontakt</H4>
+        <View paddingHorizontal="$2" gap={8}>
+          <Text color={theme.color11}>{investor?.contactPerson}</Text>
+          {investor?.phone && (
+            <Text color={theme.color11}>{formatPhoneNumber(investor.phone)}</Text>
+          )}
+          {investor?.email && <Text color={theme.color11}>{investor?.email}</Text>}
+        </View>
+
+        {investor?.address.city && (
+          <>
+            <H4 marginTop="$4">Adres</H4>
+            <View paddingHorizontal="$2" gap={8}>
+              <Text color={theme.color11}>
+                {`${investor?.address.city}, ${investor?.address.street} ${investor?.address.number}`}
+              </Text>
+              {investor?.address.zipCode && (
+                <Text color={theme.color11}>
+                  {`${investor?.address.zipCode} ${investor?.address.city}`}
+                </Text>
+              )}
+            </View>
+          </>
+        )}
+
+        <H4 marginTop="$4">NIP</H4>
+        <View paddingHorizontal="$2" gap={8}>
+          <Text color={theme.color11}>{investor?.nip ? investor.nip : 'Nie sprecyzowano'}</Text>
+        </View>
+
+        <H4 marginTop="$4">REGON</H4>
+        <View paddingHorizontal="$2" gap={8}>
+          <Text color={theme.color11}>{investor?.regon ? investor.regon : 'Nie sprecyzowano'}</Text>
+        </View>
+
+        <H4 marginTop="$4">Inwestycje</H4>
+        {investor?.locations?.length ? (
+          <YStack flex={1} marginTop="$2">
+            <YGroup borderRadius={0}>
+              {investor.locations.map(investment => (
+                <YGroup.Item key={investment.id}>
+                  <ListItem
+                    onPress={() =>
+                      router.navigate({
+                        pathname: '/investments/details',
+                        params: { id: investment.id },
+                      })
+                    }
+                    hoverTheme
+                    backgroundColor={theme.$color4}
+                    borderBottomColor={theme.$color6}
+                    borderBottomWidth={1}
+                    title={investment.name}
+                    subTitle={investment.investor.name}
+                    icon={
+                      <StatusIcon status={investment.status.id} strokeColor={theme.color11.val} />
+                    }
+                  />
+                </YGroup.Item>
+              ))}
+            </YGroup>
+          </YStack>
+        ) : (
+          <View paddingHorizontal="$2" gap={8}>
+            <Text color={theme.color11}>Brak inwestycji</Text>
+          </View>
+        )}
+
+        <View marginVertical="$6" gap="$4">
+          <Button
+            backgroundColor={theme.$color12}
+            color={theme.$color1}
+            onPress={() =>
+              router.navigate({
+                pathname: '/investors/form',
+                params: { id: investor?.id },
+              })
+            }>
+            Edytuj
+          </Button>
+          <Button
+            backgroundColor={theme.$color4}
+            color={theme.$color12}
+            borderColor={theme.$color12}
+            onPress={() => router.back()}>
+            Cofnij
+          </Button>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
