@@ -29,11 +29,7 @@ import retroMap from '@/utils/retro-map.json';
 
 const InvestmentDetailsScreen: FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const {
-    data: investment,
-    isLoading: isFetchingInvestment,
-    isSuccess: isInvestmentFetched,
-  } = useGetSingleInvestmentQuery(+id);
+  const { data: investment, isSuccess: isInvestmentFetched } = useGetSingleInvestmentQuery(+id);
   const [updateInvestment] = useUpdateInvestmentMutation();
 
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
@@ -45,13 +41,17 @@ const InvestmentDetailsScreen: FC = () => {
 
   useEffect(() => {
     const fetchCoords = async () => {
-      const address = `${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`;
-      const geoResult = await Location.geocodeAsync(address);
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
-      setCoords({ latitude: geoResult[0].latitude, longitude: geoResult[0].longitude });
+      if (status === Location.PermissionStatus.GRANTED) {
+        const address = `${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`;
+        const geoResult = await Location.geocodeAsync(address);
+
+        setCoords({ latitude: geoResult[0].latitude, longitude: geoResult[0].longitude });
+      }
     };
 
-    if (!isFetchingInvestment && isInvestmentFetched) {
+    if (isInvestmentFetched) {
       fetchCoords().catch(_err => {
         Toast.show({
           type: 'warning',
@@ -62,7 +62,7 @@ const InvestmentDetailsScreen: FC = () => {
         });
       });
     }
-  }, [investment, isFetchingInvestment, isInvestmentFetched]);
+  }, [investment, isInvestmentFetched]);
 
   const statusSheetRef = useRef<BottomSheetModal>(null);
 

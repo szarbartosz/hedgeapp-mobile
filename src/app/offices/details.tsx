@@ -26,11 +26,7 @@ import retroMap from '@/utils/retro-map.json';
 
 const InvestmentDetailsScreen: FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const {
-    data: office,
-    isLoading: isFetchingOffice,
-    isSuccess: isOfficeFetched,
-  } = useGetSingleOfficeQuery(+id);
+  const { data: office, isSuccess: isOfficeFetched } = useGetSingleOfficeQuery(+id);
 
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
   const [isMapCentered, setIsMapCentered] = useState(true);
@@ -41,13 +37,17 @@ const InvestmentDetailsScreen: FC = () => {
 
   useEffect(() => {
     const fetchCoords = async () => {
-      const address = `${office?.address.city}, ${office?.address.street} ${office?.address.number}`;
-      const geoResult = await Location.geocodeAsync(address);
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
-      setCoords({ latitude: geoResult[0].latitude, longitude: geoResult[0].longitude });
+      if (status === Location.PermissionStatus.GRANTED) {
+        const address = `${office?.address.city}, ${office?.address.street} ${office?.address.number}`;
+        const geoResult = await Location.geocodeAsync(address);
+
+        setCoords({ latitude: geoResult[0].latitude, longitude: geoResult[0].longitude });
+      }
     };
 
-    if (!isFetchingOffice && isOfficeFetched) {
+    if (isOfficeFetched) {
       fetchCoords().catch(_err => {
         Toast.show({
           type: 'warning',
@@ -58,7 +58,7 @@ const InvestmentDetailsScreen: FC = () => {
         });
       });
     }
-  }, [isFetchingOffice, isOfficeFetched, office]);
+  }, [office, isOfficeFetched]);
 
   return (
     <>

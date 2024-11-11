@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import { FC, useEffect, useState } from 'react';
 import { ImageRequireSource } from 'react-native';
@@ -33,6 +34,12 @@ const InvestmentsScreen: FC = () => {
       }
     })();
   }, [user]);
+
+  useEffect(() => {
+    void (async () => {
+      await Location.requestForegroundPermissionsAsync();
+    })();
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
