@@ -5,7 +5,6 @@ import {
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { router } from 'expo-router';
 import React, { forwardRef, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { Platform } from 'react-native';
@@ -48,8 +47,7 @@ const NotesSheet = forwardRef<BottomSheetModal, Props>(({ investmentId, notes },
   };
 
   const onDelete = async (id: number) => {
-    const result = await deleteNote({ id, investmentId });
-    console.log(result);
+    await deleteNote({ id, investmentId });
     (ref as React.RefObject<BottomSheetModal>).current?.dismiss();
   };
 
@@ -112,7 +110,7 @@ const NotesSheet = forwardRef<BottomSheetModal, Props>(({ investmentId, notes },
                 backgroundColor={theme.$color4}
                 color={theme.$color12}
                 borderColor={theme.$color12}
-                onPress={() => router.back()}>
+                onPress={() => (ref as React.RefObject<BottomSheetModal>).current?.dismiss()}>
                 Anuluj
               </Button>
             </View>

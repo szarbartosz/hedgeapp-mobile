@@ -5,7 +5,6 @@ import {
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { router } from 'expo-router';
 import React, { forwardRef, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { Platform } from 'react-native';
@@ -133,7 +132,7 @@ const ApplicationSheet = forwardRef<BottomSheetModal, Props>(({ investment }, re
                 backgroundColor={theme.$color4}
                 color={theme.$color12}
                 borderColor={theme.$color12}
-                onPress={() => router.back()}>
+                onPress={() => (ref as React.RefObject<BottomSheetModal>).current?.dismiss()}>
                 Anuluj
               </Button>
             </View>
