@@ -56,8 +56,8 @@ const InvestmentDetailsScreen: FC = () => {
         Toast.show({
           type: 'warning',
           props: {
-            text1: 'Wystąpił błąd!',
-            text2: 'Nie udało się pobrać lokalizacji inwestycji...',
+            text1: 'Hmmm... 🧐',
+            text2: 'Nie udało się pobrać lokalizacji inwestycji',
           },
         });
       });
@@ -104,21 +104,23 @@ const InvestmentDetailsScreen: FC = () => {
           region={{
             latitude: coords?.latitude || 50.049683,
             longitude: coords?.longitude || 19.944544,
-            latitudeDelta: 0.0035,
-            longitudeDelta: 0.0035,
+            latitudeDelta: coords ? 0.0035 : 0.05,
+            longitudeDelta: coords ? 0.0035 : 0.05,
           }}
           customMapStyle={colorScheme === 'dark' ? darkMap : retroMap}
           ref={mapRef}
           style={{ height: 250 }}
           showsCompass={false}
           showsMyLocationButton={false}>
-          <MapMarker coordinate={coords || { latitude: 50.049683, longitude: 19.944544 }} />
+          {coords && <MapMarker coordinate={coords} />}
         </MapView>
         <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4" zIndex={-10}>
           <H3 paddingTop="$2">{investment?.name}</H3>
-          <Text color={theme.color11}>
-            {`${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`}
-          </Text>
+          {investment?.address.city && (
+            <Text color={theme.color11}>
+              {`${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`}
+            </Text>
+          )}
 
           {investment?.investor && <InvestorContact investor={investment?.investor} />}
 
