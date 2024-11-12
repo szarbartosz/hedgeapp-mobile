@@ -30,6 +30,7 @@ const NavigationButton: FC<Props> = ({ address, coords }) => {
   return (
     <Pressable
       onPress={handlePress}
+      disabled={!coords?.latitude || !coords?.longitude}
       style={{
         width: 50,
         height: 50,
@@ -37,7 +38,7 @@ const NavigationButton: FC<Props> = ({ address, coords }) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.color4.val,
+        backgroundColor: coords ? theme.color4.val : theme.color2.val,
         borderWidth: 1.5,
         borderColor: theme.color10.val,
         top: 70,
@@ -46,7 +47,7 @@ const NavigationButton: FC<Props> = ({ address, coords }) => {
         zIndex: 1,
         paddingRight: 2,
       }}>
-      <NavigationIcon strokeColor={theme.color12.val} />
+      <NavigationIcon strokeColor={coords ? theme.color12.val : theme.color10.val} />
     </Pressable>
   );
 };

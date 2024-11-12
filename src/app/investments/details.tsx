@@ -74,6 +74,20 @@ const InvestmentDetailsScreen: FC = () => {
   const applicationSheetRef = useRef<BottomSheetModal>(null);
   const notesSheetRef = useRef<BottomSheetModal>(null);
 
+  useEffect(() => {
+    if (coords?.latitude && coords?.longitude) {
+      mapRef.current?.animateToRegion(
+        {
+          latitude: coords?.latitude,
+          longitude: coords?.longitude,
+          latitudeDelta: 0.0035,
+          longitudeDelta: 0.0035,
+        },
+        1000
+      );
+    }
+  }, [coords]);
+
   return (
     investment && (
       <GestureHandlerRootView>
@@ -102,10 +116,10 @@ const InvestmentDetailsScreen: FC = () => {
         <MapView
           onPanDrag={() => setIsMapCentered(false)}
           region={{
-            latitude: coords?.latitude || 50.049683,
-            longitude: coords?.longitude || 19.944544,
-            latitudeDelta: coords ? 0.0035 : 0.05,
-            longitudeDelta: coords ? 0.0035 : 0.05,
+            latitude: 49.985318,
+            longitude: 20.293428,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
           }}
           customMapStyle={colorScheme === 'dark' ? darkMap : retroMap}
           ref={mapRef}

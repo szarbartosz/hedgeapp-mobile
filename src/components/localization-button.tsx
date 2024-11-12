@@ -16,21 +16,24 @@ const LocalizationButton: FC<Props> = ({ mapRef, coords, isMapCentered, setIsMap
   const theme = useTheme();
 
   const handlePress = () => {
-    mapRef?.current?.animateToRegion(
-      {
-        latitude: coords?.latitude || 50.049683,
-        longitude: coords?.longitude || 19.944544,
-        latitudeDelta: 0.0035,
-        longitudeDelta: 0.0035,
-      },
-      1000
-    );
-    setIsMapCentered?.(true);
+    if (coords?.latitude && coords?.longitude) {
+      mapRef?.current?.animateToRegion(
+        {
+          latitude: coords?.latitude,
+          longitude: coords?.longitude,
+          latitudeDelta: 0.0035,
+          longitudeDelta: 0.0035,
+        },
+        1000
+      );
+      setIsMapCentered?.(true);
+    }
   };
 
   return (
     <Pressable
       onPress={handlePress}
+      disabled={!coords?.latitude || !coords?.longitude}
       style={{
         width: 50,
         height: 50,
@@ -38,7 +41,7 @@ const LocalizationButton: FC<Props> = ({ mapRef, coords, isMapCentered, setIsMap
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.color4.val,
+        backgroundColor: coords ? theme.color4.val : theme.color2.val,
         borderWidth: 1.5,
         borderColor: theme.color10.val,
         top: 130,
@@ -47,9 +50,9 @@ const LocalizationButton: FC<Props> = ({ mapRef, coords, isMapCentered, setIsMap
         zIndex: 1,
       }}>
       {isMapCentered ? (
-        <LocateFixedIcon strokeColor={theme.color12.val} />
+        <LocateFixedIcon strokeColor={coords ? theme.color12.val : theme.color10.val} />
       ) : (
-        <LocateIcon strokeColor={theme.color12.val} />
+        <LocateIcon strokeColor={coords ? theme.color12.val : theme.color10.val} />
       )}
     </Pressable>
   );
