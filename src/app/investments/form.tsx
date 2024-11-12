@@ -3,6 +3,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 import { Button, H3, ScrollView, useTheme, View } from 'tamagui';
 
 import {
@@ -68,9 +69,48 @@ const AddOrUpdateInvestmentScreen: FC = () => {
 
   const onSubmit = async (data: AddInvestmentRequest) => {
     if (investmentId) {
-      await updateInvestment({ id: +investmentId, data: { ...investment, ...data } });
+      const updateInvestmentResult = await updateInvestment({
+        id: +investmentId,
+        data: { ...investment, ...data },
+      });
+
+      if (updateInvestmentResult.error) {
+        Toast.show({
+          type: 'error',
+          props: {
+            text1: 'Wystąpił błąd! 😳',
+            text2: 'Edycja obiektu nie powiodła się',
+          },
+        });
+      } else if (updateInvestmentResult.data) {
+        Toast.show({
+          type: 'success',
+          props: {
+            text1: 'Sukces! 🎉',
+            text2: 'Dane obiektu zostały pomyślnie zmodfikowane',
+          },
+        });
+      }
     } else {
-      await addInvestment(data);
+      const addInvestmentResult = await addInvestment(data);
+
+      if (addInvestmentResult.error) {
+        Toast.show({
+          type: 'error',
+          props: {
+            text1: 'Wystąpił błąd! 😳',
+            text2: 'Dodawanie obiektu nie powiodło się',
+          },
+        });
+      } else if (addInvestmentResult.data) {
+        Toast.show({
+          type: 'success',
+          props: {
+            text1: 'Sukces! 🎉',
+            text2: 'Obiekt został pomyślnie dodany',
+          },
+        });
+      }
     }
     router.back();
   };

@@ -3,6 +3,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 import { Button, H3, ScrollView, useTheme, View } from 'tamagui';
 
 import {
@@ -65,11 +66,47 @@ const AddOrUpdateInvestmentScreen: FC = () => {
 
   const onSubmit = async (data: AddInvestorRequest) => {
     if (investorId) {
-      await updateInvestor({ id: +investorId, data });
+      const updateInvestorResult = await updateInvestor({ id: +investorId, data });
+
+      if (updateInvestorResult.error) {
+        Toast.show({
+          type: 'error',
+          props: {
+            text1: 'Wystąpił błąd! 😳',
+            text2: 'Edycja inwestora nie powiodła się',
+          },
+        });
+      } else if (updateInvestorResult.data) {
+        Toast.show({
+          type: 'success',
+          props: {
+            text1: 'Sukces! 🎉',
+            text2: 'Dane inwestora zostały pomyślnie zmodfikowane',
+          },
+        });
+      }
     } else {
-      await addInvestor(data);
+      const addInvestorResult = await addInvestor(data);
+
+      if (addInvestorResult.error) {
+        Toast.show({
+          type: 'error',
+          props: {
+            text1: 'Wystąpił błąd! 😳',
+            text2: 'Dodawanie inwestora nie powiodło się',
+          },
+        });
+      } else if (addInvestorResult.data) {
+        Toast.show({
+          type: 'success',
+          props: {
+            text1: 'Sukces! 🎉',
+            text2: 'Inwestor został pomyślnie dodany',
+          },
+        });
+      }
     }
-    router.replace('/investors');
+    router.back();
   };
 
   return (
