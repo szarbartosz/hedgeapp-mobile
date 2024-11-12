@@ -131,15 +131,15 @@ const InvestmentsScreen: FC = () => {
             </YGroup>
           )}
         </YStack>
+        <View paddingHorizontal="$4" position="absolute" bottom="$4" width="100%">
+          <Button
+            backgroundColor={theme.$color12}
+            color={theme.$color1}
+            onPress={() => router.navigate('/investments/form')}>
+            {`${isSuccess && investments.length > 0 ? 'Dodaj obiekt' : 'Zdefiniuj pierwszą inwestycję'}`}
+          </Button>
+        </View>
       </LoadingWrapper>
-      <View paddingHorizontal="$4" position="absolute" bottom="$4" width="100%">
-        <Button
-          backgroundColor={theme.$color12}
-          color={theme.$color1}
-          onPress={() => router.navigate('/investments/form')}>
-          {`${isSuccess && investments.length > 0 ? 'Dodaj obiekt' : 'Zdefiniuj pierwszą inwestycję'}`}
-        </Button>
-      </View>
     </SafeAreaView>
   );
 };
