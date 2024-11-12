@@ -26,7 +26,11 @@ import retroMap from '@/utils/retro-map.json';
 
 const InvestmentDetailsScreen: FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { data: office, isSuccess: isOfficeFetched } = useGetSingleOfficeQuery(+id);
+  const {
+    data: office,
+    isLoading: isFetchingOffice,
+    isSuccess: isOfficeFetched,
+  } = useGetSingleOfficeQuery(+id);
 
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
   const [isMapCentered, setIsMapCentered] = useState(true);
@@ -47,7 +51,7 @@ const InvestmentDetailsScreen: FC = () => {
       }
     };
 
-    if (isOfficeFetched) {
+    if (isFetchingOffice && isOfficeFetched) {
       fetchCoords().catch(_err => {
         Toast.show({
           type: 'warning',
@@ -58,7 +62,7 @@ const InvestmentDetailsScreen: FC = () => {
         });
       });
     }
-  }, [office, isOfficeFetched]);
+  }, [office, isFetchingOffice, isOfficeFetched]);
 
   useEffect(() => {
     if (coords?.latitude && coords?.longitude) {

@@ -29,7 +29,11 @@ import retroMap from '@/utils/retro-map.json';
 
 const InvestmentDetailsScreen: FC = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { data: investment, isSuccess: isInvestmentFetched } = useGetSingleInvestmentQuery(+id);
+  const {
+    data: investment,
+    isLoading: isFetchingInvestment,
+    isSuccess: isInvestmentFetched,
+  } = useGetSingleInvestmentQuery(+id);
   const [updateInvestment] = useUpdateInvestmentMutation();
 
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
@@ -51,7 +55,7 @@ const InvestmentDetailsScreen: FC = () => {
       }
     };
 
-    if (isInvestmentFetched) {
+    if (!isFetchingInvestment && isInvestmentFetched) {
       fetchCoords().catch(_err => {
         Toast.show({
           type: 'warning',
@@ -62,7 +66,7 @@ const InvestmentDetailsScreen: FC = () => {
         });
       });
     }
-  }, [investment, isInvestmentFetched]);
+  }, [investment, isFetchingInvestment, isInvestmentFetched]);
 
   const statusSheetRef = useRef<BottomSheetModal>(null);
 
