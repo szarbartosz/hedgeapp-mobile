@@ -40,7 +40,7 @@ const InvestorDetailsScreen: FC = () => {
         <View paddingHorizontal="$2" gap={8}>
           <Text color={theme.color11}>{investor?.contactPerson}</Text>
           {investor?.phone && (
-            <Text color={theme.color11}>{formatPhoneNumber(investor.phone)}</Text>
+            <Text color={theme.color11}>{formatPhoneNumber(investor.phone) ?? investor.phone}</Text>
           )}
           {investor?.email && <Text color={theme.color11}>{investor?.email}</Text>}
         </View>

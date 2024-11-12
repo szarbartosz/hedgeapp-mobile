@@ -1,6 +1,6 @@
 import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Platform } from 'react-native';
 import { Button, Text, useTheme, View } from 'tamagui';
 
@@ -13,16 +13,6 @@ type Props = {
 };
 
 const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
-  const [canSendMail, setCanSendMail] = useState<boolean>(false);
-  const [canMakePhoneCall, setCanMakePhoneCall] = useState<boolean>(false);
-
-  useEffect(() => {
-    void (async () => {
-      setCanSendMail(await Linking.canOpenURL(`mailto:${investor.email}`));
-      setCanMakePhoneCall(await Linking.canOpenURL(`tel:${investor.phone}`));
-    })();
-  }, [investor.email, investor.phone]);
-
   const theme = useTheme();
 
   const handleMailLinking = async () => {
@@ -83,7 +73,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
           backgroundColor={theme.$color1}
           gap={2}
           onPress={handleMailLinking}
-          disabled={!canSendMail}>
+          disabled={!investor.email}>
           <MailIcon strokeColor={theme.color12.val} />
           <Text fontSize={15}>Wyślij mail</Text>
         </Button>
@@ -98,7 +88,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
         backgroundColor={theme.$color1}
         gap={2}
         onPress={handlePhoneLinking}
-        disabled={!canMakePhoneCall}>
+        disabled={!investor.phone}>
         <PhoneIcon strokeColor={theme.color12.val} />
         <Text fontSize={15}>Zadzwoń</Text>
       </Button>
