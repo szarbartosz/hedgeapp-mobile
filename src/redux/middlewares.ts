@@ -34,7 +34,7 @@ export const rtkQueryErrorLogger: Middleware = () => next => (action: unknown) =
     Toast.show({
       type: 'error',
       props: {
-        text1: 'Wystąpił błąd!',
+        text1: 'Wystąpił błąd! 😳',
         text2: typedAction.payload?.data?.message || 'Coś poszło nie tak...',
       },
     });

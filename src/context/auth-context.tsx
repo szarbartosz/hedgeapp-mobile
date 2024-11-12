@@ -49,8 +49,8 @@ const AuthProvider: FC<Props> = ({ children }) => {
       Toast.show({
         type: 'error',
         props: {
-          text1: 'Wystąpił błąd!',
-          text2: 'Coś poszło nie tak...',
+          text1: 'Wystąpił błąd! 😳',
+          text2: 'Coś poszło nie tak - spróbuj ponownie później',
         },
       });
     });
