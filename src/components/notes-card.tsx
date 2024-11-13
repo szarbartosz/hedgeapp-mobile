@@ -21,11 +21,11 @@ const NotesCard: FC<Props> = ({ notes, handlePress }) => {
       marginTop="$4"
       minHeight="$8">
       <XGroup.Item>
-        <YGroup gap={8}>
+        <YGroup gap={8} display="flex" flexGrow={1}>
           {notes.length ? (
             notes.map((note, index) => (
               <YGroup.Item key={index}>
-                <Text maxWidth="85%" color={theme.color11}>
+                <Text maxWidth="70%" color={theme.color11}>
                   {note.content}
                 </Text>
               </YGroup.Item>

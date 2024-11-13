@@ -78,8 +78,6 @@ const NotesSheet = forwardRef<BottomSheetModal, Props>(({ investmentId, notes },
                   padding="$4"
                   borderBottomWidth={1}
                   borderBottomColor={theme.color8.val}
-                  backgroundColor={theme.$color1}
-                  borderRadius="$10"
                   justifyContent="space-between">
                   <Text maxWidth="85%">{note.content}</Text>
                   <TrashIcon
