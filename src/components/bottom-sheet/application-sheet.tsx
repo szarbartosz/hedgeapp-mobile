@@ -85,7 +85,7 @@ const ApplicationSheet = forwardRef<BottomSheetModal, Props>(({ investment }, re
             <Input
               name="isCommercial"
               label="Wycinka komercyjna"
-              placeholder="Wybierz opcję"
+              placeholder="Podaj czy wycinka jest komercyjna"
               control={control}
             />
             <Input
