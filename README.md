@@ -1,5 +1,13 @@
 # hedgeapp mobile :hedgehog:
 
+Mobile app created to streamline and enhance the inventory processes for individuals and teams managing green areas.
+
+## preview :eye:
+
+| List of investments                                                                               | Investment details                                                                               | Investor details                                                                                  | Office details                                                                                    |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| <img width="200" alt="image" src="assets/462650107_3765312603735855_5423466211216614636_n.jpg" /> | <img width="200" alt="image" src="assets/466729359_548106131393961_8682861411856069245_n.jpg" /> | <img width="200" alt="image" src="assets/462566824_1115766920218576_4647418960574164106_n.jpg" /> | <img width="200" alt="image" src="assets/462570629_1302322244115890_1643044618316419013_n.jpg" /> |
+
 ## tech stack :wrench:
 
 ![React Native](https://img.shields.io/badge/react_native-%23000000.svg?style=for-the-badge&logo=react&logoColor=white)
