@@ -13,7 +13,7 @@ Mobile app created to streamline and enhance the inventory processes for individ
 ![React Native](https://img.shields.io/badge/react_native-%23000000.svg?style=for-the-badge&logo=react&logoColor=white)
 ![Expo](https://img.shields.io/badge/expo-%23000000.svg?style=for-the-badge&logo=expo&logoColor=white)
 ![Bun](https://img.shields.io/badge/bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white)
-![Nativewind](https://img.shields.io/badge/nativewind-%23000000.svg?style=for-the-badge&logo=tamagui&logoColor=white)
+![Tamagui](https://img.shields.io/badge/tamagui-%23000000.svg?style=for-the-badge&logo=tamagui&logoColor=white)
 
 ## dev quickstart :construction:
 
