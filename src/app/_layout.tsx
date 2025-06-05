@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
+import '@/styles/global.css';
+
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { FontSource, useFonts } from 'expo-font';
 import { Stack } from 'expo-router';

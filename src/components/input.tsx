@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
 import { Button, Input as TextInput, Label, Text, XGroup, XStack, YStack } from 'tamagui';
 
@@ -11,7 +11,7 @@ type InputType = {
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   secureTextEntry?: boolean;
   placeholder?: string;
-  suffixIcon?: ReactNode | null;
+  suffixIcon?: ReactElement | null;
   suffixIconCallback?: () => void;
   textContentType?: ContentTypes;
   multiline?: boolean;
@@ -76,7 +76,7 @@ const Input = <T extends FieldValues>(props: Props<T>) => {
               autoCapitalize={autoCapitalize}
               secureTextEntry={secureTextEntry}
               textContentType={textContentType}
-              blurOnSubmit={false}
+              submitBehavior="blurAndSubmit"
               multiline={multiline}
               {...rest}
             />
@@ -96,7 +96,7 @@ const Input = <T extends FieldValues>(props: Props<T>) => {
             autoCapitalize={autoCapitalize}
             secureTextEntry={secureTextEntry}
             textContentType={textContentType}
-            blurOnSubmit={false}
+            submitBehavior="blurAndSubmit"
             multiline={multiline}
             {...rest}
           />
