@@ -2,11 +2,12 @@ import { Image } from 'expo-image';
 import * as Linking from 'expo-linking';
 import { ImageRequireSource } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { H3, H4, ListItem, ScrollView, Text, useTheme, View, YGroup } from 'tamagui';
+import { H3, H4, ListItem, ScrollView, Text, useTheme, View, XStack, YGroup } from 'tamagui';
 
 import { useGetCurrentUserQuery } from '@/api/core.service';
-import { ChevronRightIcon } from '@/assets/icons';
+import { ChevronRightIcon, MoonStar, Sun } from '@/assets/icons';
 import { useAuth } from '@/context/auth-context';
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 const ProfileScreen = () => {
   const theme = useTheme();
@@ -14,11 +15,29 @@ const ProfileScreen = () => {
   const { signOut } = useAuth();
   const { data: user } = useGetCurrentUserQuery();
 
+  const { colorScheme, setColorScheme } = useColorScheme();
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
-        <H3>{user?.firstName ? `Witaj, ${user?.firstName}!` : 'Witaj!'}</H3>
-
+        <XStack justifyContent="space-between" alignItems="center">
+          <H3>{user?.firstName ? `Witaj, ${user?.firstName}!` : 'Witaj!'}</H3>
+          {colorScheme === 'light' ? (
+            <Sun
+              onPress={() => setColorScheme('dark')}
+              className="stroke-primary"
+              width={30}
+              height={30}
+            />
+          ) : (
+            <MoonStar
+              onPress={() => setColorScheme('light')}
+              className="stroke-primary"
+              width={30}
+              height={30}
+            />
+          )}
+        </XStack>
         <View
           backgroundColor="$color1"
           flexDirection="row"
