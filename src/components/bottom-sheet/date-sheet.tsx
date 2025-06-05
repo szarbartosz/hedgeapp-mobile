@@ -57,7 +57,6 @@ const DateSheet = forwardRef<BottomSheetModal, Props>(({ title, currentDate, upd
               disableTouchEvent: true,
             },
           }}
-          disable
           disableAllTouchEventsForDisabledDays={true}
           renderHeader={(date: Date) => (
             <Text style={{ color: theme.color12.val }}>
@@ -65,7 +64,6 @@ const DateSheet = forwardRef<BottomSheetModal, Props>(({ title, currentDate, upd
             </Text>
           )}
           enableSwipeMonths={true}
-          selected={date}
           initialDate={dayjs.utc(date).isValid() ? date : dayjs().format('YYYY-MM-DD')}
           theme={{
             calendarBackground: theme.color1.val,

@@ -38,7 +38,7 @@ const SignInModal: FC = () => {
     if (signInResult?.data) {
       await SecureStore.setItemAsync('token', signInResult.data?.token || '');
       await fetchCurrentUser();
-      router.navigate('/(tabs)/');
+      router.navigate('/');
     }
   };
 
@@ -90,7 +90,7 @@ const SignInModal: FC = () => {
               <Text>Nie masz konta?</Text>
               <Pressable
                 onPress={() => {
-                  router.replace('/(auth)/sign-up');
+                  router.replace('/auth/sign-up');
                 }}>
                 <Text fontWeight={800}>Zarejestruj się</Text>
               </Pressable>

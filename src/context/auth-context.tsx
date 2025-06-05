@@ -41,7 +41,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
     const getToken = async () => {
       const token = await SecureStore.getItemAsync('token');
       if (!token) {
-        router.navigate('/(auth)/sign-in');
+        router.navigate('/auth/sign-in');
       }
     };
 
@@ -57,7 +57,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
   }, []);
 
   const signOut = async () => {
-    router.navigate('/(auth)/sign-in');
+    router.navigate('/auth/sign-in');
     await SecureStore.deleteItemAsync('token');
     dispatch(coreApi.util.resetApiState());
   };

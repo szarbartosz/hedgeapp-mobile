@@ -50,7 +50,7 @@ export const authorizationMiddleware: Middleware = () => next => async (action: 
   if (isRejected(action) && typedAction?.payload?.status === 401) {
     await SecureStore.deleteItemAsync('token');
     if (endpointName != 'signIn') {
-      router.navigate('/(auth)/sign-in');
+      router.navigate('/auth/sign-in');
     }
   }
   return next(typedAction);

@@ -38,7 +38,7 @@ const SignUpScreen: FC = () => {
 
     if (signUpResult?.data) {
       await SecureStore.setItemAsync('token', signUpResult.data?.token || '');
-      router.navigate('/(tabs)/');
+      router.navigate('/');
     }
   };
 
@@ -122,7 +122,7 @@ const SignUpScreen: FC = () => {
               <Text>Masz już konto?</Text>
               <Pressable
                 onPress={() => {
-                  router.replace('/(auth)/sign-in');
+                  router.replace('/auth/sign-in');
                 }}>
                 <Text fontWeight={800}>Zaloguj się</Text>
               </Pressable>

@@ -33,7 +33,7 @@ const InvestmentsScreen: FC = () => {
         await refetchInvestments();
       }
     })();
-  }, [user]);
+  }, [user, refetchInvestments]);
 
   useEffect(() => {
     void (async () => {
