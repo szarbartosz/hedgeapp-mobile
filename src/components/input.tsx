@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
 import { Button, Input as TextInput, Label, Text, XGroup, XStack, YStack } from 'tamagui';
 
@@ -11,7 +11,7 @@ type InputType = {
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   secureTextEntry?: boolean;
   placeholder?: string;
-  suffixIcon?: ReactNode | null;
+  suffixIcon?: JSX.Element;
   suffixIconCallback?: () => void;
   textContentType?: ContentTypes;
   multiline?: boolean;
