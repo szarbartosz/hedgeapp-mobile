@@ -13,7 +13,7 @@ export const TAGS = {
 export const coreApi = createApi({
   reducerPath: 'coreApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.EXPO_PUBLIC_BASE_URL,
+    baseUrl: process.env.EXPO_PUBLIC_BASE_URL as string,
     prepareHeaders: async headers => await prepareHeaders(headers),
   }),
   tagTypes: [TAGS.CURRENT_USER, TAGS.INVESTMENTS, TAGS.INVESTORS, TAGS.OFFICES],

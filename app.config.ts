@@ -11,7 +11,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     package: 'com.szarbartosz.hedgeapp',
     config: {
       googleMaps: {
-        apiKey: process.env.ANDROID_GOOGLE_API_KEY,
+        apiKey: process.env.ANDROID_GOOGLE_API_KEY as string,
       },
     },
   },
