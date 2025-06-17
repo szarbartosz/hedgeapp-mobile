@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 import { router, useLocalSearchParams } from 'expo-router';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, RefObject, useEffect, useRef, useState } from 'react';
 import { useColorScheme } from 'react-native';
 import MapView, { MapMarker } from 'react-native-maps';
 import Toast from 'react-native-toast-message';
@@ -81,7 +81,7 @@ const InvestmentDetailsScreen: FC = () => {
   return (
     <>
       <LocalizationButton
-        mapRef={mapRef}
+        mapRef={mapRef as RefObject<MapView>}
         coords={coords}
         isMapCentered={isMapCentered}
         setIsMapCentered={setIsMapCentered}
