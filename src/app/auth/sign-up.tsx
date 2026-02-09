@@ -5,7 +5,8 @@ import * as SecureStore from 'expo-secure-store';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ImageRequireSource, Pressable } from 'react-native';
-import { Button, H3, H4, ScrollView, Text, useTheme, XStack, YStack } from 'tamagui';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { Button, H3, H4, Text, useTheme, XStack, YStack } from 'tamagui';
 
 import { useSignUpMutation } from '@/api/auth.service';
 import { EyeClosedIcon } from '@/assets/icons/eye-closed-icon';
@@ -43,94 +44,92 @@ const SignUpScreen: FC = () => {
   };
 
   return (
-    <>
+    <KeyboardAwareScrollView bottomOffset={20}>
       <Image
         source={require('@/assets/images/auth-cover.png') as ImageRequireSource}
         style={{ width: '100%', height: 300 }}
       />
-      <ScrollView>
-        <YStack marginHorizontal={24} gap="$4" marginBottom={64}>
-          <YStack marginTop={30}>
-            <H3 color="$color">Miło Cię poznać!</H3>
-            <H4 color="$color">Zarejestruj się i korzystaj z aplikacji</H4>
-          </YStack>
-          <YStack>
-            <Input
-              name="email"
-              label="Email"
-              placeholder="Podaj swój email"
-              control={control}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-            <Input
-              name="password"
-              label="Hasło"
-              placeholder="Podaj hasło"
-              control={control}
-              keyboardType="default"
-              autoCapitalize="none"
-              secureTextEntry={hidePassword}
-              suffixIcon={
-                hidePassword ? (
-                  <EyeClosedIcon strokeColor={theme.color12.val} />
-                ) : (
-                  <EyeIcon strokeColor={theme.color12.val} />
-                )
-              }
-              suffixIconCallback={() => setHidePassword(!hidePassword)}
-              textContentType="oneTimeCode"
-            />
-            <Input
-              name="confirmPassword"
-              label="Powtórz hasło"
-              placeholder="Powtórz hasło"
-              control={control}
-              keyboardType="default"
-              autoCapitalize="none"
-              secureTextEntry={hidePassword}
-              suffixIcon={
-                hidePassword ? (
-                  <EyeClosedIcon strokeColor={theme.color12.val} />
-                ) : (
-                  <EyeIcon strokeColor={theme.color12.val} />
-                )
-              }
-              suffixIconCallback={() => setHidePassword(!hidePassword)}
-              textContentType="oneTimeCode"
-            />
-            <Input
-              name="firstName"
-              label="Imię"
-              placeholder="Podaj swoje imię"
-              control={control}
-              autoCapitalize="words"
-            />
-            <Input
-              name="lastName"
-              label="Nazwisko"
-              placeholder="Podaj swoje nazwisko"
-              control={control}
-              autoCapitalize="words"
-            />
-          </YStack>
-          <YStack gap="$4">
-            <Button backgroundColor="$green8" onPress={handleSubmit(onSubmit)}>
-              Zarejestruj się
-            </Button>
-            <XStack gap="$2" justifyContent="center">
-              <Text>Masz już konto?</Text>
-              <Pressable
-                onPress={() => {
-                  router.replace('/auth/sign-in');
-                }}>
-                <Text fontWeight={800}>Zaloguj się</Text>
-              </Pressable>
-            </XStack>
-          </YStack>
+      <YStack marginHorizontal={24} gap="$4" marginBottom={64}>
+        <YStack marginTop={30}>
+          <H3 color="$color">Miło Cię poznać!</H3>
+          <H4 color="$color">Zarejestruj się i korzystaj z aplikacji</H4>
         </YStack>
-      </ScrollView>
-    </>
+        <YStack>
+          <Input
+            name="email"
+            label="Email"
+            placeholder="Podaj swój email"
+            control={control}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+          <Input
+            name="password"
+            label="Hasło"
+            placeholder="Podaj hasło"
+            control={control}
+            keyboardType="default"
+            autoCapitalize="none"
+            secureTextEntry={hidePassword}
+            suffixIcon={
+              hidePassword ? (
+                <EyeClosedIcon strokeColor={theme.color12.val} />
+              ) : (
+                <EyeIcon strokeColor={theme.color12.val} />
+              )
+            }
+            suffixIconCallback={() => setHidePassword(!hidePassword)}
+            textContentType="oneTimeCode"
+          />
+          <Input
+            name="confirmPassword"
+            label="Powtórz hasło"
+            placeholder="Powtórz hasło"
+            control={control}
+            keyboardType="default"
+            autoCapitalize="none"
+            secureTextEntry={hidePassword}
+            suffixIcon={
+              hidePassword ? (
+                <EyeClosedIcon strokeColor={theme.color12.val} />
+              ) : (
+                <EyeIcon strokeColor={theme.color12.val} />
+              )
+            }
+            suffixIconCallback={() => setHidePassword(!hidePassword)}
+            textContentType="oneTimeCode"
+          />
+          <Input
+            name="firstName"
+            label="Imię"
+            placeholder="Podaj swoje imię"
+            control={control}
+            autoCapitalize="words"
+          />
+          <Input
+            name="lastName"
+            label="Nazwisko"
+            placeholder="Podaj swoje nazwisko"
+            control={control}
+            autoCapitalize="words"
+          />
+        </YStack>
+        <YStack gap="$4">
+          <Button backgroundColor="$green8" onPress={handleSubmit(onSubmit)}>
+            Zarejestruj się
+          </Button>
+          <XStack gap="$2" justifyContent="center">
+            <Text>Masz już konto?</Text>
+            <Pressable
+              onPress={() => {
+                router.replace('/auth/sign-in');
+              }}>
+              <Text fontWeight={800}>Zaloguj się</Text>
+            </Pressable>
+          </XStack>
+        </YStack>
+      </YStack>
+    </KeyboardAwareScrollView>
   );
 };
 
