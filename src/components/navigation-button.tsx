@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { Pressable } from 'react-native';
 import { showLocation } from 'react-native-map-link';
-import { useTheme } from 'tamagui';
+import { Button, useTheme } from 'tamagui';
 
 import { NavigationIcon } from '@/assets/icons';
 
@@ -28,27 +27,27 @@ const NavigationButton: FC<Props> = ({ address, coords }) => {
   };
 
   return (
-    <Pressable
+    <Button
       onPress={handlePress}
       disabled={!coords?.latitude || !coords?.longitude}
-      style={{
-        width: 50,
-        height: 50,
-        borderRadius: 8,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: coords ? theme.color4.val : theme.color2.val,
-        borderWidth: 1.5,
+      width={50}
+      height={50}
+      borderRadius={8}
+      justifyContent="center"
+      alignItems="center"
+      backgroundColor={coords ? theme.color4.val : theme.color2.val}
+      borderWidth={1.5}
+      borderColor={theme.color8.val}
+      pressStyle={{
+        backgroundColor: theme.color6.val,
         borderColor: theme.color10.val,
-        top: 70,
-        right: 10,
-        position: 'absolute',
-        zIndex: 1,
-        paddingRight: 2,
-      }}>
-      <NavigationIcon strokeColor={coords ? theme.color12.val : theme.color10.val} />
-    </Pressable>
+      }}
+      top={70}
+      right={10}
+      position="absolute"
+      zIndex={1}
+      icon={<NavigationIcon strokeColor={coords ? theme.color12.val : theme.color10.val} />}
+    />
   );
 };
 

@@ -4,6 +4,6 @@ import { createTamagui } from 'tamagui';
 export const tamaguiConfig = createTamagui(config);
 
 type Conf = typeof tamaguiConfig;
-declare module '@tamagui/core' {
+declare module 'tamagui' {
   interface TamaguiCustomConfig extends Conf {}
 }

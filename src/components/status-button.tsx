@@ -17,15 +17,16 @@ const StatusButton: FC<Props> = ({ status, onPress, active }) => {
   return (
     <Button
       onPress={onPress}
-      style={{
-        height: 50,
-        borderRadius: 8,
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: active ? theme.color8.val : theme.color4.val,
-        borderWidth: 1.5,
-        borderColor: active ? theme.color12.val : theme.color10.val,
+      height={50}
+      borderRadius={8}
+      justifyContent="flex-start"
+      alignItems="center"
+      backgroundColor={theme.color4.val}
+      borderWidth={1.5}
+      borderColor={theme.color8.val}
+      pressStyle={{
+        backgroundColor: theme.color6.val,
+        borderColor: theme.color10.val,
       }}
       icon={<StatusIcon status={status.id} />}>
       <Text fontSize={16}>{status.name}</Text>

@@ -14,7 +14,8 @@ import { TamaguiProvider } from 'tamagui';
 import ToastMessage from '@/components/toast-message';
 import AuthProvider from '@/context/auth-context';
 import { store } from '@/redux/store';
-import { tamaguiConfig } from '@/utils/tamagui.config';
+
+import { tamaguiConfig } from '../../tamagui.config';
 
 export { ErrorBoundary } from 'expo-router';
 
