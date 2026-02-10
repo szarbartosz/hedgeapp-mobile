@@ -56,7 +56,12 @@ function RootLayoutNav() {
   return (
     <KeyboardProvider>
       <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme || 'light'}>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <ThemeProvider
+          value={
+            colorScheme === 'dark'
+              ? { ...DarkTheme, colors: { ...DarkTheme.colors, background: '#191919' } }
+              : { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: '#F6F6F6' } }
+          }>
           <PortalProvider shouldAddRootHost>
             <Stack screenOptions={{ headerShown: false }}>
               <Stack.Screen name="(tabs)" options={{ headerShown: false, animation: 'fade' }} />

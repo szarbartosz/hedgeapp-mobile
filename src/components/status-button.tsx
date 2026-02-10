@@ -11,7 +11,7 @@ type Props = {
   active?: boolean;
 };
 
-const StatusButton: FC<Props> = ({ status, onPress, active }) => {
+const StatusButton: FC<Props> = ({ status, onPress }) => {
   const theme = useTheme();
 
   return (

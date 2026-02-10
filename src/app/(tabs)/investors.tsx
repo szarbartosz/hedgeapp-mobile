@@ -31,8 +31,8 @@ const InvestorsScreen: FC = () => {
                         })
                       }
                       hoverTheme
-                      backgroundColor={theme.$color4}
-                      borderBottomColor={theme.$color6}
+                      backgroundColor={theme.$color3}
+                      borderBottomColor={theme.$color5}
                       borderBottomWidth={1}
                       title={investor.name}
                       subTitle={investor.contactPerson}

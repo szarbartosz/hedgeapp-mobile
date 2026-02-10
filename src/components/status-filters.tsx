@@ -22,12 +22,7 @@ const StatusFilters: FC<Props> = ({ selectedStatus, setSelectedStatus }) => {
             <Button
               icon={
                 status.id ? (
-                  <StatusIcon
-                    status={status.id}
-                    strokeColor={
-                      selectedStatus === status.id ? theme.color1.val : theme.color12.val
-                    }
-                  />
+                  <StatusIcon status={status.id} strokeColor={theme.color12.val} />
                 ) : undefined
               }
               onPress={() => setSelectedStatus(status.id)}
@@ -39,9 +34,7 @@ const StatusFilters: FC<Props> = ({ selectedStatus, setSelectedStatus }) => {
               paddingHorizontal={12}
               marginLeft={index === 0 ? 24 : 0}
               marginRight={index === statuses?.length ? 24 : 0}>
-              <Text color={selectedStatus === status.id ? '$color1' : '$color12'}>
-                {status.name}
-              </Text>
+              <Text color={theme.$color12}>{status.name}</Text>
             </Button>
           </XGroup.Item>
         ))}

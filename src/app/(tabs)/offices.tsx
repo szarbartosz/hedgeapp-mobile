@@ -31,8 +31,8 @@ const OfficesScreen: FC = () => {
                         })
                       }
                       hoverTheme
-                      backgroundColor={theme.$color4}
-                      borderBottomColor={theme.$color6}
+                      backgroundColor={theme.$color3}
+                      borderBottomColor={theme.$color5}
                       borderBottomWidth={1}
                       title={office.name}
                       subTitle={`${office.address.street} ${office.address.number}`}

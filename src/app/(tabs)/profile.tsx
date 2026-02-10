@@ -20,7 +20,7 @@ const ProfileScreen = () => {
         <H3>{user?.firstName ? `Witaj, ${user?.firstName}!` : 'Witaj!'}</H3>
 
         <View
-          backgroundColor="$color1"
+          backgroundColor="$color2"
           flexDirection="row"
           alignItems="center"
           justifyContent="space-between"
@@ -54,8 +54,8 @@ const ProfileScreen = () => {
             <ListItem
               onPress={() => Linking.openSettings()}
               hoverTheme
-              backgroundColor={theme.$color4}
-              borderBottomColor={theme.$color6}
+              backgroundColor={theme.$color3}
+              borderBottomColor={theme.$color5}
               borderBottomWidth={1}
               title="Ustawienia powiadomień"
               iconAfter={ChevronRightIcon}
@@ -66,8 +66,8 @@ const ProfileScreen = () => {
               // TODO: add password change functionality
               onPress={() => {}}
               hoverTheme
-              backgroundColor={theme.$color4}
-              borderBottomColor={theme.$color6}
+              backgroundColor={theme.$color3}
+              borderBottomColor={theme.$color5}
               borderBottomWidth={1}
               title="Zmiana hasła"
               iconAfter={ChevronRightIcon}
@@ -77,8 +77,8 @@ const ProfileScreen = () => {
             <ListItem
               onPress={signOut}
               hoverTheme
-              backgroundColor={theme.$color4}
-              borderBottomColor={theme.$color6}
+              backgroundColor={theme.$color3}
+              borderBottomColor={theme.$color5}
               borderBottomWidth={1}
               title="Wyloguj się"
               iconAfter={ChevronRightIcon}
