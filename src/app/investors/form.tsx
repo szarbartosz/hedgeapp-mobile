@@ -2,9 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { Button, H3, ScrollView, useTheme, View } from 'tamagui';
+import { Button, H3, useTheme, View } from 'tamagui';
 
 import {
   useCreateInvestorMutation,
@@ -111,7 +112,10 @@ const AddOrUpdateInvestmentScreen: FC = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
+      <KeyboardAwareScrollView
+        bottomOffset={20}
+        showsVerticalScrollIndicator={false}
+        style={{ paddingHorizontal: 16 }}>
         <H3 paddingVertical="$4">
           {investorId ? 'Edytuj dane inwestora' : 'Dodaj nowego inwestora'}
         </H3>
@@ -199,7 +203,7 @@ const AddOrUpdateInvestmentScreen: FC = () => {
             Anuluj
           </Button>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
