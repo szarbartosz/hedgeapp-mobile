@@ -17,7 +17,7 @@ const ApplicationCard: FC<Props> = ({ application, handlePress }) => {
       justifyContent="space-between"
       alignItems="center"
       padding="$4"
-      backgroundColor="$color1"
+      backgroundColor="$color2"
       borderWidth={1}
       borderColor="$color5"
       marginTop="$4">

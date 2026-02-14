@@ -113,27 +113,33 @@ const InvestmentDetailsScreen: FC = () => {
         <H4 marginTop="$4">Inwestycje</H4>
         <YStack flex={1} marginTop="$2">
           <YGroup borderRadius={0}>
-            {office?.locations.map(investment => (
-              <YGroup.Item key={investment.id}>
-                <ListItem
-                  onPress={() =>
-                    router.navigate({
-                      pathname: '/investments/details',
-                      params: { id: investment.id },
-                    })
-                  }
-                  hoverTheme
-                  backgroundColor={theme.$color4}
-                  borderBottomColor={theme.$color6}
-                  borderBottomWidth={1}
-                  title={investment.name}
-                  subTitle={investment.investor.name}
-                  icon={
-                    <StatusIcon status={investment.status.id} strokeColor={theme.color11.val} />
-                  }
-                />
-              </YGroup.Item>
-            ))}
+            {office?.locations.length ? (
+              office.locations.map(investment => (
+                <YGroup.Item key={investment.id}>
+                  <ListItem
+                    onPress={() =>
+                      router.navigate({
+                        pathname: '/investments/details',
+                        params: { id: investment.id },
+                      })
+                    }
+                    hoverTheme
+                    backgroundColor={theme.$color3}
+                    borderBottomColor={theme.$color5}
+                    borderBottomWidth={1}
+                    title={investment.name}
+                    subTitle={investment.investor.name}
+                    icon={
+                      <StatusIcon status={investment.status.id} strokeColor={theme.color11.val} />
+                    }
+                  />
+                </YGroup.Item>
+              ))
+            ) : (
+              <View>
+                <Text color={theme.color11}>Brak inwestycji przypisanych do tego urzędu</Text>
+              </View>
+            )}
           </YGroup>
         </YStack>
 

@@ -34,7 +34,7 @@ const OfficesScreen: FC = () => {
                       backgroundColor={theme.$color3}
                       borderBottomColor={theme.$color5}
                       borderBottomWidth={1}
-                      title={office.name}
+                      title={`${office.address.city} - ${office.name}`}
                       subTitle={`${office.address.street} ${office.address.number}`}
                       iconAfter={ChevronRightIcon}
                       icon={

@@ -27,7 +27,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
 
   return (
     <View
-      backgroundColor="$color1"
+      backgroundColor="$color2"
       flex={1}
       flexDirection="row"
       alignItems="center"
@@ -45,7 +45,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
           flexDirection="row"
           alignItems="center"
           justifyContent="center"
-          backgroundColor={theme.$color1}
+          backgroundColor={theme.$color2}
           gap={2}
           onPress={() =>
             router.navigate({
@@ -70,7 +70,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
           flexDirection="row"
           alignItems="center"
           justifyContent="center"
-          backgroundColor={theme.$color1}
+          backgroundColor={theme.$color2}
           gap={2}
           onPress={handleMailLinking}
           disabled={!investor.email}>
@@ -85,7 +85,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
-        backgroundColor={theme.$color1}
+        backgroundColor={theme.$color2}
         gap={2}
         onPress={handlePhoneLinking}
         disabled={!investor.phone}>

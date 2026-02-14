@@ -31,7 +31,7 @@ const DateIndicator: FC<Props> = ({
         <XGroup backgroundColor="$color2">
           <XGroup.Item>
             <Button
-              backgroundColor="$color1"
+              backgroundColor="$color2"
               width="50%"
               size="$4"
               borderWidth={1}
@@ -50,7 +50,7 @@ const DateIndicator: FC<Props> = ({
           <XGroup.Item>
             <Button
               onPress={handleToggle}
-              backgroundColor="$color1"
+              backgroundColor="$color2"
               width="50%"
               size="$4"
               borderWidth={1}
@@ -65,7 +65,7 @@ const DateIndicator: FC<Props> = ({
         <XGroup backgroundColor="$color2">
           <XGroup.Item>
             <Button
-              backgroundColor="$color1"
+              backgroundColor="$color2"
               width="100%"
               borderWidth={1}
               borderColor="$color5"

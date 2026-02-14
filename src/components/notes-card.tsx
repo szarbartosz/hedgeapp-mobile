@@ -15,7 +15,7 @@ const NotesCard: FC<Props> = ({ notes, handlePress }) => {
     <XGroup
       display="flex"
       padding="$4"
-      backgroundColor="$color1"
+      backgroundColor="$color2"
       borderWidth={1}
       borderColor="$color5"
       marginTop="$4"
