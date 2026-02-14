@@ -1,13 +1,13 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { FC } from 'react';
-import { ImageRequireSource } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ListItem, ScrollView, useTheme, YGroup, YStack } from 'tamagui';
 
 import { useGetOfficesQuery } from '@/api/offices.service';
 import { ChevronRightIcon } from '@/assets/icons';
 import LoadingWrapper from '@/components/loading-wrapper';
+import { getOfficeLogo } from '@/utils/helpers';
 
 const OfficesScreen: FC = () => {
   const theme = useTheme();
@@ -39,9 +39,7 @@ const OfficesScreen: FC = () => {
                       iconAfter={ChevronRightIcon}
                       icon={
                         <Image
-                          source={
-                            require('@/assets/images/office-logos/krakow.png') as ImageRequireSource
-                          }
+                          source={getOfficeLogo(office.address.city)}
                           style={{ width: 50, height: 50 }}
                           contentFit="contain"
                         />

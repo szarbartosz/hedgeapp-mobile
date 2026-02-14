@@ -149,7 +149,12 @@ const AddOrUpdateInvestmentScreen: FC = () => {
           label="Wybierz urząd"
           placeholder="Wybierz urząd"
           control={control}
-          items={offices?.map(office => ({ id: office.id, label: office.name })) || []}
+          items={
+            offices?.map(office => ({
+              id: office.id,
+              label: `${office.address.city} - ${office.name}`,
+            })) || []
+          }
         />
         <Input
           name="address.city"

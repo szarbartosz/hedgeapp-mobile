@@ -3,6 +3,7 @@ import 'dayjs/locale/pl';
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
 import utc from 'dayjs/plugin/utc';
+import { ImageSource } from 'expo-image';
 
 dayjs.extend(utc);
 dayjs.extend(isoWeek);
@@ -19,6 +20,16 @@ export const formatPhoneNumber = (phoneNumber: string) => {
   }
   return null;
 };
+
+const officeLogo: Record<string, ImageSource> = {
+  Kraków: require('@/assets/images/office-logos/krakow.png') as ImageSource,
+  Zabierzów: require('@/assets/images/office-logos/zabierzow.png') as ImageSource,
+  Niepołomice: require('@/assets/images/office-logos/niepolomice.png') as ImageSource,
+  Kłaj: require('@/assets/images/office-logos/klaj.png') as ImageSource,
+  Wieliczka: require('@/assets/images/office-logos/wieliczka.png') as ImageSource,
+};
+
+export const getOfficeLogo = (city: string): ImageSource | undefined => officeLogo[city];
 
 export const calculateDaysLeft = (dates: string[]) => {
   let minDaysLeft = Number.MAX_SAFE_INTEGER;
