@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, Text, useTheme, XGroup, YGroup } from 'tamagui';
+import { Button, Text, XGroup, YGroup } from 'tamagui';
 
 import { Note } from '@/types/data';
 
@@ -9,8 +9,6 @@ type Props = {
 };
 
 const NotesCard: FC<Props> = ({ notes, handlePress }) => {
-  const theme = useTheme();
-
   return (
     <XGroup
       display="flex"
@@ -25,14 +23,14 @@ const NotesCard: FC<Props> = ({ notes, handlePress }) => {
           {notes.length ? (
             notes.map((note, index) => (
               <YGroup.Item key={index}>
-                <Text maxWidth="70%" color={theme.color11}>
+                <Text maxWidth="70%" color="$color11">
                   {note.content}
                 </Text>
               </YGroup.Item>
             ))
           ) : (
             <YGroup.Item>
-              <Text color={theme.color11}>Brak notatek</Text>
+              <Text color="$color11">Brak notatek</Text>
             </YGroup.Item>
           )}
         </YGroup>

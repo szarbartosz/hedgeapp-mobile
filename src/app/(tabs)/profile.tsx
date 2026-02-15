@@ -2,23 +2,22 @@ import { Image } from 'expo-image';
 import * as Linking from 'expo-linking';
 import { ImageRequireSource } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { H3, H4, ListItem, ScrollView, Text, useTheme, View, YGroup } from 'tamagui';
+import { H3, H4, ListItem, ScrollView, Text, View, YGroup } from 'tamagui';
 
 import { useGetCurrentUserQuery } from '@/api/core.service';
 import { ChevronRightIcon } from '@/assets/icons';
 import { useAuth } from '@/context/auth-context';
 
 const ProfileScreen = () => {
-  const theme = useTheme();
-
   const { signOut } = useAuth();
   const { data: user } = useGetCurrentUserQuery();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }} edges={['top']}>
+      <H3 paddingHorizontal="$4" paddingTop="$3">
+        {user?.firstName ? `Witaj, ${user?.firstName}!` : 'Witaj!'}
+      </H3>
       <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
-        <H3>{user?.firstName ? `Witaj, ${user?.firstName}!` : 'Witaj!'}</H3>
-
         <View
           backgroundColor="$color2"
           flexDirection="row"
@@ -43,10 +42,8 @@ const ProfileScreen = () => {
 
         <H4 marginTop="$4">Twoje dane</H4>
         <View paddingHorizontal="$2" gap={8}>
-          {user?.firstName && (
-            <Text color={theme.color12}>{`${user.firstName} ${user?.lastName}`}</Text>
-          )}
-          <Text color={theme.color12}>{user?.email}</Text>
+          {user?.firstName && <Text color="$color12">{`${user.firstName} ${user?.lastName}`}</Text>}
+          <Text color="$color12">{user?.email}</Text>
         </View>
 
         <YGroup borderRadius={0} paddingTop="$8">
@@ -54,8 +51,8 @@ const ProfileScreen = () => {
             <ListItem
               onPress={() => Linking.openSettings()}
               hoverTheme
-              backgroundColor={theme.$color3}
-              borderBottomColor={theme.$color5}
+              backgroundColor="$color3"
+              borderBottomColor="$color5"
               borderBottomWidth={1}
               title="Ustawienia powiadomień"
               iconAfter={ChevronRightIcon}
@@ -66,8 +63,8 @@ const ProfileScreen = () => {
               // TODO: add password change functionality
               onPress={() => {}}
               hoverTheme
-              backgroundColor={theme.$color3}
-              borderBottomColor={theme.$color5}
+              backgroundColor="$color3"
+              borderBottomColor="$color5"
               borderBottomWidth={1}
               title="Zmiana hasła"
               iconAfter={ChevronRightIcon}
@@ -77,8 +74,8 @@ const ProfileScreen = () => {
             <ListItem
               onPress={signOut}
               hoverTheme
-              backgroundColor={theme.$color3}
-              borderBottomColor={theme.$color5}
+              backgroundColor="$color3"
+              borderBottomColor="$color5"
               borderBottomWidth={1}
               title="Wyloguj się"
               iconAfter={ChevronRightIcon}

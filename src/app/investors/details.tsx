@@ -38,22 +38,22 @@ const InvestorDetailsScreen: FC = () => {
 
         <H4 marginTop="$4">Kontakt</H4>
         <View paddingHorizontal="$2" gap={8}>
-          <Text color={theme.color11}>{investor?.contactPerson}</Text>
+          <Text color="$color11">{investor?.contactPerson}</Text>
           {investor?.phone && (
-            <Text color={theme.color11}>{formatPhoneNumber(investor.phone) ?? investor.phone}</Text>
+            <Text color="$color11">{formatPhoneNumber(investor.phone) ?? investor.phone}</Text>
           )}
-          {investor?.email && <Text color={theme.color11}>{investor?.email}</Text>}
+          {investor?.email && <Text color="$color11">{investor?.email}</Text>}
         </View>
 
         {investor?.address.city && (
           <>
             <H4 marginTop="$4">Adres</H4>
             <View paddingHorizontal="$2" gap={8}>
-              <Text color={theme.color11}>
+              <Text color="$color11">
                 {`${investor?.address.city}, ${investor?.address.street} ${investor?.address.number}`}
               </Text>
               {investor?.address.zipCode && (
-                <Text color={theme.color11}>
+                <Text color="$color11">
                   {`${investor?.address.zipCode} ${investor?.address.city}`}
                 </Text>
               )}
@@ -63,12 +63,12 @@ const InvestorDetailsScreen: FC = () => {
 
         <H4 marginTop="$4">NIP</H4>
         <View paddingHorizontal="$2" gap={8}>
-          <Text color={theme.color11}>{investor?.nip ? investor.nip : 'Nie sprecyzowano'}</Text>
+          <Text color="$color11">{investor?.nip ? investor.nip : 'Nie sprecyzowano'}</Text>
         </View>
 
         <H4 marginTop="$4">REGON</H4>
         <View paddingHorizontal="$2" gap={8}>
-          <Text color={theme.color11}>{investor?.regon ? investor.regon : 'Nie sprecyzowano'}</Text>
+          <Text color="$color11">{investor?.regon ? investor.regon : 'Nie sprecyzowano'}</Text>
         </View>
 
         <H4 marginTop="$4">Inwestycje</H4>
@@ -77,17 +77,17 @@ const InvestorDetailsScreen: FC = () => {
             <YGroup borderRadius={0}>
               {investor.locations.map(investment => (
                 <YGroup.Item key={investment.id}>
-                  <ListItem
-                    onPress={() =>
-                      router.navigate({
-                        pathname: '/investments/details',
-                        params: { id: investment.id },
-                      })
-                    }
-                    hoverTheme
-                    backgroundColor={theme.$color3}
-                    borderBottomColor={theme.$color5}
-                    borderBottomWidth={1}
+                    <ListItem
+                      onPress={() =>
+                        router.navigate({
+                          pathname: '/investments/details',
+                          params: { id: investment.id },
+                        })
+                      }
+                      hoverTheme
+                      backgroundColor="$color3"
+                      borderBottomColor="$color5"
+                      borderBottomWidth={1}
                     title={investment.name}
                     subTitle={investment.investor.name}
                     icon={
@@ -100,14 +100,14 @@ const InvestorDetailsScreen: FC = () => {
           </YStack>
         ) : (
           <View paddingHorizontal="$2" gap={8}>
-            <Text color={theme.color11}>Brak inwestycji</Text>
+            <Text color="$color11">Brak inwestycji</Text>
           </View>
         )}
 
         <View marginVertical="$6" gap="$4">
           <Button
-            backgroundColor={theme.$color12}
-            color={theme.$color1}
+            backgroundColor="$color12"
+            color="$color1"
             onPress={() =>
               router.navigate({
                 pathname: '/investors/form',
@@ -117,9 +117,9 @@ const InvestorDetailsScreen: FC = () => {
             Edytuj
           </Button>
           <Button
-            backgroundColor={theme.$color4}
-            color={theme.$color12}
-            borderColor={theme.$color12}
+            backgroundColor="$color4"
+            color="$color12"
+            borderColor="$color12"
             onPress={() => router.back()}>
             Cofnij
           </Button>

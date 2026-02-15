@@ -107,8 +107,8 @@ const InvestmentDetailsScreen: FC = () => {
       </MapView>
       <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4">
         <H3 paddingTop="$2">{`${office?.address.city} - ${office?.name}`}</H3>
-        <Text color={theme.color12}>{`${office?.address.street} ${office?.address.number}`}</Text>
-        <Text color={theme.color12}>
+        <Text color="$color12">{`${office?.address.street} ${office?.address.number}`}</Text>
+        <Text color="$color12">
           {office?.address.zipCode
             ? `${office?.address.zipCode} ${office?.address.city}`
             : office?.address.city}
@@ -120,17 +120,17 @@ const InvestmentDetailsScreen: FC = () => {
             {office?.locations.length ? (
               office.locations.map(investment => (
                 <YGroup.Item key={investment.id}>
-                  <ListItem
-                    onPress={() =>
-                      router.navigate({
-                        pathname: '/investments/details',
-                        params: { id: investment.id },
-                      })
-                    }
-                    hoverTheme
-                    backgroundColor={theme.$color3}
-                    borderBottomColor={theme.$color5}
-                    borderBottomWidth={1}
+                    <ListItem
+                      onPress={() =>
+                        router.navigate({
+                          pathname: '/investments/details',
+                          params: { id: investment.id },
+                        })
+                      }
+                      hoverTheme
+                      backgroundColor="$color3"
+                      borderBottomColor="$color5"
+                      borderBottomWidth={1}
                     title={investment.name}
                     subTitle={investment.investor.name}
                     icon={
@@ -141,7 +141,7 @@ const InvestmentDetailsScreen: FC = () => {
               ))
             ) : (
               <View>
-                <Text color={theme.color11}>Brak inwestycji przypisanych do tego urzędu</Text>
+                <Text color="$color11">Brak inwestycji przypisanych do tego urzędu</Text>
               </View>
             )}
           </YGroup>
@@ -149,9 +149,9 @@ const InvestmentDetailsScreen: FC = () => {
 
         <View marginVertical="$6" gap="$4">
           <Button
-            backgroundColor={theme.$color4}
-            color={theme.$color12}
-            borderColor={theme.$color12}
+            backgroundColor="$color4"
+            color="$color12"
+            borderColor="$color12"
             onPress={() => router.back()}>
             Cofnij
           </Button>

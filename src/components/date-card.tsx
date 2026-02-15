@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button, H4, Text, useTheme, XGroup, YGroup } from 'tamagui';
+import { Button, H4, Text, XGroup, YGroup } from 'tamagui';
 
 import { formattedDate } from '@/utils/helpers';
 
@@ -10,8 +10,6 @@ type Props = {
 };
 
 const DateCard: FC<Props> = ({ title, date, handlePress }) => {
-  const theme = useTheme();
-
   return (
     <XGroup
       display="flex"
@@ -28,7 +26,7 @@ const DateCard: FC<Props> = ({ title, date, handlePress }) => {
             <H4 fontSize={16}>{formattedDate(date, 'D MMMM YYYY')}</H4>
           </YGroup.Item>
           <YGroup.Item>
-            <Text color={theme.color11}>{title}</Text>
+            <Text color="$color11">{title}</Text>
           </YGroup.Item>
         </YGroup>
         <Button onPress={handlePress} borderRadius="$10">

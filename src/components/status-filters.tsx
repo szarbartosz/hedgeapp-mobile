@@ -27,7 +27,7 @@ const StatusFilters: FC<Props> = ({ selectedStatus, setSelectedStatus }) => {
               }
               onPress={() => setSelectedStatus(status.id)}
               style={{ borderRadius: 8 }}
-              backgroundColor={selectedStatus === status.id ? '#245531' : '$color8'}
+              backgroundColor={selectedStatus === status.id ? '$green8' : '$color8'}
               h={44}
               display="flex"
               justifyContent="center"

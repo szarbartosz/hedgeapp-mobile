@@ -3,21 +3,20 @@ import { router } from 'expo-router';
 import { FC } from 'react';
 import { ImageRequireSource } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, ListItem, ScrollView, Text, useTheme, View, YGroup, YStack } from 'tamagui';
+import { Button, H3, ListItem, ScrollView, Text, View, YGroup, YStack } from 'tamagui';
 
 import { useGetInvestorsQuery } from '@/api/investors.service';
 import { ChevronRightIcon } from '@/assets/icons';
 import LoadingWrapper from '@/components/loading-wrapper';
 
 const InvestorsScreen: FC = () => {
-  const theme = useTheme();
-
   const { data: investors, isSuccess, isLoading } = useGetInvestorsQuery();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }} edges={['top']}>
       <LoadingWrapper isLoading={isLoading}>
-        <YStack flex={1} marginBottom="$8" marginTop="$3">
+        <H3 paddingHorizontal="$4" paddingTop="$3">Inwestorzy</H3>
+        <YStack flex={1} marginBottom="$8">
           {isSuccess && investors.length > 0 ? (
             <ScrollView>
               <YGroup borderRadius={0}>
@@ -31,8 +30,8 @@ const InvestorsScreen: FC = () => {
                         })
                       }
                       hoverTheme
-                      backgroundColor={theme.$color3}
-                      borderBottomColor={theme.$color5}
+                      backgroundColor="$color3"
+                      borderBottomColor="$color5"
                       borderBottomWidth={1}
                       title={investor.name}
                       subTitle={investor.contactPerson}
@@ -65,8 +64,8 @@ const InvestorsScreen: FC = () => {
         </YStack>
         <View paddingHorizontal="$4" position="absolute" bottom="$4" width="100%">
           <Button
-            backgroundColor={theme.$color12}
-            color={theme.$color1}
+            backgroundColor="$color12"
+            color="$color1"
             onPress={() => router.navigate('/investors/form')}>
             {`${isSuccess && investors.length > 0 ? 'Dodaj inwestora' : 'Zdefiniuj pierwszego inwestora'}`}
           </Button>

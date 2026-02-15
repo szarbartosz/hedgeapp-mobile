@@ -135,7 +135,7 @@ const InvestmentDetailsScreen: FC = () => {
         <ScrollView showsVerticalScrollIndicator={false} paddingHorizontal="$4" zIndex={-10}>
           <H3 paddingTop="$2">{investment?.name}</H3>
           {investment?.address.city && (
-            <Text color={theme.color11}>
+            <Text color="$color11">
               {`${investment?.address.city}, ${investment?.address.street} ${investment?.address.number}`}
             </Text>
           )}
@@ -235,24 +235,24 @@ const InvestmentDetailsScreen: FC = () => {
           />
 
           <View marginVertical="$6" gap="$4">
-            <Button
-              backgroundColor={theme.$color12}
-              color={theme.$color1}
-              onPress={() =>
-                router.navigate({
-                  pathname: '/investments/form',
-                  params: { id: investment?.id },
-                })
-              }>
-              Edytuj
-            </Button>
-            <Button
-              backgroundColor={theme.$color4}
-              color={theme.$color12}
-              borderColor={theme.$color12}
-              onPress={() => router.back()}>
-              Cofnij
-            </Button>
+          <Button
+            backgroundColor="$color12"
+            color="$color1"
+            onPress={() =>
+              router.navigate({
+                pathname: '/investments/form',
+                params: { id: investment?.id },
+              })
+            }>
+            Edytuj
+          </Button>
+          <Button
+            backgroundColor="$color4"
+            color="$color12"
+            borderColor="$color12"
+            onPress={() => router.back()}>
+            Cofnij
+          </Button>
           </View>
         </ScrollView>
         <BottomSheetModalProvider>

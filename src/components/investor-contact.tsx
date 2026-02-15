@@ -45,7 +45,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
           flexDirection="row"
           alignItems="center"
           justifyContent="center"
-          backgroundColor={theme.$color2}
+          backgroundColor="$color2"
           gap={2}
           onPress={() =>
             router.navigate({
@@ -58,7 +58,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
             <Text maxWidth={110} numberOfLines={1} fontSize={16}>
               {investor.name}
             </Text>
-            <Text maxWidth={110} numberOfLines={1} color={theme.color11} fontSize={14}>
+            <Text maxWidth={110} numberOfLines={1} color="$color11" fontSize={14}>
               {investor.contactPerson}
             </Text>
           </View>
@@ -70,7 +70,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
           flexDirection="row"
           alignItems="center"
           justifyContent="center"
-          backgroundColor={theme.$color2}
+          backgroundColor="$color2"
           gap={2}
           onPress={handleMailLinking}
           disabled={!investor.email}>
@@ -78,7 +78,7 @@ const InvestorContact: FC<Props> = ({ investor, variant = 'default' }) => {
           <Text fontSize={15}>Wyślij mail</Text>
         </Button>
       )}
-      <View display="flex" height={46} borderWidth={0.5} borderColor={theme.color11.val}></View>
+      <View display="flex" height={46} borderWidth={0.5} borderColor="$color11"></View>
       <Button
         display="flex"
         width="45%"

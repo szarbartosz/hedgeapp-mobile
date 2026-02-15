@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { FC, useEffect, useState } from 'react';
 import { ImageRequireSource } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, ListItem, ScrollView, Text, useTheme, View, YGroup, YStack } from 'tamagui';
+import { Button, H3, ListItem, ScrollView, Text, useTheme, View, YGroup, YStack } from 'tamagui';
 
 import { useGetCurrentUserQuery } from '@/api/core.service';
 import { useGetInvestmentsQuery } from '@/api/investments.service';
@@ -42,9 +42,10 @@ const InvestmentsScreen: FC = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }} edges={['top']}>
       <LoadingWrapper isLoading={isLoading}>
-        <YStack flex={1} marginBottom="$8" marginTop="$3">
+        <H3 paddingHorizontal="$4" paddingTop="$3">Obiekty</H3>
+        <YStack flex={1} marginBottom="$8">
           {isSuccess && investments.length > 0 ? (
             <ScrollView>
               <StatusFilters
@@ -81,8 +82,8 @@ const InvestmentsScreen: FC = () => {
                           })
                         }
                         hoverTheme
-                        backgroundColor={theme.$color3}
-                        borderBottomColor={theme.$color5}
+                        backgroundColor="$color3"
+                        borderBottomColor="$color5"
                         borderBottomWidth={1}
                         title={investment.name}
                         subTitle={investment.investor.name}
@@ -133,8 +134,8 @@ const InvestmentsScreen: FC = () => {
         </YStack>
         <View paddingHorizontal="$4" position="absolute" bottom="$4" width="100%">
           <Button
-            backgroundColor={theme.$color12}
-            color={theme.$color1}
+            backgroundColor="$color12"
+            color="$color1"
             onPress={() => router.navigate('/investments/form')}>
             {`${isSuccess && investments.length > 0 ? 'Dodaj obiekt' : 'Zdefiniuj pierwszą inwestycję'}`}
           </Button>

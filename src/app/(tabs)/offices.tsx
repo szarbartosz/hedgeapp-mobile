@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { FC } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ListItem, ScrollView, useTheme, YGroup, YStack } from 'tamagui';
+import { H3, ListItem, ScrollView, YGroup, YStack } from 'tamagui';
 
 import { useGetOfficesQuery } from '@/api/offices.service';
 import { ChevronRightIcon } from '@/assets/icons';
@@ -10,14 +10,15 @@ import LoadingWrapper from '@/components/loading-wrapper';
 import { getOfficeLogo } from '@/utils/helpers';
 
 const OfficesScreen: FC = () => {
-  const theme = useTheme();
-
   const { data: offices, isSuccess, isLoading } = useGetOfficesQuery();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }} edges={['top']}>
       <LoadingWrapper isLoading={isLoading}>
-        <YStack flex={1} marginBottom="$8" marginTop="$3">
+        <H3 paddingHorizontal="$4" paddingTop="$3">
+          Urzędy
+        </H3>
+        <YStack flex={1} marginBottom="$8">
           <ScrollView>
             <YGroup borderRadius={0}>
               {isSuccess &&
@@ -31,8 +32,8 @@ const OfficesScreen: FC = () => {
                         })
                       }
                       hoverTheme
-                      backgroundColor={theme.$color3}
-                      borderBottomColor={theme.$color5}
+                      backgroundColor="$color3"
+                      borderBottomColor="$color5"
                       borderBottomWidth={1}
                       title={`${office.address.city} - ${office.name}`}
                       subTitle={`${office.address.street} ${office.address.number}`}
