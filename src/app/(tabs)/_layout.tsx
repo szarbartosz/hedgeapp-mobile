@@ -1,14 +1,12 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { useColorScheme } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { BuildingIcon, LandmarkIcon, UserIcon, UsersIcon } from '@/assets/icons';
 import Colors from '@/constants/Colors';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const insets = useSafeAreaInsets();
 
   return (
     <Tabs

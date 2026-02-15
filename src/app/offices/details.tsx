@@ -120,17 +120,17 @@ const InvestmentDetailsScreen: FC = () => {
             {office?.locations.length ? (
               office.locations.map(investment => (
                 <YGroup.Item key={investment.id}>
-                    <ListItem
-                      onPress={() =>
-                        router.navigate({
-                          pathname: '/investments/details',
-                          params: { id: investment.id },
-                        })
-                      }
-                      hoverTheme
-                      backgroundColor="$color3"
-                      borderBottomColor="$color5"
-                      borderBottomWidth={1}
+                  <ListItem
+                    onPress={() =>
+                      router.navigate({
+                        pathname: '/investments/details',
+                        params: { id: investment.id },
+                      })
+                    }
+                    hoverTheme
+                    backgroundColor="$color3"
+                    borderBottomColor="$color5"
+                    borderBottomWidth={1}
                     title={investment.name}
                     subTitle={investment.investor.name}
                     icon={

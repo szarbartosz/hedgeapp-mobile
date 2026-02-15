@@ -6,7 +6,7 @@ import { useColorScheme } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MapView, { MapMarker } from 'react-native-maps';
 import Toast from 'react-native-toast-message';
-import { Button, H3, H4, ScrollView, Text, useTheme, View } from 'tamagui';
+import { Button, H3, H4, ScrollView, Text, View } from 'tamagui';
 
 import {
   useGetSingleInvestmentQuery,
@@ -39,7 +39,6 @@ const InvestmentDetailsScreen: FC = () => {
   const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(null);
   const [isMapCentered, setIsMapCentered] = useState(true);
 
-  const theme = useTheme();
   const mapRef = useRef<MapView>(null);
   const colorScheme = useColorScheme();
 
@@ -235,24 +234,24 @@ const InvestmentDetailsScreen: FC = () => {
           />
 
           <View marginVertical="$6" gap="$4">
-          <Button
-            backgroundColor="$color12"
-            color="$color1"
-            onPress={() =>
-              router.navigate({
-                pathname: '/investments/form',
-                params: { id: investment?.id },
-              })
-            }>
-            Edytuj
-          </Button>
-          <Button
-            backgroundColor="$color4"
-            color="$color12"
-            borderColor="$color12"
-            onPress={() => router.back()}>
-            Cofnij
-          </Button>
+            <Button
+              backgroundColor="$color12"
+              color="$color1"
+              onPress={() =>
+                router.navigate({
+                  pathname: '/investments/form',
+                  params: { id: investment?.id },
+                })
+              }>
+              Edytuj
+            </Button>
+            <Button
+              backgroundColor="$color4"
+              color="$color12"
+              borderColor="$color12"
+              onPress={() => router.back()}>
+              Cofnij
+            </Button>
           </View>
         </ScrollView>
         <BottomSheetModalProvider>

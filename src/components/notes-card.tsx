@@ -8,38 +8,36 @@ type Props = {
   handlePress: () => void;
 };
 
-const NotesCard: FC<Props> = ({ notes, handlePress }) => {
-  return (
-    <XGroup
-      display="flex"
-      padding="$4"
-      backgroundColor="$color2"
-      borderWidth={1}
-      borderColor="$color5"
-      marginTop="$4"
-      minHeight="$8">
-      <XGroup.Item>
-        <YGroup gap={8} display="flex" flexGrow={1}>
-          {notes.length ? (
-            notes.map((note, index) => (
-              <YGroup.Item key={index}>
-                <Text maxWidth="70%" color="$color11">
-                  {note.content}
-                </Text>
-              </YGroup.Item>
-            ))
-          ) : (
-            <YGroup.Item>
-              <Text color="$color11">Brak notatek</Text>
+const NotesCard: FC<Props> = ({ notes, handlePress }) => (
+  <XGroup
+    display="flex"
+    padding="$4"
+    backgroundColor="$color2"
+    borderWidth={1}
+    borderColor="$color5"
+    marginTop="$4"
+    minHeight="$8">
+    <XGroup.Item>
+      <YGroup gap={8} display="flex" flexGrow={1}>
+        {notes.length ? (
+          notes.map((note, index) => (
+            <YGroup.Item key={index}>
+              <Text maxWidth="70%" color="$color11">
+                {note.content}
+              </Text>
             </YGroup.Item>
-          )}
-        </YGroup>
-        <Button position="absolute" right={18} top={18} onPress={handlePress} borderRadius="$10">
-          <Text>Edytuj</Text>
-        </Button>
-      </XGroup.Item>
-    </XGroup>
-  );
-};
+          ))
+        ) : (
+          <YGroup.Item>
+            <Text color="$color11">Brak notatek</Text>
+          </YGroup.Item>
+        )}
+      </YGroup>
+      <Button position="absolute" right={18} top={18} onPress={handlePress} borderRadius="$10">
+        <Text>Edytuj</Text>
+      </Button>
+    </XGroup.Item>
+  </XGroup>
+);
 
 export default NotesCard;

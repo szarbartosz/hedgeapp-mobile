@@ -44,7 +44,9 @@ const InvestmentsScreen: FC = () => {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['top']}>
       <LoadingWrapper isLoading={isLoading}>
-        <H3 paddingHorizontal="$4" paddingTop="$3">Obiekty</H3>
+        <H3 paddingHorizontal="$4" paddingTop="$3">
+          Obiekty
+        </H3>
         <YStack flex={1} marginBottom="$8">
           {isSuccess && investments.length > 0 ? (
             <ScrollView>
