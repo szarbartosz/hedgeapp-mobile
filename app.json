@@ -25,7 +25,15 @@
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.szarbartosz.hedgeapp",
+      "config": {
+        "googleMaps": {}
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -40,6 +48,12 @@
       "eas": {
         "projectId": "d31eac7e-77bf-4ed4-ab97-e12b9e1a2b0b"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/d31eac7e-77bf-4ed4-ab97-e12b9e1a2b0b"
     }
   }
 }
